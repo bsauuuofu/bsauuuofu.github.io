@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!--
+    ========================================================================
+    BSAUU WEBSITE CUSTOMIZATION GUIDE
+    ========================================================================
+    To customize this website, create a folder named "assets" in the same 
+    directory as this index.html file, and place your images there. Then, 
+    update the links in this file to point to your new assets.
+
+    1. WEBSITE ICON (Favicon):
+       - Look right below this comment box and update the <link rel="icon"> tag.
+       - Example: <link rel="icon" type="image/png" href="assets/icon.png">
+
+    2. COVER PHOTO:
+       - Search for "backgroundImage:" in the tailwind.config script below.
+       - Change the url(...) to point to your image: url('assets/cover-photo.jpg').
+
+    3. LOGO:
+       - Search for the text "BSAUU" in the <nav> section.
+       - You can replace the text with an image tag: <img src="assets/logo.png" alt="BSAUU Logo" class="w-8 h-8">.
+
+    4. COLORS:
+       - Search for "colors:" in the tailwind.config script below.
+       - You can change the hex codes (e.g., '#006a4e') to match your exact branding.
+
+    5. EXECUTIVE COMMITTEE PHOTOS:
+       - Scroll down to the <section id="committee">.
+       - Inside each member's card, find the <img> tag and change the src attribute.
+       - Example: <img src="assets/president.jpg" alt="President">
+
+    6. EVENT PHOTOS (Gallery):
+       - There are TWO places to update event photos:
+         a) The thumbnail images on the main page: Scroll to <section id="gallery"> and change the <img> src tags to your assets (e.g., 'assets/event1-thumb.jpg').
+         b) The pop-out slideshow images: Scroll down to the <script> section at the very bottom, find the "galleryData" object, and replace the URLs inside the arrays with your local files (e.g., 'assets/event1-full1.jpg').
+    ========================================================================
+    -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSAUU | Bangladesh Student Association at University of Utah</title>
+    
+    <!-- Website Icon (Favicon) - Replace href with your icon in the assets folder -->
+    <link rel="icon" type="image/png" href="assets/icon.png">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -28,9 +68,10 @@
                         sans: ['Poppins', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
                         bengali: ['Tiro Bangla', 'serif'],
+                        cursive: ['Great Vibes', 'cursive']
                     },
                     backgroundImage: {
-                        // High-quality cultural hero image
+                        // High-quality cultural hero image - CHANGE THIS URL TO CHANGE THE COVER PICTURE
                         'hero-pattern': "linear-gradient(to right bottom, rgba(0, 106, 78, 0.90), rgba(204, 0, 0, 0.80)), url('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
                         // Traditional Alpana/Mandala SVG pattern for background
                         'alpana-pattern': "url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'%23006a4e\\' fill-opacity=\\'0.03\\' fill-rule=\\'evenodd\\'%3E%3Cpath d=\\'M50 0c27.614 0 50 22.386 50 50s-22.386 50-50 50S0 77.614 0 50 22.386 0 50 0zm0 5C25.147 5 5 25.147 5 50s20.147 45 45 45 45-20.147 45-45S74.853 5 50 5zm0 15c16.569 0 30 13.431 30 30s-13.431 30-30 30-30-13.431-30-30 13.431-30 30-30zm0 5c-13.807 0-25 11.193-25 25s11.193 25 25 25 25-11.193 25-25-11.193-25-25-25zm0 10c8.284 0 15 6.716 15 15s-6.716 15-15 15-15-6.716-15-15 6.716-15 15-15z\\'/%3E%3C/g%3E%3C/svg%3E')"
@@ -229,9 +270,7 @@
             </div>
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 hero-title leading-tight">
                 Bangladesh Student <br/> 
-                <span class="text-gold-light bg-clip-text text-transparent bg-gradient-to-r from-gold-light via-yellow-200 to-gold-dark filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                    Association
-                </span>
+                Association
             </h1>
             <p class="text-lg md:text-2xl text-gray-100 mb-12 font-light max-w-3xl mx-auto drop-shadow-md">
                 Fostering community, celebrating culture, and building lifelong connections away from home.
@@ -312,15 +351,9 @@
                     <div class="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-bd-red rounded-bl-3xl opacity-30 m-4"></div>
                     <div class="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-bd-green rounded-br-3xl opacity-30 m-4"></div>
                     
-                    <div class="w-full h-[600px] md:h-[700px] rounded-2xl overflow-hidden relative z-10 bg-gray-50 border border-gray-100">
-                        <!-- 
-                            INSTRUCTIONS FOR GOOGLE CALENDAR: 
-                            1. Go to Google Calendar > Settings > Integrate Calendar.
-                            2. Copy your Embed code.
-                            3. Replace the <iframe> below with yours. 
-                            4. Ensure width="100%" and height="100%" are set!
-                        -->
-                        <iframe src="https://calendar.google.com/calendar/embed?src=ebdd1ad6c436f51a4b4389e83d64179bc9bf4fa8da623a9afd4e7f6fcb704a79%40group.calendar.google.com&ctz=America%2FDenver" style="border: 0" width="100%" height="100%" frameborder="0" scrolling="no">></iframe>
+                    <div class="w-full h-[600px] md:h-[700px] rounded-2xl overflow-hidden relative z-10 bg-gray-50 border border-gray-100 flex">
+                        <!-- Google Calendar Integration -->
+                        <iframe src="https://calendar.google.com/calendar/embed?src=ebdd1ad6c436f51a4b4389e83d64179bc9bf4fa8da623a9afd4e7f6fcb704a79%40group.calendar.google.com&ctz=America%2FDenver" style="border: 0; width: 100% !important; min-width: 100% !important; height: 100% !important; flex: 1;" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
                     </div>
                 </div>
             </div>
@@ -343,7 +376,7 @@
                 
                 <!-- Album 1: Pohela Boishakh -->
                 <div class="album-card relative h-80 group reveal" onclick="openLightbox('boishakh')">
-                    <img src="asets/pp.jpg&auto=format&fit=crop&w=800&q=80" alt="Pohela Boishakh" class="w-full h-full object-cover">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pohela Boishakh" class="w-full h-full object-cover">
                     <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
                         <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Spring 1430</div>
                         <h3 class="text-2xl font-serif font-bold mb-1">Pohela Boishakh</h3>
