@@ -9,7 +9,7 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&family=Tiro+Bangla&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -17,7 +17,9 @@
                 extend: {
                     colors: {
                         'bd-green': '#006a4e',
+                        'bd-green-dark': '#004c38',
                         'bd-red': '#f42a41',
+                        'bd-red-dark': '#c81025',
                         'utah-red': '#cc0000',
                         'gold-light': '#fdf0d5',
                         'gold-dark': '#d4af37'
@@ -25,567 +27,568 @@
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
+                        bengali: ['Tiro Bangla', 'serif'],
                     },
                     backgroundImage: {
-                        'hero-pattern': "linear-gradient(to right bottom, rgba(0, 106, 78, 0.85), rgba(204, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1621213554203-9eeb6f7ce55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
-                        'traditional-pattern': "url('data:image/svg+xml,%3Csvg width=\\'60\\' height=\\'60\\' viewBox=\\'0 0 60 60\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' fill-rule=\\'evenodd\\'%3E%3Cg fill=\\'%23006a4e\\' fill-opacity=\\'0.05\\'%3E%3Cpath d=\\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"
+                        // High-quality cultural hero image
+                        'hero-pattern': "linear-gradient(to right bottom, rgba(0, 106, 78, 0.90), rgba(204, 0, 0, 0.80)), url('https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+                        // Traditional Alpana/Mandala SVG pattern for background
+                        'alpana-pattern': "url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'%23006a4e\\' fill-opacity=\\'0.03\\' fill-rule=\\'evenodd\\'%3E%3Cpath d=\\'M50 0c27.614 0 50 22.386 50 50s-22.386 50-50 50S0 77.614 0 50 22.386 0 50 0zm0 5C25.147 5 5 25.147 5 50s20.147 45 45 45 45-20.147 45-45S74.853 5 50 5zm0 15c16.569 0 30 13.431 30 30s-13.431 30-30 30-30-13.431-30-30 13.431-30 30-30zm0 5c-13.807 0-25 11.193-25 25s11.193 25 25 25 25-11.193 25-25-11.193-25-25-25zm0 10c8.284 0 15 6.716 15 15s-6.716 15-15 15-15-6.716-15-15 6.716-15 15-15z\\'/%3E%3C/g%3E%3C/svg%3E')"
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(244, 42, 65, 0.4)',
+                        'glow-green': '0 0 20px rgba(0, 106, 78, 0.4)',
                     }
                 }
             }
         }
     </script>
+    
     <style>
-        /* Custom styles for animations and specific effects */
+        /* Smooth Scroll & Base */
+        html { scroll-behavior: smooth; }
+        body { overflow-x: hidden; }
+
+        /* Glassmorphism Nav */
         .glass-nav {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
         }
         
-        .hero-title {
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        /* Typography Effects */
+        .hero-title { text-shadow: 3px 3px 6px rgba(0,0,0,0.6); }
+        .bengali-watermark {
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.05;
+            color: #000;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
         }
 
-        .tab-btn.active {
-            border-bottom: 3px solid #f42a41;
-            color: #006a4e;
-            font-weight: 600;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-        
-        .slide-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-        
-        .slide-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Modernized border element (Removed flowers) */
-        .alpana-border {
+        /* Modernized underline (Removed flowers) */
+        .cultural-underline {
             position: relative;
-            padding-bottom: 15px;
+            padding-bottom: 12px;
+            display: inline-block;
         }
-        .alpana-border::after {
+        .cultural-underline::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 80px;
             height: 4px;
-            background-color: #f42a41;
-            border-radius: 2px;
-        }
-        
-        /* Calendar Grid specific styling */
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-        }
-        
-        .event-day {
-            background-color: #fef2f2;
-            border-bottom: 2px solid #f42a41;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .event-day:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        
-        /* Custom scrollbar for events list */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
+            background: linear-gradient(90deg, #006a4e, #f42a41);
+            border-radius: 4px;
         }
 
-        /* Past Events Slider Styling */
-        .slider-track {
-            display: flex;
-            width: calc(300px * 12 + 1.5rem * 12); /* Width of slide + gap multiplied by number of elements */
-            animation: scroll 30s linear infinite;
+        /* Tabs styling */
+        .com-tab-btn {
+            position: relative;
+            transition: all 0.3s ease;
         }
-        .slider-container:hover .slider-track {
-            animation-play-state: paused; /* Pauses sliding on hover */
+        .com-tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background-color: #f42a41;
+            transition: width 0.3s ease;
         }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-300px * 6 - 1.5rem * 6)); /* Scroll half the track */ }
+        .com-tab-btn.active::after { width: 100%; }
+        .com-tab-btn.active { color: #006a4e; font-weight: 700; }
+
+        /* --- Advanced Scroll Reveal Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+        /* Staggered delays for grid items */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* --- Lightbox Modal Styles --- */
+        .lightbox-overlay {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(8px);
+        }
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .lightbox-img-container {
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .lightbox-overlay.active .lightbox-img-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+        body.modal-open { overflow: hidden; }
+
+        /* Event Album Card Hover Effects */
+        .album-card {
+            overflow: hidden;
+            border-radius: 1rem;
+            cursor: pointer;
+        }
+        .album-card img {
+            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .album-card:hover img {
+            transform: scale(1.1);
+        }
+        .album-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        .album-card:hover .album-overlay {
+            opacity: 1;
+        }
+        .album-icon-pulse {
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(253, 240, 213, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(253, 240, 213, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(253, 240, 213, 0); }
         }
     </style>
 </head>
-<body class="font-sans bg-gray-50 text-gray-800 bg-traditional-pattern">
+<body class="font-sans bg-gray-50 text-gray-800 bg-alpana-pattern">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 transition-all duration-500 py-2" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center gap-3">
-                    <!-- Placeholder Logo - Replace with actual BSAUU logo -->
-                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-bd-green shadow-lg overflow-hidden">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center border-2 border-bd-green shadow-lg overflow-hidden group-hover:shadow-glow-green transition-shadow duration-300">
                        <span class="text-bd-green font-serif font-bold text-lg">BSAUU</span>
                     </div>
-                    <div class="hidden sm:block">
-                        <span class="text-white font-serif font-bold text-xl tracking-wide transition-colors duration-300" id="nav-title">BSAUU</span>
+                    <div class="hidden sm:block overflow-hidden">
+                        <span class="text-white font-serif font-bold text-xl tracking-wider transition-colors duration-300" id="nav-title">BSAUU</span>
                     </div>
                 </div>
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="nav-link text-white hover:text-gold-light font-medium transition-colors">Home</a>
-                    <a href="#about" class="nav-link text-white hover:text-gold-light font-medium transition-colors">About Us</a>
-                    <a href="#events" class="nav-link text-white hover:text-gold-light font-medium transition-colors">Events & Calendar</a>
-                    <a href="#committee" class="nav-link text-white hover:text-gold-light font-medium transition-colors">Committee</a>
-                    <a href="#contact" class="bg-bd-red text-white px-5 py-2 rounded-full font-medium hover:bg-red-700 transition-colors shadow-md">Join Us</a>
+                    <a href="#home" class="nav-link text-white hover:text-gold-light font-medium transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gold-light hover:after:w-full after:transition-all after:duration-300">Home</a>
+                    <a href="#about" class="nav-link text-white hover:text-gold-light font-medium transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gold-light hover:after:w-full after:transition-all after:duration-300">About Us</a>
+                    <a href="#events" class="nav-link text-white hover:text-gold-light font-medium transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gold-light hover:after:w-full after:transition-all after:duration-300">Calendar</a>
+                    <a href="#gallery" class="nav-link text-white hover:text-gold-light font-medium transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gold-light hover:after:w-full after:transition-all after:duration-300">Past Events</a>
+                    <a href="#committee" class="nav-link text-white hover:text-gold-light font-medium transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-gold-light hover:after:w-full after:transition-all after:duration-300">Committee</a>
+                    <a href="#contact" class="bg-bd-red text-white px-6 py-2.5 rounded-full font-medium hover:bg-bd-red-dark transition-all duration-300 shadow-md hover:shadow-glow transform hover:-translate-y-0.5">Join Us</a>
                 </div>
                 
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-white hover:text-gray-300 focus:outline-none p-2">
-                        <i class="fas fa-bars text-2xl"></i>
+                    <button id="mobile-menu-btn" class="text-white hover:text-gray-300 focus:outline-none p-2 transition-colors">
+                        <i class="fas fa-bars text-2xl" id="menu-icon"></i>
                     </button>
                 </div>
             </div>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl absolute w-full left-0 top-20 border-t border-gray-100">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="block px-3 py-2 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-md font-medium">Home</a>
-                <a href="#about" class="block px-3 py-2 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-md font-medium">About Us</a>
-                <a href="#events" class="block px-3 py-2 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-md font-medium">Events & Calendar</a>
-                <a href="#committee" class="block px-3 py-2 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-md font-medium">Committee</a>
-                <a href="#contact" class="block px-3 py-2 text-bd-red font-bold hover:bg-gray-50 rounded-md">Join Us</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md shadow-2xl absolute w-full left-0 top-full border-t border-gray-100 transition-all duration-300 origin-top transform scale-y-0 opacity-0">
+            <div class="px-4 pt-4 pb-6 space-y-2">
+                <a href="#home" class="mobile-link block px-4 py-3 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-xl font-medium transition-colors">Home</a>
+                <a href="#about" class="mobile-link block px-4 py-3 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-xl font-medium transition-colors">About Us</a>
+                <a href="#events" class="mobile-link block px-4 py-3 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-xl font-medium transition-colors">Calendar</a>
+                <a href="#gallery" class="mobile-link block px-4 py-3 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-xl font-medium transition-colors">Past Events</a>
+                <a href="#committee" class="mobile-link block px-4 py-3 text-gray-800 hover:bg-gray-50 hover:text-bd-green rounded-xl font-medium transition-colors">Committee</a>
+                <a href="#contact" class="mobile-link block px-4 py-3 bg-bd-red text-white text-center font-bold rounded-xl mt-4 shadow-md">Join Us</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed">
-        <div class="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
-            <div class="inline-block mb-4 px-4 py-1 rounded-full bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white text-sm font-semibold uppercase tracking-widest animate-pulse">
+    <section id="home" class="relative h-screen flex items-center justify-center bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed overflow-hidden">
+        <!-- Animated Background Particles/Overlays could go here -->
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16 reveal">
+            <div class="inline-block mb-6 px-5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/30 text-white text-sm font-semibold uppercase tracking-[0.2em] shadow-lg">
                 University of Utah
             </div>
-            <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 hero-title leading-tight">
-                Bangladesh Student <br/> <span class="text-gold-light">Association</span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 hero-title leading-tight">
+                Bangladesh Student <br/> 
+                <span class="text-gold-light bg-clip-text text-transparent bg-gradient-to-r from-gold-light via-yellow-200 to-gold-dark filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                    Association
+                </span>
             </h1>
-            <p class="text-lg md:text-2xl text-gray-100 mb-10 font-light max-w-2xl mx-auto">
-                Fostering community, celebrating culture, and building connections away from home.
+            <p class="text-lg md:text-2xl text-gray-100 mb-12 font-light max-w-3xl mx-auto drop-shadow-md">
+                Fostering community, celebrating culture, and building lifelong connections away from home.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#events" class="bg-bd-red hover:bg-red-700 text-white px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
-                    <i class="far fa-calendar-alt"></i> Upcoming Events
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <a href="#events" class="group bg-bd-red hover:bg-bd-red-dark text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-[0_0_15px_rgba(244,42,65,0.5)] flex items-center gap-3 w-full sm:w-auto justify-center">
+                    <i class="far fa-calendar-alt group-hover:rotate-12 transition-transform"></i> 2026 Events
                 </a>
-                <a href="#about" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-bd-green px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 flex items-center justify-center">
-                    Discover More
+                <a href="#gallery" class="group bg-transparent border-2 border-white text-white hover:bg-white hover:text-bd-green px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 flex items-center gap-3 w-full sm:w-auto justify-center">
+                    <i class="far fa-images group-hover:scale-110 transition-transform"></i> View Gallery
                 </a>
             </div>
         </div>
         
         <!-- Scroll Down Indicator -->
-        <a href="#about" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white text-3xl animate-bounce hover:text-gold-light transition-colors z-20">
+        <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80 text-3xl animate-bounce hover:text-gold-light transition-colors z-20 p-4">
             <i class="fas fa-chevron-down"></i>
         </a>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-white relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 slide-up">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-bd-green alpana-border inline-block">Welcome to BSAUU</h2>
-                <p class="mt-6 text-gray-600 max-w-3xl mx-auto text-lg">
-                    The mission of the Bangladeshi Student Association at the University of Utah is to serve as a connecting hub for Bangladeshi students, promote and share Bangladeshi culture with the University of Utah community, and create a welcoming environment for new students.
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <!-- Cultural Watermark -->
+        <div class="bengali-watermark font-bengali">স্বাগতম</div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-bd-green cultural-underline">Welcome to BSAUU</h2>
+                <p class="mt-8 text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
+                    The mission of the Bangladeshi Student Association at the University of Utah is to serve as a connecting hub for Bangladeshi students, promote and share our vibrant culture with the campus community, and create a welcoming environment for new students arriving in Utah.
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                <div class="bg-gray-50 rounded-2xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-lg transition-shadow duration-300 slide-up" style="transition-delay: 100ms;">
-                    <div class="w-16 h-16 bg-bd-green bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-users text-2xl text-bd-green"></i>
+                <div class="bg-white rounded-3xl p-10 text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 reveal delay-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-bd-green/5 rounded-bl-[100px] transition-transform group-hover:scale-110"></div>
+                    <div class="w-20 h-20 bg-bd-green/10 rounded-2xl flex items-center justify-center mx-auto mb-8 transform rotate-3 group-hover:rotate-12 transition-transform duration-300">
+                        <i class="fas fa-users text-3xl text-bd-green"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Community</h3>
-                    <p class="text-gray-600">Building a strong, supportive network for students to feel at home on campus and exchange ideas.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 font-serif">Community</h3>
+                    <p class="text-gray-600 leading-relaxed">Building a strong, supportive network for students to feel at home on campus and exchange ideas freely.</p>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-lg transition-shadow duration-300 slide-up" style="transition-delay: 200ms;">
-                    <div class="w-16 h-16 bg-bd-red bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-drum text-2xl text-bd-red"></i>
+                
+                <div class="bg-white rounded-3xl p-10 text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 reveal delay-200 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-bd-red/5 rounded-bl-[100px] transition-transform group-hover:scale-110"></div>
+                    <div class="w-20 h-20 bg-bd-red/10 rounded-2xl flex items-center justify-center mx-auto mb-8 transform -rotate-3 group-hover:-rotate-12 transition-transform duration-300">
+                        <i class="fas fa-drum text-3xl text-bd-red"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Culture</h3>
-                    <p class="text-gray-600">Celebrating our rich heritage through festivals, food, music, and traditional events.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 font-serif">Culture</h3>
+                    <p class="text-gray-600 leading-relaxed">Celebrating our rich heritage through vibrant festivals, authentic food, music, and traditional events.</p>
                 </div>
-                <div class="bg-gray-50 rounded-2xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-lg transition-shadow duration-300 slide-up" style="transition-delay: 300ms;">
-                    <div class="w-16 h-16 bg-utah-red bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-graduation-cap text-2xl text-utah-red"></i>
+                
+                <div class="bg-white rounded-3xl p-10 text-center shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-500 reveal delay-300 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-utah-red/5 rounded-bl-[100px] transition-transform group-hover:scale-110"></div>
+                    <div class="w-20 h-20 bg-utah-red/10 rounded-2xl flex items-center justify-center mx-auto mb-8 transform rotate-3 group-hover:rotate-12 transition-transform duration-300">
+                        <i class="fas fa-graduation-cap text-3xl text-utah-red"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Support</h3>
-                    <p class="text-gray-600">Assisting new and prospective students with information and resources for a smooth transition to Utah.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 font-serif">Support</h3>
+                    <p class="text-gray-600 leading-relaxed">Assisting new and prospective students with crucial information and resources for a smooth transition.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Events & Calendar Section -->
-    <section id="events" class="py-20 bg-gray-50 border-t border-gray-200">
+    <section id="events" class="py-24 bg-gray-50/80 border-y border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 slide-up">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-bd-green alpana-border inline-block">Events & Calendar</h2>
-                <p class="mt-6 text-gray-600">Join us in our upcoming cultural celebrations, social gatherings, and workshops for 2026.</p>
+            <div class="text-center mb-16 reveal">
+                <span class="text-bd-red font-bold tracking-widest uppercase text-sm mb-2 block">Mark Your Dates</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-bd-green cultural-underline">2026 Calendar of Events</h2>
+                <p class="mt-8 text-gray-600 max-w-2xl mx-auto">Stay up-to-date with our official schedule. Join us in our cultural celebrations, social gatherings, and professional workshops throughout the year.</p>
             </div>
 
-            <div class="event-content fade-in">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Full Width Calendar Container -->
+            <div class="reveal delay-100">
+                <div class="bg-white rounded-3xl shadow-xl p-4 md:p-6 lg:p-8 border border-gray-200 relative">
+                    <!-- Decorative corner elements -->
+                    <div class="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-bd-green rounded-tl-3xl opacity-30 m-4"></div>
+                    <div class="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-bd-red rounded-tr-3xl opacity-30 m-4"></div>
+                    <div class="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-bd-red rounded-bl-3xl opacity-30 m-4"></div>
+                    <div class="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-bd-green rounded-br-3xl opacity-30 m-4"></div>
                     
-                    <!-- Google Calendar Embed Container (Bigger part) -->
-                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-md p-4 border border-gray-100 flex flex-col" style="min-height: 550px;">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 px-2">Official 2026 Calendar</h3>
-                        
+                    <div class="w-full h-[600px] md:h-[700px] rounded-2xl overflow-hidden relative z-10 bg-gray-50 border border-gray-100">
                         <!-- 
-                            INSTRUCTIONS: 
-                            Replace the iframe below with your actual Google Calendar embed link. 
+                            INSTRUCTIONS FOR GOOGLE CALENDAR: 
+                            1. Go to Google Calendar > Settings > Integrate Calendar.
+                            2. Copy your Embed code.
+                            3. Replace the <iframe> below with yours. 
+                            4. Ensure width="100%" and height="100%" are set!
                         -->
-                        <div class="flex-grow w-full h-full rounded-lg overflow-hidden bg-gray-50 border border-gray-200">
-                            <!-- Example Google Calendar - REPLACE THIS IFRAME -->
-                            <iframe src="https://calendar.google.com/calendar/embed?src=ebdd1ad6c436f51a4b4389e83d64179bc9bf4fa8da623a9afd4e7f6fcb704a79%40group.calendar.google.com&ctz=America%2FDenver" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-                        </div>
-                    </div>
-
-                    <!-- Dynamic Events List from Google Calendar API (Smaller part) -->
-                    <div class="lg:col-span-1 flex flex-col h-full">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 px-2">Featured Upcoming</h3>
-                        
-                        <!-- Scrollable list container -->
-                        <div id="dynamic-events-list" class="space-y-4 overflow-y-auto pr-2 custom-scrollbar" style="max-height: 550px;">
-                            <!-- Loading State -->
-                            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 text-center flex flex-col items-center justify-center h-full min-h-[300px]">
-                                <i class="fas fa-circle-notch fa-spin text-4xl text-bd-green mb-4"></i>
-                                <p class="text-gray-500 font-medium">Loading 2026 events...</p>
-                            </div>
-                        </div>
+                        <iframe src="https://calendar.google.com/calendar/embed?src=ebdd1ad6c436f51a4b4389e83d64179bc9bf4fa8da623a9afd4e7f6fcb704a79%40group.calendar.google.com&ctz=America%2FDenver" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Past Events Gallery Section -->
-    <section id="gallery" class="py-20 bg-gray-900 overflow-hidden relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center slide-up">
-            <h2 class="text-3xl md:text-4xl font-serif font-bold text-white alpana-border inline-block">Past Memories</h2>
-            <p class="mt-6 text-gray-400">Glimpses of our vibrant community celebrations and gatherings.</p>
-        </div>
+    <section id="gallery" class="py-24 bg-gray-900 relative">
+        <!-- Dark pattern overlay -->
+        <div class="absolute inset-0 bg-alpana-pattern opacity-10"></div>
         
-        <!-- Sliding Container -->
-        <div class="slider-container relative w-full overflow-hidden pt-4 pb-8">
-            <div class="slider-track gap-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-gold-light font-bold tracking-widest uppercase text-sm mb-2 block">Memories</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-white cultural-underline">Past Event Galleries</h2>
+                <p class="mt-8 text-gray-400 max-w-2xl mx-auto">Click on any event below to open the interactive photo gallery and relive our favorite moments.</p>
+            </div>
+            
+            <!-- Gallery Grid (Albums) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 
-                <!-- ORIGINAL SET OF SLIDES -->
-                <!-- Slide 1 -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">Pohela Boishakh 1430</h3>
+                <!-- Album 1: Pohela Boishakh -->
+                <div class="album-card relative h-80 group reveal" onclick="openLightbox('boishakh')">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pohela Boishakh" class="w-full h-full object-cover">
+                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Spring 1430</div>
+                        <h3 class="text-2xl font-serif font-bold mb-1">Pohela Boishakh</h3>
+                        <p class="text-gray-300 text-sm flex items-center gap-2">
+                            <i class="far fa-images"></i> 5 Photos
+                        </p>
                     </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1523580494112-071d45740871?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">International Food Fest</h3>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">Ekushey February</h3>
-                    </div>
-                </div>
-                <!-- Slide 4 -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">New Student Welcome</h3>
-                    </div>
-                </div>
-                <!-- Slide 5 -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">Spring Picnic @ Liberty Park</h3>
-                    </div>
-                </div>
-                <!-- Slide 6 -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">BSAUU Gala Night</h3>
+                    <!-- Hover Action Icon -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                        <i class="fas fa-expand text-xl"></i>
                     </div>
                 </div>
 
-                <!-- DUPLICATED SET (Required for infinite scrolling effect) -->
-                <!-- Slide 1 Copy -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">Pohela Boishakh 1430</h3>
+                <!-- Album 2: International Food Fest -->
+                <div class="album-card relative h-80 group reveal delay-100" onclick="openLightbox('foodfest')">
+                    <img src="https://images.unsplash.com/photo-1523580494112-071d45740871?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Food Fest" class="w-full h-full object-cover">
+                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Fall 2025</div>
+                        <h3 class="text-2xl font-serif font-bold mb-1">International Food Fest</h3>
+                        <p class="text-gray-300 text-sm flex items-center gap-2">
+                            <i class="far fa-images"></i> 4 Photos
+                        </p>
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                        <i class="fas fa-expand text-xl"></i>
                     </div>
                 </div>
-                <!-- Slide 2 Copy -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1523580494112-071d45740871?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">International Food Fest</h3>
+
+                <!-- Album 3: Ekushey February -->
+                <div class="album-card relative h-80 group reveal delay-200" onclick="openLightbox('ekushey')">
+                    <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ekushey" class="w-full h-full object-cover">
+                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Feb 2026</div>
+                        <h3 class="text-2xl font-serif font-bold mb-1">Ekushey February</h3>
+                        <p class="text-gray-300 text-sm flex items-center gap-2">
+                            <i class="far fa-images"></i> 3 Photos
+                        </p>
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                        <i class="fas fa-expand text-xl"></i>
                     </div>
                 </div>
-                <!-- Slide 3 Copy -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">Ekushey February</h3>
-                    </div>
-                </div>
-                <!-- Slide 4 Copy -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">New Student Welcome</h3>
-                    </div>
-                </div>
-                <!-- Slide 5 Copy -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">Spring Picnic @ Liberty Park</h3>
-                    </div>
-                </div>
-                <!-- Slide 6 Copy -->
-                <div class="relative group w-[300px] h-[250px] flex-shrink-0 rounded-2xl overflow-hidden shadow-lg cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Past Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-70 transition-all duration-300 flex items-center justify-center">
-                        <h3 class="text-white font-serif font-bold text-xl opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-center px-4">BSAUU Gala Night</h3>
-                    </div>
-                </div>
-                
+
             </div>
         </div>
     </section>
 
-    <!-- Committee Section -->
-    <section id="committee" class="py-20 bg-white">
+    <div id="lightbox" class="lightbox-overlay fixed inset-0 z-[100] bg-black/95 flex flex-col justify-between">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-center p-4 md:p-6 relative z-10">
+            <div>
+                <h3 id="lightbox-title" class="text-white font-serif font-bold text-xl md:text-3xl">Event Title</h3>
+                <p id="lightbox-counter" class="text-gray-400 text-sm mt-1">1 / 5</p>
+            </div>
+            <button onclick="closeLightbox()" class="text-white hover:text-bd-red transition-colors bg-white/10 hover:bg-white/20 rounded-full w-12 h-12 flex items-center justify-center backdrop-blur-md">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Main Image Area -->
+        <div class="flex-grow relative flex items-center justify-center px-12 md:px-24">
+            <!-- Prev Button -->
+            <button onclick="prevImage(event)" class="absolute left-4 md:left-8 text-white hover:text-gold-light bg-black/50 hover:bg-black/80 rounded-full w-12 h-12 md:w-16 md:h-16 flex items-center justify-center transition-all z-10">
+                <i class="fas fa-chevron-left text-xl md:text-2xl"></i>
+            </button>
+            
+            <!-- Image Container -->
+            <div class="lightbox-img-container relative max-w-5xl max-h-[70vh] w-full h-full flex items-center justify-center">
+                <img id="lightbox-main-img" src="" alt="Gallery Image" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+                <!-- Loading Spinner -->
+                <div id="lightbox-loader" class="absolute inset-0 flex items-center justify-center text-white hidden">
+                    <i class="fas fa-circle-notch fa-spin text-4xl"></i>
+                </div>
+            </div>
+
+            <!-- Next Button -->
+            <button onclick="nextImage(event)" class="absolute right-4 md:right-8 text-white hover:text-gold-light bg-black/50 hover:bg-black/80 rounded-full w-12 h-12 md:w-16 md:h-16 flex items-center justify-center transition-all z-10">
+                <i class="fas fa-chevron-right text-xl md:text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Thumbnail Strip -->
+        <div class="p-4 md:p-6 bg-black/50 border-t border-white/10 backdrop-blur-md h-32 md:h-40">
+            <div id="lightbox-thumbnails" class="flex items-center justify-center gap-3 md:gap-4 h-full overflow-x-auto custom-scrollbar">
+                <!-- Thumbnails injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <section id="committee" class="py-24 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12 slide-up">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold text-bd-green alpana-border inline-block">Executive Committee</h2>
-                <p class="mt-6 text-gray-600">Meet the dedicated student leaders working to serve the BSAUU community.</p>
+            <div class="text-center mb-16 reveal">
+                <span class="text-bd-red font-bold tracking-widest uppercase text-sm mb-2 block">Leadership</span>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-bd-green cultural-underline">Executive Committee</h2>
+                <p class="mt-8 text-gray-600 max-w-2xl mx-auto">Meet the dedicated student leaders working passionately to serve the BSAUU community.</p>
             </div>
 
             <!-- Committee Tabs -->
-            <div class="flex justify-center mb-10 border-b border-gray-300 slide-up">
-                <button class="com-tab-btn px-6 py-3 text-gray-500 font-medium hover:text-bd-green transition-colors active" onclick="switchComTab('26-27')">2026 - 2027</button>
-                <button class="com-tab-btn px-6 py-3 text-gray-500 font-medium hover:text-bd-green transition-colors" onclick="switchComTab('25-26')">2025 - 2026 (Past)</button>
+            <div class="flex justify-center mb-12 border-b border-gray-200 reveal delay-100">
+                <button class="com-tab-btn px-6 py-4 text-gray-500 font-medium hover:text-bd-green transition-colors active text-lg" onclick="switchComTab('26-27')">2026 - 2027</button>
+                <button class="com-tab-btn px-6 py-4 text-gray-500 font-medium hover:text-bd-green transition-colors text-lg" onclick="switchComTab('25-26')">2025 - 2026 (Past)</button>
             </div>
 
-            <!-- 2026-2027 Committee -->
-            <div id="com-26-27" class="com-content fade-in">
+            <!-- 2026-2027 Committee Content -->
+            <div id="com-26-27" class="com-content transition-opacity duration-500">
                 
                 <!-- 
                 ====================================================================
                 INSTRUCTIONS TO ADD A NEW COMMITTEE MEMBER:
-                1. Copy the entire block starting from "[START: Member Card]" 
-                   down to "[END: Member Card]".
-                2. Paste it right before the final closing div of this grid.
-                3. Update the text elements (Name, Role, Major).
-                4. To update the image, change the 'src' in the img tag.
+                1. Copy the code starting from `<div class="group text-center">` 
+                   down to its closing `</div>`.
+                2. Paste it before the final closing `</div>` of this grid.
+                3. Update the text inside tags (Name, Role, Major).
+                4. To update the image, change the 'src' attribute in the <img> tag.
                 ====================================================================
                 -->
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
                     
-                    <!-- [START: Member Card] -->
-                    <div class="group text-center">
-                        <div class="relative mb-4 mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-bd-green transition-colors duration-300 shadow-md">
-                            <img src="https://placehold.co/400x400/006a4e/ffffff?text=P" alt="President" class="w-full h-full object-cover">
+                    <!-- Member 1 -->
+                    <div class="group text-center reveal delay-100">
+                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-full overflow-hidden border-[6px] border-gray-50 group-hover:border-bd-green transition-colors duration-300 shadow-xl group-hover:shadow-glow-green">
+                            <img src="https://placehold.co/400x400/006a4e/ffffff?text=P" alt="President" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                             <!-- Overlay social links -->
-                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fab fa-linkedin text-xl"></i></a>
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fas fa-envelope text-xl"></i></a>
+                            <div class="absolute inset-0 bg-bd-green/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                                <a href="#" class="text-white hover:text-gold-light bg-black/20 p-3 rounded-full hover:bg-black/40 transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+                                <a href="#" class="text-white hover:text-gold-light bg-black/20 p-3 rounded-full hover:bg-black/40 transition-colors"><i class="fas fa-envelope text-xl"></i></a>
                             </div>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800">Rahman S.</h4>
-                        <p class="text-bd-red font-medium text-sm mb-2">President</p>
-                        <p class="text-gray-500 text-xs">PhD Candidate, Computer Science</p>
-                    </div>
-                    <!-- [END: Member Card] -->
-
-                    <!-- [START: Member Card] -->
-                    <div class="group text-center">
-                        <div class="relative mb-4 mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-bd-green transition-colors duration-300 shadow-md">
-                            <img src="https://placehold.co/400x400/006a4e/ffffff?text=P" alt="President" class="w-full h-full object-cover">
-                            <!-- Overlay social links -->
-                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fab fa-linkedin text-xl"></i></a>
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fas fa-envelope text-xl"></i></a>
-                            </div>
-                        </div>
-                        <h4 class="text-xl font-bold text-gray-800">Rahman S.</h4>
-                        <p class="text-bd-red font-medium text-sm mb-2">President</p>
-                        <p class="text-gray-500 text-xs">PhD Candidate, Computer Science</p>
+                        <h4 class="text-2xl font-bold text-gray-800 font-serif">Rahman S.</h4>
+                        <p class="text-bd-red font-bold text-sm mb-2 uppercase tracking-wide">President</p>
+                        <p class="text-gray-500 text-sm">PhD Candidate, Computer Science</p>
                     </div>
 
                     <!-- Member 2 -->
-                    <div class="group text-center">
-                        <div class="relative mb-4 mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-bd-green transition-colors duration-300 shadow-md">
-                            <img src="https://placehold.co/400x400/cc0000/ffffff?text=VP" alt="Vice President" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fab fa-linkedin text-xl"></i></a>
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fas fa-envelope text-xl"></i></a>
+                    <div class="group text-center reveal delay-200">
+                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-full overflow-hidden border-[6px] border-gray-50 group-hover:border-bd-red transition-colors duration-300 shadow-xl group-hover:shadow-glow">
+                            <img src="https://placehold.co/400x400/cc0000/ffffff?text=VP" alt="Vice President" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-bd-red/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                                <a href="#" class="text-white hover:text-gold-light bg-black/20 p-3 rounded-full hover:bg-black/40 transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+                                <a href="#" class="text-white hover:text-gold-light bg-black/20 p-3 rounded-full hover:bg-black/40 transition-colors"><i class="fas fa-envelope text-xl"></i></a>
                             </div>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800">Nadia H.</h4>
-                        <p class="text-bd-red font-medium text-sm mb-2">Vice President</p>
-                        <p class="text-gray-500 text-xs">MS, Bioengineering</p>
+                        <h4 class="text-2xl font-bold text-gray-800 font-serif">Nadia H.</h4>
+                        <p class="text-bd-green font-bold text-sm mb-2 uppercase tracking-wide">Vice President</p>
+                        <p class="text-gray-500 text-sm">MS, Bioengineering</p>
                     </div>
 
                     <!-- Member 3 -->
-                    <div class="group text-center">
-                        <div class="relative mb-4 mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-bd-green transition-colors duration-300 shadow-md">
-                            <img src="https://placehold.co/400x400/006a4e/ffffff?text=GS" alt="General Secretary" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fab fa-linkedin text-xl"></i></a>
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fas fa-envelope text-xl"></i></a>
+                    <div class="group text-center reveal delay-300">
+                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-full overflow-hidden border-[6px] border-gray-50 group-hover:border-bd-green transition-colors duration-300 shadow-xl group-hover:shadow-glow-green">
+                            <img src="https://placehold.co/400x400/006a4e/ffffff?text=GS" alt="General Secretary" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-bd-green/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                                <a href="#" class="text-white hover:text-gold-light bg-black/20 p-3 rounded-full hover:bg-black/40 transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+                                <a href="#" class="text-white hover:text-gold-light bg-black/20 p-3 rounded-full hover:bg-black/40 transition-colors"><i class="fas fa-envelope text-xl"></i></a>
                             </div>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800">Tanvir A.</h4>
-                        <p class="text-bd-red font-medium text-sm mb-2">General Secretary</p>
-                        <p class="text-gray-500 text-xs">Undergraduate, Business</p>
+                        <h4 class="text-2xl font-bold text-gray-800 font-serif">Tanvir A.</h4>
+                        <p class="text-bd-red font-bold text-sm mb-2 uppercase tracking-wide">General Secretary</p>
+                        <p class="text-gray-500 text-sm">Undergraduate, Business</p>
                     </div>
 
                     <!-- Member 4 -->
-                    <div class="group text-center">
-                        <div class="relative mb-4 mx-auto w-48 h-48 rounded-full overflow-hidden border-4 border-gray-100 group-hover:border-bd-green transition-colors duration-300 shadow-md">
-                            <!-- Example referencing the provided search info for cultural secretary -->
-                            <img src="https://placehold.co/400x400/cc0000/ffffff?text=CS" alt="Cultural Secretary" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fab fa-linkedin text-xl"></i></a>
-                                <a href="#" class="text-white hover:text-gold-light"><i class="fas fa-envelope text-xl"></i></a>
+                    <div class="group text-center reveal delay-400">
+                        <div class="relative mb-6 mx-auto w-48 h-48 rounded-full overflow-hidden border-[6px] border-gray-50 group-hover:border-bd-red transition-colors duration-300 shadow-xl group-hover:shadow-glow">
+                            <img src="https://placehold.co/400x400/cc0000/ffffff?text=CS" alt="Cultural Secretary" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-bd-red/80 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                                <a href="#" class="text-white hover:text-gold-light bg-black/20 p-3 rounded-full hover:bg-black/40 transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+                                <a href="#" class="text-white hover:text-gold-light bg-black/20 p-3 rounded-full hover:bg-black/40 transition-colors"><i class="fas fa-envelope text-xl"></i></a>
                             </div>
                         </div>
-                        <h4 class="text-xl font-bold text-gray-800">Ishrat J. E.</h4>
-                        <p class="text-bd-red font-medium text-sm mb-2">Cultural Secretary</p>
-                        <p class="text-gray-500 text-xs">PhD Student, Computing</p>
+                        <h4 class="text-2xl font-bold text-gray-800 font-serif">Ishrat J. E.</h4>
+                        <p class="text-bd-green font-bold text-sm mb-2 uppercase tracking-wide">Cultural Secretary</p>
+                        <p class="text-gray-500 text-sm">PhD Student, Computing</p>
                     </div>
-                    <!-- [END: Member Card] -->
 
                 </div>
             </div>
 
-            <!-- 2025-2026 Committee (Hidden) -->
-            <div id="com-25-26" class="com-content hidden">
-                <div class="bg-gray-50 rounded-xl p-8 border border-gray-200 text-center">
-                    <p class="text-gray-600 mb-4">We thank our previous committee for their dedicated service and hard work in building our community.</p>
+            <!-- 2025-2026 Committee Content (Hidden initially) -->
+            <div id="com-25-26" class="com-content hidden opacity-0 transition-opacity duration-500">
+                <div class="bg-gray-50 rounded-3xl p-10 border border-gray-200 text-center shadow-inner">
+                    <p class="text-gray-600 mb-8 text-lg font-medium">We sincerely thank our previous executive committee for their dedicated service, leadership, and hard work in building our community.</p>
                     <div class="inline-flex flex-wrap justify-center gap-4">
-                        <span class="px-4 py-2 bg-white rounded-full text-sm border shadow-sm">President: Hasan M.</span>
-                        <span class="px-4 py-2 bg-white rounded-full text-sm border shadow-sm">VP: Farhana K.</span>
-                        <span class="px-4 py-2 bg-white rounded-full text-sm border shadow-sm">Treasurer: Ahmed Z.</span>
+                        <span class="px-6 py-3 bg-white rounded-full text-md font-semibold border border-gray-200 shadow-sm text-bd-green">President: Hasan M.</span>
+                        <span class="px-6 py-3 bg-white rounded-full text-md font-semibold border border-gray-200 shadow-sm text-bd-red">VP: Farhana K.</span>
+                        <span class="px-6 py-3 bg-white rounded-full text-md font-semibold border border-gray-200 shadow-sm text-bd-green">Treasurer: Ahmed Z.</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section id="contact" class="py-16 relative bg-bd-green overflow-hidden">
-        <!-- Abstract background pattern -->
-        <div class="absolute inset-0 opacity-10">
-             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="dotPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <circle cx="2" cy="2" r="2" fill="#ffffff" />
-                    </pattern>
-                </defs>
-                <rect x="0" y="0" width="100%" height="100%" fill="url(#dotPattern)" />
-            </svg>
-        </div>
-        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
-            <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-6">Become a Member Today</h2>
-            <p class="text-gray-200 text-lg mb-8">Join BSAUU via Campus Connect to stay updated with all our events, announcements, and resources.</p>
-            <a href="https://campusconnect.utah.edu/club_signup?view=all&" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-bd-green font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:bg-gray-100 transform hover:-translate-y-1 transition-all duration-300">
-                Join on Campus Connect <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+    <section id="contact" class="py-20 relative bg-bd-green overflow-hidden">
+        <div class="absolute inset-0 bg-alpana-pattern opacity-10 mix-blend-overlay"></div>
+        <div class="max-w-4xl mx-auto px-4 relative z-10 text-center reveal">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6 text-shadow-md">Become a Member Today</h2>
+            <p class="text-gold-light text-xl mb-10 font-light">Join BSAUU via Campus Connect to stay updated with all our cultural events, announcements, and resources.</p>
+            <a href="https://campusconnect.utah.edu/club_signup?view=all&" target="_blank" rel="noopener noreferrer" class="inline-block bg-white text-bd-green font-bold text-xl px-10 py-5 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:bg-gold-light hover:text-bd-green transform hover:-translate-y-2 transition-all duration-300">
+                Join on Campus Connect <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-12">
+    <footer class="bg-gray-950 text-gray-400 py-16 border-t-[6px] border-bd-red">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div>
-                    <h3 class="text-2xl font-serif font-bold text-white mb-4"><span class="text-bd-green">BSA</span><span class="text-utah-red">UU</span></h3>
-                    <p class="text-sm text-gray-400 mb-4">Bangladesh Student Association<br>University of Utah<br>Salt Lake City, UT</p>
+                    <h3 class="text-3xl font-serif font-bold text-white mb-6 tracking-wider">
+                        <span class="text-bd-green">BSA</span><span class="text-white">UU</span>
+                    </h3>
+                    <p class="text-sm leading-relaxed text-gray-400 mb-6 font-medium">Bangladesh Student Association<br>University of Utah<br>Salt Lake City, UT</p>
                 </div>
                 <div>
-                    <h4 class="text-lg font-semibold text-white mb-4 border-b border-gray-700 pb-2 inline-block">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="hover:text-gold-light transition-colors">Home</a></li>
-                        <li><a href="#about" class="hover:text-gold-light transition-colors">About</a></li>
-                        <li><a href="#events" class="hover:text-gold-light transition-colors">Events</a></li>
-                        <li><a href="#committee" class="hover:text-gold-light transition-colors">Committee</a></li>
+                    <h4 class="text-xl font-serif text-white mb-6 border-b border-gray-800 pb-3 inline-block">Quick Links</h4>
+                    <ul class="space-y-3 font-medium">
+                        <li><a href="#home" class="hover:text-gold-light transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs"></i> Home</a></li>
+                        <li><a href="#about" class="hover:text-gold-light transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs"></i> About Us</a></li>
+                        <li><a href="#events" class="hover:text-gold-light transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs"></i> Calendar</a></li>
+                        <li><a href="#gallery" class="hover:text-gold-light transition-colors flex items-center gap-2"><i class="fas fa-angle-right text-xs"></i> Past Events</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-lg font-semibold text-white mb-4 border-b border-gray-700 pb-2 inline-block">Connect With Us</h4>
-                    <div class="flex space-x-4 mb-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-bd-green hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-bd-red hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
-                        <a href="mailto:studentorgs@utah.edu" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-utah-red hover:text-white transition-all"><i class="fas fa-envelope"></i></a>
+                    <h4 class="text-xl font-serif text-white mb-6 border-b border-gray-800 pb-3 inline-block">Connect With Us</h4>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center hover:bg-bd-green hover:border-bd-green hover:text-white transition-all duration-300 shadow-md"><i class="fab fa-facebook-f text-lg"></i></a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center hover:bg-bd-red hover:border-bd-red hover:text-white transition-all duration-300 shadow-md"><i class="fab fa-instagram text-lg"></i></a>
+                        <a href="mailto:studentorgs@utah.edu" class="w-12 h-12 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center hover:bg-utah-red hover:border-utah-red hover:text-white transition-all duration-300 shadow-md"><i class="fas fa-envelope text-lg"></i></a>
                     </div>
-                    <p class="text-xs text-gray-500">Recognized Student Organization<br>Student Leadership & Involvement</p>
+                    <p class="text-xs text-gray-500 font-medium">Recognized Student Organization<br>Student Leadership & Involvement</p>
                 </div>
             </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
-                <p>&copy; 2026 Bangladesh Student Association at the University of Utah. All rights reserved.</p>
-                <p class="mt-2 text-xs">Designed for GitHub Pages</p>
+            <div class="border-t border-gray-900 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+                <p>&copy; 2026 Bangladesh Student Association at the University of Utah.</p>
+                <p class="mt-2 md:mt-0 font-medium text-gray-600">Designed for GitHub Pages</p>
             </div>
         </div>
     </footer>
 
     <script>
         // ==========================================
-        // GOOGLE CALENDAR API SETUP
+        // 1. Navigation & Mobile Menu Logic
         // ==========================================
-        // 1. Get your Calendar ID from your embed link (look for src=... up to the & symbol)
-        //    Make sure your calendar is set to "Public" in Google Calendar settings.
-        const CALENDAR_ID = 'en.usa#holiday@group.v.calendar.google.com'; // Replace with your Calendar ID
-        
-        // 2. You need a Google Cloud API Key with Calendar API v3 enabled.
-        //    (Leave empty to see the error message with instructions, or paste yours here)
-        const GOOGLE_API_KEY = ''; // Replace with your API Key
-        
-        // ==========================================
-
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             const navTitle = document.getElementById('nav-title');
@@ -597,174 +600,241 @@
                 navLinks.forEach(link => {
                     link.classList.replace('text-white', 'text-gray-800');
                     link.classList.replace('hover:text-gold-light', 'hover:text-bd-green');
+                    link.classList.replace('after:bg-gold-light', 'after:bg-bd-green');
                 });
+                document.getElementById('menu-icon').classList.replace('text-white', 'text-gray-800');
             } else {
                 nav.classList.remove('glass-nav');
                 navTitle.classList.replace('text-bd-green', 'text-white');
                 navLinks.forEach(link => {
                     link.classList.replace('text-gray-800', 'text-white');
                     link.classList.replace('hover:text-bd-green', 'hover:text-gold-light');
+                    link.classList.replace('after:bg-bd-green', 'after:bg-gold-light');
                 });
+                document.getElementById('menu-icon').classList.replace('text-gray-800', 'text-white');
             }
         });
 
-        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         
         mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            if(mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                setTimeout(() => {
+                    mobileMenu.classList.remove('scale-y-0', 'opacity-0');
+                    mobileMenu.classList.add('scale-y-100', 'opacity-100');
+                }, 10);
+            } else {
+                mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+                mobileMenu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            }
         });
 
-        // Close mobile menu on link click
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
+        document.querySelectorAll('.mobile-link').forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('scale-y-100', 'opacity-100');
+                mobileMenu.classList.add('scale-y-0', 'opacity-0');
+                setTimeout(() => { mobileMenu.classList.add('hidden'); }, 300);
             });
         });
 
-        // Tab Switching Logic for Committee
+        // ==========================================
+        // 2. Committee Tabs Logic
+        // ==========================================
         function switchComTab(yearSpan) {
-            // Update buttons
-            const buttons = document.querySelectorAll('.com-tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.com-tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
-            // Update content
             const contents = document.querySelectorAll('.com-content');
             contents.forEach(content => {
-                content.classList.add('hidden');
-                content.classList.remove('fade-in');
+                content.classList.remove('opacity-100');
+                content.classList.add('opacity-0');
+                setTimeout(() => {
+                    content.classList.add('hidden');
+                }, 300);
             });
             
-            const targetContent = document.getElementById(`com-${yearSpan}`);
-            targetContent.classList.remove('hidden');
             setTimeout(() => {
-                targetContent.classList.add('fade-in');
+                const targetContent = document.getElementById(`com-${yearSpan}`);
+                targetContent.classList.remove('hidden');
+                setTimeout(() => {
+                    targetContent.classList.remove('opacity-0');
+                    targetContent.classList.add('opacity-100');
+                }, 50);
+            }, 300);
+        }
+
+        // ==========================================
+        // 3. Lightbox Gallery Logic
+        // ==========================================
+        // Data Structure for past event albums
+        const galleryData = {
+            'boishakh': {
+                title: 'Pohela Boishakh 1430',
+                images: [
+                    'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1519750157634-b6d493a0f77c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            'foodfest': {
+                title: 'International Food Fest 2025',
+                images: [
+                    'https://images.unsplash.com/photo-1523580494112-071d45740871?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+                ]
+            },
+            'ekushey': {
+                title: 'Ekushey February (Language Movement Day)',
+                images: [
+                    'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+                ]
+            }
+        };
+
+        let currentAlbum = null;
+        let currentIndex = 0;
+
+        const lightbox = document.getElementById('lightbox');
+        const mainImg = document.getElementById('lightbox-main-img');
+        const loader = document.getElementById('lightbox-loader');
+        const thumbnailsContainer = document.getElementById('lightbox-thumbnails');
+
+        function openLightbox(albumId) {
+            currentAlbum = galleryData[albumId];
+            currentIndex = 0;
+            
+            document.getElementById('lightbox-title').innerText = currentAlbum.title;
+            
+            // Build thumbnails
+            thumbnailsContainer.innerHTML = '';
+            currentAlbum.images.forEach((src, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden border-2 transition-all duration-300 ${idx === 0 ? 'border-bd-red scale-105' : 'border-transparent opacity-60 hover:opacity-100'}`;
+                btn.onclick = () => showImage(idx);
+                btn.innerHTML = `<img src="${src}" class="w-full h-full object-cover" alt="Thumbnail">`;
+                thumbnailsContainer.appendChild(btn);
+            });
+
+            // Show Modal
+            lightbox.classList.remove('hidden');
+            // Slight delay to allow display block to apply before animating opacity
+            setTimeout(() => {
+                lightbox.classList.add('active');
+                document.body.classList.add('modal-open');
+                showImage(0);
             }, 10);
         }
 
-        // Fetch and Render Events from Google Calendar
-        async function fetchGoogleCalendarEvents() {
-            const container = document.getElementById('dynamic-events-list');
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                mainImg.src = ''; // clear memory
+            }, 400); // match css transition duration
+        }
+
+        function showImage(index) {
+            currentIndex = index;
+            const src = currentAlbum.images[currentIndex];
             
-            if (!GOOGLE_API_KEY) {
-                container.innerHTML = `
-                    <div class="bg-red-50 rounded-2xl p-6 border border-red-200 text-center flex flex-col justify-center items-center h-[300px]">
-                        <i class="fas fa-exclamation-triangle text-3xl text-red-400 mb-3"></i>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">API Key Required</h3>
-                        <p class="text-gray-600 text-sm">Provide a Google Calendar API Key at the bottom of the HTML file to show dynamic cards.</p>
-                    </div>
-                `;
-                return;
-            }
+            // Update counter
+            document.getElementById('lightbox-counter').innerText = `${currentIndex + 1} / ${currentAlbum.images.length}`;
+            
+            // Show loader while loading
+            loader.classList.remove('hidden');
+            mainImg.classList.add('opacity-0');
+            
+            mainImg.onload = () => {
+                loader.classList.add('hidden');
+                mainImg.classList.remove('opacity-0');
+            };
+            mainImg.src = src;
 
-            try {
-                // Fetch events from today onwards, strictly limited to the end of 2026
-                const timeMin = new Date().toISOString();
-                const timeMax = new Date('2026-12-31T23:59:59Z').toISOString();
-                const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(CALENDAR_ID)}/events?key=${GOOGLE_API_KEY}&timeMin=${timeMin}&timeMax=${timeMax}&singleEvents=true&orderBy=startTime&maxResults=10`;
-                
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Failed to fetch calendar data.');
-                
-                const data = await response.json();
-                const events = data.items;
-
-                if (!events || events.length === 0) {
-                    container.innerHTML = `
-                        <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200 text-center flex flex-col justify-center items-center h-[300px]">
-                            <i class="far fa-calendar-check text-3xl text-gray-400 mb-3"></i>
-                            <h3 class="text-lg font-bold text-gray-800 mb-1">No Upcoming Events</h3>
-                            <p class="text-gray-500 text-sm">Check back later for new events in 2026!</p>
-                        </div>
-                    `;
-                    return;
+            // Update thumbnail states
+            const thumbs = thumbnailsContainer.children;
+            for(let i=0; i<thumbs.length; i++) {
+                if(i === currentIndex) {
+                    thumbs[i].classList.replace('border-transparent', 'border-bd-red');
+                    thumbs[i].classList.replace('opacity-60', 'opacity-100');
+                    thumbs[i].classList.add('scale-105');
+                    // Scroll thumbnail into view
+                    thumbs[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    thumbs[i].classList.replace('border-bd-red', 'border-transparent');
+                    thumbs[i].classList.replace('opacity-100', 'opacity-60');
+                    thumbs[i].classList.remove('scale-105');
                 }
-
-                // Render events
-                let html = '';
-                events.forEach((event, index) => {
-                    // Determine start date and time
-                    const start = event.start.dateTime ? new Date(event.start.dateTime) : new Date(event.start.date);
-                    const end = event.end?.dateTime ? new Date(event.end.dateTime) : null;
-                    
-                    const month = start.toLocaleString('default', { month: 'short' });
-                    const day = start.getDate();
-                    
-                    let timeString = 'All Day';
-                    if (event.start.dateTime) {
-                        const startTimeStr = start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-                        const endTimeStr = end ? end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
-                        timeString = endTimeStr ? `${startTimeStr} - ${endTimeStr}` : startTimeStr;
-                    }
-
-                    // Placeholder imagery based on index
-                    const images = [
-                        'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-                        'https://images.unsplash.com/photo-1523580494112-071d45740871?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-                        'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
-                        'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
-                    ];
-                    const imgUrl = images[index % images.length];
-
-                    // Render as compact vertical cards for the right-hand column
-                    html += `
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow flex flex-col group fade-in" style="animation-delay: ${index * 100}ms">
-                            <div class="w-full bg-gray-200 relative overflow-hidden h-32">
-                                <img src="${imgUrl}" alt="Event" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                                <div class="absolute top-2 left-2 bg-white px-2 py-1 rounded-md shadow-sm flex flex-col items-center">
-                                    <span class="text-bd-red font-bold text-lg leading-none">${day}</span>
-                                    <span class="text-[10px] text-gray-500 uppercase font-semibold">${month}</span>
-                                </div>
-                            </div>
-                            <div class="p-4 flex flex-col flex-grow">
-                                <h3 class="text-lg font-bold text-gray-800 mb-1 group-hover:text-bd-red transition-colors line-clamp-2 leading-tight">${event.summary}</h3>
-                                <div class="flex flex-col text-xs text-gray-500 gap-1 mt-2">
-                                    <span class="flex items-center"><i class="far fa-clock w-4 text-center mr-1"></i> ${timeString}</span>
-                                    <span class="flex items-start"><i class="fas fa-map-marker-alt w-4 text-center mr-1 mt-0.5"></i> <span class="line-clamp-2">${event.location || 'Location TBD'}</span></span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                container.innerHTML = html;
-
-            } catch (error) {
-                console.error("Calendar Error:", error);
-                container.innerHTML = `
-                    <div class="bg-red-50 rounded-2xl p-6 border border-red-200 text-center flex flex-col justify-center items-center h-[300px]">
-                        <i class="fas fa-times-circle text-3xl text-red-500 mb-3"></i>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">Could not load events</h3>
-                        <p class="text-gray-600 text-sm">Please check the official calendar view to the left.</p>
-                    </div>
-                `;
             }
         }
 
-        // Intersection Observer for scroll animations (Slide up effect)
-        document.addEventListener("DOMContentLoaded", function() {
-            // Trigger calendar fetch
-            fetchGoogleCalendarEvents();
+        function nextImage(e) {
+            if(e) e.stopPropagation();
+            if (currentIndex < currentAlbum.images.length - 1) {
+                showImage(currentIndex + 1);
+            } else {
+                showImage(0); // loop back
+            }
+        }
 
+        function prevImage(e) {
+            if(e) e.stopPropagation();
+            if (currentIndex > 0) {
+                showImage(currentIndex - 1);
+            } else {
+                showImage(currentAlbum.images.length - 1); // loop to end
+            }
+        }
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') prevImage();
+            }
+        });
+
+        // Close lightbox when clicking the overlay background
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox || e.target.classList.contains('lightbox-img-container')) {
+                closeLightbox();
+            }
+        });
+
+
+        // ==========================================
+        // 4. Advanced Scroll Animations (Intersection Observer)
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", function() {
             const observerOptions = {
                 root: null,
-                rootMargin: '0px',
-                threshold: 0.1
+                rootMargin: '0px 0px -50px 0px', // trigger slightly before it comes into view
+                threshold: 0.15
             };
 
-            const observer = new IntersectionObserver((entries, observer) => {
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        entry.target.classList.add('active');
                         observer.unobserve(entry.target); // Only animate once
                     }
                 });
             }, observerOptions);
 
-            document.querySelectorAll('.slide-up').forEach(element => {
-                observer.observe(element);
+            document.querySelectorAll('.reveal').forEach(element => {
+                scrollObserver.observe(element);
             });
         });
     </script>
