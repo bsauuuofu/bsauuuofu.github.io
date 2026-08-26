@@ -374,8 +374,24 @@
             <!-- Gallery Grid (Albums) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 
+               <!-- Album 3: Pohela Boishak -->
+                <div class="album-card relative h-80 group reveal delay-200" onclick="openLightbox('event1')">
+                    <img src="assets/2026_pohela_boishak/1.jpg" alt="Pohela Boishak" class="w-full h-full object-cover">
+                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Spring 2026</div>
+                        <h3 class="text-2xl font-serif font-bold mb-1">Pohela Boishak 1433</h3>
+                        <p class="text-gray-300 text-sm flex items-center gap-2">
+                            <i class="far fa-images"></i> 3 Photos
+                        </p>
+                    </div>
+                    <!-- Hover Action Icon -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                        <i class="fas fa-expand text-xl"></i>
+                    </div>
+                </div>
+                
                 <!-- Album: Fifa Worldcup Final 2026 Watch Party -->
-                <div class="album-card relative h-80 group reveal" onclick="openLightbox('boishakh')">
+                <div class="album-card relative h-80 group reveal" onclick="openLightbox('event2')">
                     <img src="assets/2026_watch_party/1.jpg" alt="Worldcup Watch Party" class="w-full h-full object-cover">
                     <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
                         <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Summer 2026</div>
@@ -391,28 +407,13 @@
                 </div>
 
                 <!-- Album: Committee Handover ceremony-->
-                <div class="album-card relative h-80 group reveal delay-100" onclick="openLightbox('foodfest')">
+                <div class="album-card relative h-80 group reveal delay-100" onclick="openLightbox('event3')">
                     <img src="assets/2026_committee_handover/1.jpg" alt="Committee Handover" class="w-full h-full object-cover">
                     <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
                         <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Summer 2026</div>
                         <h3 class="text-2xl font-serif font-bold mb-1">Committee Handover ceremony</h3>
                         <p class="text-gray-300 text-sm flex items-center gap-2">
                             <i class="far fa-images"></i> 2 Photos
-                        </p>
-                    </div>
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
-                        <i class="fas fa-expand text-xl"></i>
-                    </div>
-                </div>
-
-                <!-- Album 3: Ekushey February -->
-                <div class="album-card relative h-80 group reveal delay-200" onclick="openLightbox('ekushey')">
-                    <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ekushey" class="w-full h-full object-cover">
-                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Feb 2026</div>
-                        <h3 class="text-2xl font-serif font-bold mb-1">Ekushey February</h3>
-                        <p class="text-gray-300 text-sm flex items-center gap-2">
-                            <i class="far fa-images"></i> 3 Photos
                         </p>
                     </div>
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
@@ -719,7 +720,15 @@
         // ==========================================
         // Data Structure for past event albums
         const galleryData = {
-            'boishakh': {
+            'event1': {
+                title: 'Pohela Boishak 1433',
+                images: [
+                    'assets/2026_pohela_boishak/1.jpg',
+                    'assets/2026_pohela_boishak/2.jpg',
+                    'assets/2026_pohela_boishak/3.jpg'
+                ]
+            },
+            'event2': {
                 title: 'FIFA World Cup Final 2026 Watch Party',
                 images: [
                     'assets/2026_watch_party/1.jpg',
@@ -730,21 +739,13 @@
                     'assets/2026_watch_party/6.jpg'
                 ]
             },
-            'foodfest': {
+            'event3': {
                 title: 'Executive Committee Handover ceremony 2026',
                 images: [
                     'assets/2026_committee_handover/1.jpg',
                     'assets/2026_committee_handover/2.jpg'
                 ]
             },
-            'ekushey': {
-                title: 'Ekushey February (Language Movement Day)',
-                images: [
-                    'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-                    'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-                    'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-                ]
-            }
         };
 
         let currentAlbum = null;
