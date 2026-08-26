@@ -1,2 +1,0 @@
-# bsauu
-BSAUU website
