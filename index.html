@@ -192,6 +192,8 @@
             overflow: hidden;
             border-radius: 1rem;
             cursor: pointer;
+            min-width: 300px; /* Essential for horizontal scroll */
+            flex: 0 0 auto; /* Essential for horizontal scroll */
         }
         .album-card img {
             transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -214,6 +216,20 @@
             0% { box-shadow: 0 0 0 0 rgba(253, 240, 213, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(253, 240, 213, 0); }
             100% { box-shadow: 0 0 0 0 rgba(253, 240, 213, 0); }
+        }
+
+        /* Horizontal Gallery Scroll */
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 1.5rem; /* Equivalent to gap-6 */
+            padding-bottom: 1rem;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .gallery-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
         }
     </style>
 </head>
@@ -285,10 +301,7 @@
             </div>
         </div>
         
-        <!-- Scroll Down Indicator -->
-        <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/80 text-3xl animate-bounce hover:text-gold-light transition-colors z-20 p-4">
-            <i class="fas fa-chevron-down"></i>
-        </a>
+        <!-- Scroll Down Indicator Removed based on request -->
     </section>
 
     <section id="about" class="py-24 bg-white relative overflow-hidden">
@@ -296,12 +309,61 @@
         <div class="bengali-watermark font-bengali">স্বাগতম</div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-20 reveal">
+            <div class="text-center mb-10 reveal">
                 <h2 class="text-3xl md:text-5xl font-serif font-bold text-bd-green cultural-underline">Welcome to BSAUU</h2>
                 <p class="mt-8 text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed">
                     The mission of the Bangladeshi Student Association at the University of Utah is to serve as a connecting hub for Bangladeshi students, promote and share our vibrant culture with the campus community, and create a welcoming environment for new students arriving in Utah.
                 </p>
             </div>
+            <!-- Traditional Icons -->
+            <div class="flex justify-center items-center gap-8 md:gap-16 reveal delay-100">
+                
+                <!-- Culture: Water Lily (Shapla) SVG Icon -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gold-light/30 flex items-center justify-center mb-4 transition-transform group-hover:-rotate-12">
+                        <svg class="w-12 h-12 md:w-14 md:h-14 text-bd-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21c-4.97 0-9-4.03-9-9 0-2.25.83-4.3 2.2-5.88.58-.66 1.48-1.02 2.4-1.05 2.1-.06 4.14 1.25 5.4 3.03 1.26-1.78 3.3-3.09 5.4-3.03.92.03 1.82.39 2.4 1.05C22.17 7.7 23 9.75 23 12c0 4.97-4.03 9-9 9z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21v-8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12c0 2.21 1.34 4 3 4s3-1.79 3-4-1.34-4-3-4-3 1.79-3 4z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Culture</span>
+                </div>
+
+                <!-- Music: Ektara SVG Icon -->
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gold-light/30 flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                        <svg class="w-12 h-12 md:w-14 md:h-14 text-bd-red" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                             <!-- Base/Gourd -->
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 22a5 5 0 005-5c0-2.76-2.24-5-5-5s-5 2.24-5 5a5 5 0 005 5z"></path>
+                             <!-- Neck -->
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 12V4a2 2 0 114 0v8"></path>
+                             <!-- String -->
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 4v13"></path>
+                             <!-- Tuning peg -->
+                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 6h3"></path>
+                        </svg>
+                    </div>
+                    <span class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Music</span>
+                </div>
+
+                 <!-- Festivity: Hand Fan (Pankha) SVG Icon -->
+                 <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gold-light/30 flex items-center justify-center mb-4 transition-transform group-hover:rotate-12">
+                        <svg class="w-12 h-12 md:w-14 md:h-14 text-bd-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Fan Shape -->
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 12c0-4.418 3.582-8 8-8s8 3.582 8 8v2H4v-2z"></path>
+                            <!-- Handle -->
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14v8"></path>
+                            <!-- Decorative lines -->
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v10"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 5.5l2.5 8.5"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 5.5L13.5 14"></path>
+                        </svg>
+                    </div>
+                    <span class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Festivity</span>
+                </div>
+                
             </div>
         </div>
     </section>
@@ -338,82 +400,126 @@
         </div>
     </section>
 
-    <section id="gallery" class="py-24 bg-gray-900 relative">
+    <!-- Changed background to bd-green to match flag -->
+    <section id="gallery" class="py-24 bg-bd-green relative">
         <!-- Dark pattern overlay -->
-        <div class="absolute inset-0 bg-alpana-pattern opacity-10"></div>
+        <div class="absolute inset-0 bg-alpana-pattern opacity-20"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-16 reveal">
                 <span class="text-gold-light font-bold tracking-widest uppercase text-sm mb-2 block">Memories</span>
+                <!-- Adjusted title color for contrast on green bg -->
                 <h2 class="text-3xl md:text-5xl font-serif font-bold text-white cultural-underline">Past Event Galleries</h2>
-                <p class="mt-8 text-gray-400 max-w-2xl mx-auto">Click on any event below to open the interactive photo gallery and relive our favorite moments.</p>
+                <p class="mt-8 text-gray-200 max-w-2xl mx-auto">Click on any event below to open the interactive photo gallery and relive our favorite moments.</p>
             </div>
             
-            <!-- Gallery Grid (Albums) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            <!-- Horizontal Gallery Container with Arrows -->
+            <div class="relative group">
                 
-               <!-- Album 3: Pohela Boishak -->
-                <div class="album-card relative h-80 group reveal delay-200" onclick="openLightbox('event1')">
-                    <img src="assets/2026_pohela_boishak/1.jpg" alt="Pohela Boishak" class="w-full h-full object-cover">
-                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Spring 2026</div>
-                        <h3 class="text-2xl font-serif font-bold mb-1">Pohela Boishak 1433</h3>
-                        <p class="text-gray-300 text-sm flex items-center gap-2">
-                            <i class="far fa-images"></i> 3 Photos
-                        </p>
+                <!-- Left Scroll Arrow -->
+                <button id="scroll-left" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 md:-ml-6 z-20 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hidden sm:flex">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Gallery Scroll Area -->
+                <div id="gallery-scroll" class="gallery-container px-2">
+                    
+                    <!-- Album 1: Pohela Boishak -->
+                    <div class="album-card relative h-80 reveal delay-200 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]" onclick="openLightbox('event1')">
+                        <img src="assets/2026_pohela_boishak/1.jpg" alt="Pohela Boishak" class="w-full h-full object-cover">
+                        <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                            <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Spring 2026</div>
+                            <h3 class="text-2xl font-serif font-bold mb-1">Pohela Boishak 1433</h3>
+                            <p class="text-gray-300 text-sm flex items-center gap-2">
+                                <i class="far fa-images"></i> 3 Photos
+                            </p>
+                        </div>
+                        <!-- Hover Action Icon -->
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 hover-icon transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                            <i class="fas fa-expand text-xl"></i>
+                        </div>
                     </div>
-                    <!-- Hover Action Icon -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
-                        <i class="fas fa-expand text-xl"></i>
+
+                    <!-- Album 2: Committee Handover ceremony-->
+                    <div class="album-card relative h-80 reveal delay-100 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]" onclick="openLightbox('event2')">
+                        <img src="assets/2026_committee_handover/1.jpg" alt="Committee Handover" class="w-full h-full object-cover">
+                        <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                            <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Summer 2026</div>
+                            <h3 class="text-2xl font-serif font-bold mb-1">Committee Handover ceremony</h3>
+                            <p class="text-gray-300 text-sm flex items-center gap-2">
+                                <i class="far fa-images"></i> 2 Photos
+                            </p>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 hover-icon transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                            <i class="fas fa-expand text-xl"></i>
+                        </div>
                     </div>
+                    
+                    <!-- Album 3: Fifa Worldcup Final 2026 Watch Party -->
+                    <div class="album-card relative h-80 reveal w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]" onclick="openLightbox('event3')">
+                        <img src="assets/2026_watch_party/1.jpg" alt="Worldcup Watch Party" class="w-full h-full object-cover">
+                        <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                            <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Summer 2026</div>
+                            <h3 class="text-2xl font-serif font-bold mb-1">Worldcup Watch Party</h3>
+                            <p class="text-gray-300 text-sm flex items-center gap-2">
+                                <i class="far fa-images"></i> 6 Photos
+                            </p>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 hover-icon transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                            <i class="fas fa-expand text-xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Album 4: Get Involved Fair 2026 -->
+                    <div class="album-card relative h-80 reveal w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]" onclick="openLightbox('event4')">
+                        <img src="assets/get_involved_fair_2026/1.jpg" alt="Get Involved Fair" class="w-full h-full object-cover">
+                        <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                            <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Fall 2026</div>
+                            <h3 class="text-2xl font-serif font-bold mb-1">Get Involved Fair 2026</h3>
+                            <p class="text-gray-300 text-sm flex items-center gap-2">
+                                <i class="far fa-images"></i> 6 Photos
+                            </p>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 hover-icon transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                            <i class="fas fa-expand text-xl"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Album 5: Mock Extra Album for Scroll Demo -->
+                    <div class="album-card relative h-80 reveal w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]" onclick="openLightbox('event1')">
+                        <img src="assets/2026_pohela_boishak/2.jpg" alt="Spring Festival" class="w-full h-full object-cover">
+                        <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
+                            <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Spring 2025</div>
+                            <h3 class="text-2xl font-serif font-bold mb-1">Spring Festival</h3>
+                            <p class="text-gray-300 text-sm flex items-center gap-2">
+                                <i class="far fa-images"></i> 10 Photos
+                            </p>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 hover-icon transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
+                            <i class="fas fa-expand text-xl"></i>
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Album: Committee Handover ceremony-->
-                <div class="album-card relative h-80 group reveal delay-100" onclick="openLightbox('event2')">
-                    <img src="assets/2026_committee_handover/1.jpg" alt="Committee Handover" class="w-full h-full object-cover">
-                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Summer 2026</div>
-                        <h3 class="text-2xl font-serif font-bold mb-1">Committee Handover ceremony</h3>
-                        <p class="text-gray-300 text-sm flex items-center gap-2">
-                            <i class="far fa-images"></i> 2 Photos
-                        </p>
-                    </div>
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
-                        <i class="fas fa-expand text-xl"></i>
-                    </div>
-                </div>
-                <!-- Album: Fifa Worldcup Final 2026 Watch Party -->
-                <div class="album-card relative h-80 group reveal" onclick="openLightbox('event3')">
-                    <img src="assets/2026_watch_party/1.jpg" alt="Worldcup Watch Party" class="w-full h-full object-cover">
-                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Summer 2026</div>
-                        <h3 class="text-2xl font-serif font-bold mb-1">Worldcup Watch Party</h3>
-                        <p class="text-gray-300 text-sm flex items-center gap-2">
-                            <i class="far fa-images"></i> 6 Photos
-                        </p>
-                    </div>
-                    <!-- Hover Action Icon -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
-                        <i class="fas fa-expand text-xl"></i>
-                    </div>
-                </div>
-                <!-- Album: Get Involved Fair 2026 -->
-                <div class="album-card relative h-80 group reveal" onclick="openLightbox('event4')">
-                    <img src="assets/get_involved_fair_2026/1.jpg" alt="Get Involved Fair" class="w-full h-full object-cover">
-                    <div class="album-overlay absolute inset-0 flex flex-col justify-end p-6 text-white">
-                        <div class="bg-gold-light text-bd-green text-xs font-bold px-3 py-1 rounded-full w-max mb-3 uppercase tracking-wider">Fall 2026</div>
-                        <h3 class="text-2xl font-serif font-bold mb-1">Get Involved Fair 2026</h3>
-                        <p class="text-gray-300 text-sm flex items-center gap-2">
-                            <i class="far fa-images"></i> 6 Photos
-                        </p>
-                    </div>
-                    <!-- Hover Action Icon -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/50 text-white w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm album-icon-pulse">
-                        <i class="fas fa-expand text-xl"></i>
-                    </div>
-                </div>
+                <!-- Right Scroll Arrow -->
+                <button id="scroll-right" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 md:-mr-6 z-20 bg-white/20 hover:bg-white/40 backdrop-blur-md text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hidden sm:flex">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
 
             </div>
+            
+            <!-- Mobile scroll hint -->
+            <div class="text-center mt-4 sm:hidden text-white/70 text-sm">
+                <i class="fas fa-arrows-alt-h mr-2"></i> Swipe to see more events
+            </div>
+            
+            <style>
+                /* Adjust hover state for dynamically sized horizontal cards */
+                .album-card:hover .hover-icon {
+                    opacity: 1;
+                }
+            </style>
         </div>
     </section>
 
@@ -477,17 +583,6 @@
             <!-- 2026-2027 Committee Content -->
             <div id="com-26-27" class="com-content transition-opacity duration-500">
                 
-                <!-- 
-                ====================================================================
-                INSTRUCTIONS TO ADD A NEW COMMITTEE MEMBER:
-                1. Copy the code starting from `<div class="group text-center">` 
-                   down to its closing `</div>`.
-                2. Paste it before the final closing `</div>` of this grid.
-                3. Update the text inside tags (Name, Role, Major).
-                4. To update the image, change the 'src' attribute in the <img> tag.
-                ====================================================================
-                -->
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
                     
                     <!-- Member 1 -->
@@ -639,14 +734,6 @@
                         <p class="text-bd-red font-bold text-sm mb-2 uppercase tracking-wide">Extended Committee</p>
                         <p class="text-gray-500 text-sm">PhD, Computer Science</p>
                     </div>
-                    
-
-
-
-
-
-
-                    
 
                 </div>
             </div>
@@ -973,6 +1060,50 @@
                 scrollObserver.observe(element);
             });
         });
+
+        // ==========================================
+        // 5. Horizontal Gallery Scroll Logic
+        // ==========================================
+        const galleryScroll = document.getElementById('gallery-scroll');
+        const scrollLeftBtn = document.getElementById('scroll-left');
+        const scrollRightBtn = document.getElementById('scroll-right');
+
+        if(galleryScroll && scrollLeftBtn && scrollRightBtn) {
+            // Amount to scroll per click (approximately one card width + gap)
+            const getScrollAmount = () => {
+                const card = galleryScroll.querySelector('.album-card');
+                return card ? card.offsetWidth + 24 : 350; // 24px is gap-1.5rem roughly
+            };
+
+            scrollRightBtn.addEventListener('click', () => {
+                galleryScroll.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+            });
+
+            scrollLeftBtn.addEventListener('click', () => {
+                galleryScroll.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+            });
+            
+            // Optional: Hide/Show buttons based on scroll position
+            galleryScroll.addEventListener('scroll', () => {
+                if (galleryScroll.scrollLeft <= 0) {
+                    scrollLeftBtn.style.opacity = '0.5';
+                    scrollLeftBtn.style.pointerEvents = 'none';
+                } else {
+                    scrollLeftBtn.style.opacity = '';
+                    scrollLeftBtn.style.pointerEvents = '';
+                }
+                
+                if (Math.ceil(galleryScroll.scrollLeft + galleryScroll.clientWidth) >= galleryScroll.scrollWidth) {
+                    scrollRightBtn.style.opacity = '0.5';
+                    scrollRightBtn.style.pointerEvents = 'none';
+                } else {
+                    scrollRightBtn.style.opacity = '';
+                    scrollRightBtn.style.pointerEvents = '';
+                }
+            });
+            // Trigger once on load to set initial state
+            galleryScroll.dispatchEvent(new Event('scroll'));
+        }
     </script>
 </body>
 </html>
