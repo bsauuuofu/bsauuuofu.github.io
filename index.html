@@ -615,9 +615,9 @@ body.locked{overflow:hidden}
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-[minmax(0,1fr)_330px] gap-6 lg:gap-8">
+    <div class="grid lg:grid-cols-[minmax(0,1fr)_330px] gap-6 lg:gap-8" data-reveal="zoom" style="--d:100ms">
 
-    <div class="relative order-last lg:order-none" data-reveal="zoom" style="--d:100ms">
+    <div class="relative order-last lg:order-none">
       <!-- alpana corners -->
       <span class="absolute -top-3 -left-3 w-16 h-16 border-t-2 border-l-2 rounded-tl-3xl" style="border-color:var(--green);opacity:.5"></span>
       <span class="absolute -top-3 -right-3 w-16 h-16 border-t-2 border-r-2 rounded-tr-3xl" style="border-color:var(--red);opacity:.5"></span>
@@ -634,7 +634,7 @@ body.locked{overflow:hidden}
     </div>
 
     <!-- next event, filled in from the calendar feed -->
-    <aside id="nextUp" class="min-h-0" data-reveal="rise" style="--d:180ms"></aside>
+    <aside id="nextUp" class="min-h-0"></aside>
 
     </div>
 
@@ -1287,6 +1287,9 @@ const UPCOMING = [
   }
   window.addEventListener('resize', matchCalendarHeight, { passive:true });
   window.addEventListener('load', matchCalendarHeight);
+  if(window.ResizeObserver && slot && slot.previousElementSibling){
+    new ResizeObserver(matchCalendarHeight).observe(slot.previousElementSibling);
+  }
 
   const manual = () => UPCOMING
     .filter(e => e.date && new Date(e.date + 'T23:59:59') >= today)
