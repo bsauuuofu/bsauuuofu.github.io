@@ -11,9 +11,12 @@
   2. COVER PHOTO ..... CSS variable --cover  (inside <style>, search "COVER PHOTO")
   3. LOGO ............ <img> inside <nav>, search "LOGO"
   4. COLOURS ......... :root block at the top of <style>
-  5. GALLERY ......... ONE place only now: the ALBUMS array at the top of the
-                       last <script>. Add/remove albums there and the scrolling
-                       gallery + lightbox both update automatically.
+  5. GALLERY ......... To add photos to an existing album, just drop the
+                       files into that album's folder in "assets" and keep
+                       the numbering going (7.jpg, 8.jpg ...). No code edit.
+                       To add a NEW album, add a short block to the ALBUMS
+                       list at the top of the last <script> — the full
+                       instructions are written above that list.
   6. COMMITTEE ....... <section id="committee">, one block per member.
   7. NEW STUDENT PAGE  Resources -> "New student" links to  nw/index.html
 ========================================================================
@@ -58,7 +61,15 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{
+  scroll-behavior:smooth;-webkit-text-size-adjust:100%;
+  /* sections click into place as you scroll — "proximity" so long
+     sections (committee, calendar) still scroll freely inside */
+  scroll-snap-type:y proximity;
+  scroll-padding-top:76px;
+}
+section[id],header[id]{scroll-snap-align:start}
+.stack-panel{scroll-snap-align:start}
 body{
   margin:0;
   background:var(--cream);
@@ -156,6 +167,24 @@ a,button{-webkit-tap-highlight-color:transparent}
   position:fixed;top:0;left:0;height:3px;width:0;z-index:70;
   background:linear-gradient(90deg,var(--green),var(--marigold),var(--red));
 }
+
+/* section-to-section fade: content settles back as its panel leaves */
+.sec-inner{will-change:transform,opacity}
+
+/* left-hand section rail */
+#sectionNav a{display:flex;align-items:center;gap:12px;text-decoration:none}
+#sectionNav .dot{
+  width:9px;height:9px;border-radius:99px;background:rgba(109,101,87,.45);
+  transition:all .45s var(--ease);flex:none;
+}
+#sectionNav a:hover .dot{background:var(--red)}
+#sectionNav a[data-on="true"] .dot{background:var(--marigold);height:26px}
+#sectionNav .label{
+  font-size:12px;letter-spacing:.08em;color:var(--cream);
+  background:var(--green-900);padding:5px 11px;border-radius:99px;white-space:nowrap;
+  opacity:0;transform:translateX(-8px);transition:all .35s var(--ease);pointer-events:none;
+}
+#sectionNav a:hover .label,#sectionNav a:focus-visible .label{opacity:1;transform:none}
 
 /* ==================================================================
    4. HERO
@@ -332,7 +361,8 @@ body.locked{overflow:hidden}
    9. ACCESSIBILITY — honour reduced motion
    ================================================================== */
 @media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
+  html{scroll-behavior:auto;scroll-snap-type:none}
+  .sec-inner{opacity:1!important;transform:none!important}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
   [data-reveal]{opacity:1!important;transform:none!important;filter:none!important}
   .mask-line > span{transform:none!important}
@@ -423,6 +453,17 @@ body.locked{overflow:hidden}
   </div>
 </nav>
 
+<!-- section rail — click a dot to jump, it tracks where you are -->
+<nav id="sectionNav" class="hidden xl:flex fixed left-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-4" aria-label="Page sections">
+  <a href="#home" data-for="home"><span class="dot"></span><span class="label">Home</span></a>
+  <a href="#about" data-for="about"><span class="dot"></span><span class="label">About us</span></a>
+  <a href="#events" data-for="events"><span class="dot"></span><span class="label">Calendar</span></a>
+  <a href="#gallery" data-for="gallery"><span class="dot"></span><span class="label">Gallery</span></a>
+  <a href="#resources" data-for="resources"><span class="dot"></span><span class="label">Resources</span></a>
+  <a href="#committee" data-for="committee"><span class="dot"></span><span class="label">Committee</span></a>
+  <a href="#join" data-for="join"><span class="dot"></span><span class="label">Join us</span></a>
+</nav>
+
 <!-- ================================================================
      HERO
      ================================================================ -->
@@ -491,10 +532,10 @@ body.locked{overflow:hidden}
 <section id="about" class="relative py-28 sm:py-36 jaal overflow-hidden">
   <span class="display absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[20vw] text-[var(--green)] opacity-[.05] pointer-events-none select-none whitespace-nowrap">Welcome</span>
 
-  <div class="relative max-w-7xl mx-auto px-5 sm:px-8">
+  <div class="sec-inner relative max-w-7xl mx-auto px-5 sm:px-8">
     <div class="grid lg:grid-cols-12 gap-14 items-start">
 
-      <div class="lg:col-span-5" data-reveal="left">
+      <div class="lg:col-span-5" data-reveal="left" data-replay>
         <span class="eyebrow">Who we are</span>
         <h2 class="display text-4xl sm:text-5xl text-[var(--green-900)] mb-6 mask-line" data-reveal>
           <span class="mask-line"><span>Why BSAUU exists</span></span>
@@ -557,8 +598,8 @@ body.locked{overflow:hidden}
      CALENDAR
      ================================================================ -->
 <section id="events" class="relative py-28 sm:py-32 bg-[var(--cream-2)] overflow-hidden">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
-    <div class="max-w-3xl mb-14" data-reveal>
+  <div class="sec-inner max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="max-w-3xl mb-14" data-reveal data-replay>
       <span class="eyebrow">What's on</span>
       <h2 class="display text-4xl sm:text-5xl text-[var(--green-900)] mb-5 mask-line" data-reveal>
         <span class="mask-line"><span>What's on this year</span></span>
@@ -612,7 +653,7 @@ body.locked{overflow:hidden}
 <section id="gallery" class="relative bg-[var(--green-900)] on-dark jaal-dark">
 
   <div class="max-w-7xl mx-auto px-5 sm:px-8 pt-28 sm:pt-32 pb-4 relative z-10">
-    <div class="max-w-3xl" data-reveal>
+    <div class="max-w-3xl" data-reveal data-replay>
       <span class="eyebrow">Looking back</span>
       <h2 class="display text-4xl sm:text-6xl text-[var(--cream)] mb-5">
         <span class="mask-line"><span>Gallery</span></span>
@@ -676,9 +717,9 @@ body.locked{overflow:hidden}
      RESOURCES
      ================================================================ -->
 <section id="resources" class="relative py-28 sm:py-32 jaal overflow-hidden">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+  <div class="sec-inner max-w-7xl mx-auto px-5 sm:px-8">
 
-    <div class="max-w-3xl mb-14" data-reveal>
+    <div class="max-w-3xl mb-14" data-reveal data-replay>
       <span class="eyebrow">Useful links</span>
       <h2 class="display text-4xl sm:text-5xl text-[var(--green-900)] mb-5">
         <span class="mask-line"><span>Resources</span></span>
@@ -755,9 +796,9 @@ body.locked{overflow:hidden}
      COMMITTEE
      ================================================================ -->
 <section id="committee" class="relative py-28 sm:py-32 bg-[var(--cream-2)]">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+  <div class="sec-inner max-w-7xl mx-auto px-5 sm:px-8">
 
-    <div class="max-w-3xl mb-12" data-reveal>
+    <div class="max-w-3xl mb-12" data-reveal data-replay>
       <span class="eyebrow">Leadership</span>
       <h2 class="display text-4xl sm:text-5xl text-[var(--green-900)] mb-5">
         <span class="mask-line"><span>The people running it</span></span>
@@ -765,16 +806,16 @@ body.locked{overflow:hidden}
       <p class="text-lg text-[var(--muted)] measure">Students, like you, volunteering their evenings. Say hello at any event.</p>
     </div>
 
-    <div class="flex gap-2 mb-14 border-b" style="border-color:rgba(201,149,43,.4);--d:80ms" data-reveal>
+    <div class="flex justify-center gap-2 mb-14 border-b" style="border-color:rgba(201,149,43,.4);--d:80ms" data-reveal>
       <button class="tab px-6 py-4 text-lg" data-on="true" data-tab="26-27">2026 – 2027</button>
       <button class="tab px-6 py-4 text-lg" data-on="false" data-tab="25-26">2025 – 2026</button>
     </div>
 
     <!-- ---------- 2026-2027 ---------- -->
     <div class="com-panel" data-panel="26-27">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-14">
+      <div class="flex flex-wrap justify-center gap-x-6 gap-y-14">
 
-        <div class="member text-center" data-reveal="rise">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise">
           <div class="member-photo">
             <img src="assets/2026_committee/p.jpg" alt="Abdullah Arafat">
             <div class="links">
@@ -787,7 +828,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">PhD, Chemistry</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise" style="--d:80ms">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise" style="--d:80ms">
           <div class="member-photo">
             <img src="assets/2026_committee/vp.jpeg" alt="Md Alamgir Kabir">
             <div class="links">
@@ -800,7 +841,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">PhD, Chemistry</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise" style="--d:160ms">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise" style="--d:160ms">
           <div class="member-photo">
             <img src="assets/2026_committee/gs.jpeg" alt="Shad Iqbal Pathan">
             <div class="links">
@@ -813,7 +854,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">Undergraduate, Electrical &amp; Computer Engineering</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise" style="--d:240ms">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise" style="--d:240ms">
           <div class="member-photo">
             <img src="assets/2026_committee/cs.jpeg" alt="Faiyad H Rishal">
             <div class="links">
@@ -826,7 +867,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">PhD, Geology</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise">
           <div class="member-photo">
             <img src="assets/2026_committee/os.jpeg" alt="Mumtaz Shirin">
             <div class="links">
@@ -839,7 +880,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">PhD, Oncological Sciences</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise" style="--d:80ms">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise" style="--d:80ms">
           <div class="member-photo">
             <img src="assets/2026_committee/t2.jpeg" alt="Md Shariful Islam">
             <div class="links">
@@ -852,7 +893,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">PhD, Nutrition &amp; Integrative Physiology</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise" style="--d:160ms">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise" style="--d:160ms">
           <div class="member-photo">
             <img src="assets/2026_committee/t1.jpeg" alt="Monisha Deepta">
             <div class="links">
@@ -865,7 +906,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">Health &amp; Human Services</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise" style="--d:240ms">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise" style="--d:240ms">
           <div class="member-photo">
             <img src="assets/2026_committee/ss.jpeg" alt="Wahidur Rahman">
             <div class="links">
@@ -878,7 +919,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">PhD, Chemical Engineering</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise">
           <div class="member-photo">
             <img src="assets/2026_committee/org.jpeg" alt="Toushiqul Islam (Sizan)">
             <div class="links">
@@ -891,7 +932,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">PhD, Mechanical Engineering</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise" style="--d:80ms">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise" style="--d:80ms">
           <div class="member-photo">
             <img src="assets/2026_committee/ec2.jpg" alt="Arshe Alavee Aziz">
             <div class="links">
@@ -904,7 +945,7 @@ body.locked{overflow:hidden}
           <p class="text-[var(--muted)] text-sm">PhD, Physics</p>
         </div>
 
-        <div class="member text-center" data-reveal="rise" style="--d:160ms">
+        <div class="member text-center w-[calc(50%-12px)] lg:w-[calc(25%-18px)]" data-reveal="rise" style="--d:160ms">
           <div class="member-photo">
             <img src="assets/2026_committee/ec1.jpg" alt="Shamit Fatin">
             <div class="links">
@@ -966,7 +1007,7 @@ body.locked{overflow:hidden}
     </g>
   </svg>
 
-  <div class="relative max-w-3xl mx-auto px-5 text-center" data-reveal>
+  <div class="sec-inner relative max-w-3xl mx-auto px-5 text-center" data-reveal data-replay>
     <p class="text-[var(--marigold)] text-xl mb-5" style="font-family:'Fraunces',serif;font-style:italic">Free, and open to everyone</p>
     <h2 class="display text-4xl sm:text-6xl text-[var(--cream)] mb-6">Become a member</h2>
     <p class="t-cream-85 text-lg mb-10 measure mx-auto">
@@ -1031,133 +1072,226 @@ body.locked{overflow:hidden}
 
 <script>
 /* ==================================================================
-   EDIT YOUR ALBUMS HERE — this single list feeds both the scrolling
-   gallery and the pop-out lightbox.
+   THE GALLERY  —  HOW TO ADD PHOTOS
+   ------------------------------------------------------------------
+   Photos live in numbered files inside a folder per album:
+
+       assets/2026_watch_party/1.jpg
+       assets/2026_watch_party/2.jpg
+       assets/2026_watch_party/3.jpg   ...and so on
+
+   1) TO ADD PHOTOS TO AN ALBUM THAT ALREADY EXISTS
+      Drop the files into that album's folder and carry on the
+      numbering (7.jpg, 8.jpg, ...). Nothing to edit in this file —
+      the page counts the photos itself every time it loads.
+      Numbering must start at 1 with no gaps; a missing number is
+      where the page stops counting.
+
+   2) TO ADD A WHOLE NEW ALBUM
+      a. Make a folder in "assets", e.g.  assets/2027_eid/
+      b. Put the photos in it, named 1.jpg, 2.jpg, 3.jpg ...
+      c. Copy one { ... } block below, paste it into the list, and
+         change folder, title, season and blurb.
+      The list order below is the order albums appear on the page.
+
+   3) TO REMOVE AN ALBUM
+      Delete its { ... } block.
+
+   File types accepted: .jpg  .jpeg  .png  .webp (mixed is fine)
+   Photo 1 is the album cover. To use a different one, add  cover: 3
+   Optional: add  count: 12  to skip the counting and go straight to
+   12 photos — slightly faster on albums with a lot of pictures.
    ================================================================== */
 const ALBUMS = [
   {
-    id:'event1',
-    title:'Pohela Boishakh 1433',
-    season:'Spring 2026',
-    blurb:'The Bengali new year, welcomed the way it should be — panta bhat, red and white, and far too much singing.',
-    images:[
-      'assets/2026_pohela_boishak/1.jpg',
-      'assets/2026_pohela_boishak/2.jpg',
-      'assets/2026_pohela_boishak/3.jpg'
-    ]
+    folder: '2026_pohela_boishak',
+    title : 'Pohela Boishakh 1433',
+    season: 'Spring 2026',
+    blurb : 'The Bengali new year, welcomed the way it should be — panta bhat, red and white, and far too much singing.'
   },
   {
-    id:'event2',
-    title:'Committee handover ceremony',
-    season:'Summer 2026',
-    blurb:'The outgoing committee passed the association on to the 2026–2027 team.',
-    images:[
-      'assets/2026_committee_handover/1.jpg',
-      'assets/2026_committee_handover/2.jpg'
-    ]
+    folder: '2026_committee_handover',
+    title : 'Committee handover ceremony',
+    season: 'Summer 2026',
+    blurb : 'The outgoing committee passed the association on to the 2026–2027 team.'
   },
   {
-    id:'event3',
-    title:'World Cup final watch party',
-    season:'Summer 2026',
-    blurb:'One screen, one room, and everyone shouting at it together.',
-    images:[
-      'assets/2026_watch_party/1.jpg',
-      'assets/2026_watch_party/2.jpg',
-      'assets/2026_watch_party/3.jpg',
-      'assets/2026_watch_party/4.jpg',
-      'assets/2026_watch_party/5.jpg',
-      'assets/2026_watch_party/6.jpg'
-    ]
+    folder: '2026_watch_party',
+    title : 'World Cup final watch party',
+    season: 'Summer 2026',
+    blurb : 'One screen, one room, and everyone shouting at it together.'
   },
   {
-    id:'event4',
-    title:'Get Involved Fair 2026',
-    season:'Fall 2026',
-    blurb:'Our table on campus, meeting the students who joined us this year.',
-    images:[
-      'assets/get_involved_fair_2026/1.jpg',
-      'assets/get_involved_fair_2026/2.jpg',
-      'assets/get_involved_fair_2026/3.jpg',
-      'assets/get_involved_fair_2026/4.jpg',
-      'assets/get_involved_fair_2026/5.jpg',
-      'assets/get_involved_fair_2026/6.jpg'
-    ]
+    folder: 'get_involved_fair_2026',
+    title : 'Get Involved Fair 2026',
+    season: 'Fall 2026',
+    blurb : 'Our table on campus, meeting the students who joined us this year.'
   }
 ];
 
 /* ==================================================================
-   EDIT YOUR UPCOMING EVENTS HERE
+   UPCOMING EVENTS — pulled live from the Google Calendar
    ------------------------------------------------------------------
-   These feed two things: the scrolling strip under "Why BSAUU exists"
-   and the "Next up" card above the calendar. Events whose date has
-   passed drop off on their own, so old entries can stay in the list.
-   date must be YYYY-MM-DD. time and place are optional.
+   The scrolling strip and the "Next up" card both show the next two
+   events straight from the same calendar that is embedded below, so
+   they update themselves whenever you add an event in Google.
+
+   TO SWITCH THE LIVE FEED ON, paste a Google Calendar API key below.
+   Getting one is free and takes about three minutes:
+     1. console.cloud.google.com  ->  create (or pick) a project
+     2. APIs & Services -> Library -> enable "Google Calendar API"
+     3. APIs & Services -> Credentials -> Create credentials -> API key
+     4. Edit that key -> Application restrictions: Websites ->
+        add your site (e.g. bsauu.github.io/*) so nobody else can use it
+        -> API restrictions: Google Calendar API only
+     5. Paste it into apiKey below.
+   The calendar itself must be public in Google Calendar settings
+   ("Make available to public"), which it already is for the embed.
+
+   Until a key is added, the MANUAL list below is used instead, so the
+   site still works either way.
    ================================================================== */
+const CALENDAR = {
+  id: 'ebdd1ad6c436f51a4b4389e83d64179bc9bf4fa8da623a9afd4e7f6fcb704a79@group.calendar.google.com',
+  apiKey: '',   // <-- paste your API key between the quotes
+  count: 2      // how many upcoming events to show
+};
+
+/* Manual fallback. Used only when there is no API key, or if Google
+   can't be reached. date must be YYYY-MM-DD. */
 const UPCOMING = [
   // { name:'Pohela Boishakh 1434', date:'2027-04-14', time:'6:00 PM', place:'Union Ballroom' },
-  // { name:'Cricket tournament',   date:'2026-10-10', time:'10:00 AM', place:'Sunnyside Park' },
 ];
 
 (function upcomingEvents(){
-  const today = new Date(); today.setHours(0,0,0,0);
-  const list = UPCOMING
-    .filter(e => e.date && new Date(e.date + 'T23:59:59') >= today)
-    .sort((a,b) => new Date(a.date) - new Date(b.date));
-
-  const fmt = d => new Date(d + 'T12:00:00')
-    .toLocaleDateString('en-US',{ weekday:'long', month:'long', day:'numeric' });
-  const shortFmt = d => new Date(d + 'T12:00:00')
-    .toLocaleDateString('en-US',{ month:'short', day:'numeric' });
-  const daysAway = d => Math.round((new Date(d + 'T12:00:00') - today) / 86400000);
-  const countdown = n => n <= 0 ? 'Today' : n === 1 ? 'Tomorrow' : 'In ' + n + ' days';
-
-  /* --- scrolling strip --- */
   const track = document.getElementById('ribbonTrack');
-  const line = list.length
-    ? list.map(e => `<span class="inline-flex items-center gap-3">
-         <span class="text-[var(--marigold)]">&#9670;</span>
-         <span>${e.name}</span>
-         <span class="t-cream-55">${shortFmt(e.date)}</span>
-       </span>`).join('')
-    : `<span class="inline-flex items-center gap-3">
-         <span class="text-[var(--marigold)]">&#9670;</span>
-         <span>The full schedule is on the calendar below</span>
-       </span>`;
-  track.innerHTML = `<span class="inline-flex gap-12 pr-12">${line}</span>`.repeat(2);
+  const slot  = document.getElementById('nextUp');
+  const today = new Date(); today.setHours(0,0,0,0);
 
-  /* --- next up card --- */
-  const slot = document.getElementById('nextUp');
-  if(!list.length){ slot.remove(); return; }
-  const next = list[0];
-  const detail = [next.time, next.place].filter(Boolean).join(' &middot; ');
-  slot.innerHTML = `
-    <div class="relative overflow-hidden rounded-[22px] bg-[var(--green-900)] p-7 sm:p-9 flex flex-wrap items-center justify-between gap-6">
-      <span class="absolute inset-0 jaal-dark opacity-70"></span>
-      <div class="relative">
-        <p class="text-[var(--marigold)] mb-2" style="font-family:'Fraunces',serif;font-style:italic">Next up</p>
-        <h3 class="display text-2xl sm:text-4xl text-[var(--cream)] mb-2">${next.name}</h3>
-        <p class="t-cream-75">${fmt(next.date)}${detail ? ' &middot; ' + detail : ''}</p>
-      </div>
-      <span class="relative shrink-0 px-5 py-2 rounded-full font-semibold" style="background:var(--marigold);color:var(--green-900)">
-        ${countdown(daysAway(next.date))}
-      </span>
-    </div>`;
+  const longDate  = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US',{ weekday:'long', month:'long', day:'numeric' });
+  const shortDate = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US',{ month:'short', day:'numeric' });
+  const daysAway  = d => Math.round((new Date(d + 'T12:00:00') - today) / 86400000);
+  const countdown = n => n <= 0 ? 'Today' : n === 1 ? 'Tomorrow' : 'In ' + n + ' days';
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function render(list){
+    /* scrolling strip */
+    const line = list.length
+      ? list.map(e => `<span class="inline-flex items-center gap-3">
+           <span class="text-[var(--marigold)]">&#9670;</span>
+           <span>${esc(e.name)}</span>
+           <span class="t-cream-55">${shortDate(e.date)}</span>
+         </span>`).join('')
+      : `<span class="inline-flex items-center gap-3">
+           <span class="text-[var(--marigold)]">&#9670;</span>
+           <span>The full schedule is on the calendar below</span>
+         </span>`;
+    track.innerHTML = `<span class="inline-flex gap-12 pr-12">${line}</span>`.repeat(2);
+
+    /* next up card */
+    if(!slot) return;
+    if(!list.length){ slot.innerHTML = ''; slot.style.display = 'none'; return; }
+    slot.style.display = 'block';
+    const next = list[0];
+    const detail = [next.time, next.place].filter(Boolean).map(esc).join(' &middot; ');
+    slot.innerHTML = `
+      <div class="relative overflow-hidden rounded-[22px] bg-[var(--green-900)] p-7 sm:p-9 flex flex-wrap items-center justify-between gap-6">
+        <span class="absolute inset-0 jaal-dark opacity-70"></span>
+        <div class="relative">
+          <p class="text-[var(--marigold)] mb-2" style="font-family:'Fraunces',serif;font-style:italic">Next up</p>
+          <h3 class="display text-2xl sm:text-4xl text-[var(--cream)] mb-2">${esc(next.name)}</h3>
+          <p class="t-cream-75">${longDate(next.date)}${detail ? ' &middot; ' + detail : ''}</p>
+        </div>
+        <span class="relative shrink-0 px-5 py-2 rounded-full font-semibold" style="background:var(--marigold);color:var(--green-900)">
+          ${countdown(daysAway(next.date))}
+        </span>
+      </div>`;
+  }
+
+  const manual = () => UPCOMING
+    .filter(e => e.date && new Date(e.date + 'T23:59:59') >= today)
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+    .slice(0, CALENDAR.count);
+
+  /* draw the manual list straight away, then upgrade to the live feed */
+  render(manual());
+
+  if(!CALENDAR.apiKey) return;
+
+  const url = 'https://www.googleapis.com/calendar/v3/calendars/'
+    + encodeURIComponent(CALENDAR.id) + '/events'
+    + '?key=' + encodeURIComponent(CALENDAR.apiKey)
+    + '&timeMin=' + encodeURIComponent(new Date().toISOString())
+    + '&singleEvents=true&orderBy=startTime&maxResults=' + CALENDAR.count;
+
+  fetch(url)
+    .then(r => r.ok ? r.json() : Promise.reject(new Error('Calendar replied ' + r.status)))
+    .then(data => {
+      const items = (data.items || [])
+        .filter(e => e.status !== 'cancelled' && e.start)
+        .map(e => ({
+          name : e.summary || 'Untitled event',
+          date : (e.start.date || e.start.dateTime).slice(0, 10),
+          time : e.start.dateTime
+                   ? new Date(e.start.dateTime).toLocaleTimeString('en-US',{ hour:'numeric', minute:'2-digit' })
+                   : 'All day',
+          place: e.location || ''
+        }))
+        .slice(0, CALENDAR.count);
+      if(items.length) render(items);
+    })
+    .catch(err => console.warn('Live calendar unavailable, showing the manual list instead:', err));
 })();
 
 /* ==================================================================
    1. BUILD THE SCROLLING GALLERY
+   ------------------------------------------------------------------
+   Nothing here needs editing to add photos — see the ALBUMS notes
+   above. This part draws a panel per album, then counts the photos
+   in each folder by asking the browser to load 1, 2, 3 ... until one
+   comes back missing. That is what makes "just drop the files in the
+   folder" work.
    ================================================================== */
+const PHOTO_FOLDER = 'assets';                      // where album folders live
+const PHOTO_TYPES  = ['jpg','jpeg','png','webp'];   // tried in this order
+const PHOTO_LIMIT  = 60;                            // stop counting after this many
+
 const stack = document.getElementById('stack');
 const rail  = document.getElementById('rail');
 
-ALBUMS.forEach((a, i) => {
-  const cover = a.cover || a.images[0];
-  const thumbs = a.images.slice(1, 4).map((src, k) => `
-      <button class="album-thumb w-16 h-16 rounded-xl overflow-hidden border border-[rgba(201,149,43,.5)]"
-              onclick="openLightbox('${a.id}', ${k + 1})" aria-label="Open photo ${k + 2}">
-        <img src="${src}" alt="" class="w-full h-full object-cover" loading="lazy">
-      </button>`).join('');
+/* true if that file is really there */
+function fileExists(src){
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload  = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = src;
+  });
+}
+
+/* walks 1, 2, 3 ... through an album folder and returns the paths found */
+async function findPhotos(album){
+  const base  = `${PHOTO_FOLDER}/${album.folder}/`;
+  const limit = album.count || PHOTO_LIMIT;
+  const found = [];
+  for(let n = 1; n <= limit; n++){
+    let hit = null;
+    for(const type of PHOTO_TYPES){
+      const src = `${base}${n}.${type}`;
+      if(await fileExists(src)){ hit = src; break; }
+    }
+    if(!hit) break;              // gap in the numbering = end of the album
+    found.push(hit);
+    /* Note: finding the end of an album means asking for a file that
+       isn't there, so a few "404 / file not found" lines in the browser
+       console are normal and harmless — one set per album. */
+  }
+  return found;
+}
+
+/* --- draw one panel per album --- */
+ALBUMS.forEach((album, i) => {
+  const coverGuess = `${PHOTO_FOLDER}/${album.folder}/${album.cover || 1}.${PHOTO_TYPES[0]}`;
 
   const panel = document.createElement('div');
   panel.className = 'stack-panel';
@@ -1165,18 +1299,18 @@ ALBUMS.forEach((a, i) => {
   panel.innerHTML = `
     <article class="stack-card sari-frame">
       <div class="grid md:grid-cols-[1.1fr_.9fr]">
-        <div class="stack-media h-[30vh] md:h-[60vh] cursor-pointer" onclick="openLightbox('${a.id}',0)">
-          <img src="${cover}" alt="${a.title}" loading="lazy">
+        <div class="stack-media h-[30vh] md:h-[60vh] cursor-pointer" onclick="openLightbox(${i},0)">
+          <img class="js-cover" src="${coverGuess}" alt="${album.title}" loading="lazy">
           <span class="absolute inset-0" style="background:linear-gradient(to top,rgba(1,42,32,.5),transparent 55%)"></span>
-          <span class="absolute top-5 left-5 px-4 py-1.5 rounded-full text-[13px] font-semibold" style="background:var(--marigold);color:var(--green-900)">${a.season}</span>
+          <span class="absolute top-5 left-5 px-4 py-1.5 rounded-full text-[13px] font-semibold" style="background:var(--marigold);color:var(--green-900)">${album.season}</span>
           <span class="absolute bottom-5 right-5 w-14 h-14 rounded-full grid place-items-center text-white" style="background:rgba(1,42,32,.55);backdrop-filter:blur(6px)"><i class="fas fa-expand"></i></span>
         </div>
         <div class="p-6 sm:p-10 flex flex-col justify-center">
-          <h3 class="display text-2xl sm:text-4xl text-[var(--green-900)] mb-3 leading-tight">${a.title}</h3>
-          <p class="text-[var(--muted)] text-[15px] sm:text-base mb-6">${a.blurb}</p>
-          <div class="hidden sm:flex gap-3 mb-7">${thumbs}</div>
-          <button onclick="openLightbox('${a.id}',0)" class="btn btn-red px-6 py-3 self-start text-[15px]">
-            <i class="far fa-images"></i> View all ${a.images.length} photos
+          <h3 class="display text-2xl sm:text-4xl text-[var(--green-900)] mb-3 leading-tight">${album.title}</h3>
+          <p class="text-[var(--muted)] text-[15px] sm:text-base mb-6">${album.blurb}</p>
+          <div class="js-thumbs hidden sm:flex gap-3 mb-7"></div>
+          <button onclick="openLightbox(${i},0)" class="btn btn-red px-6 py-3 self-start text-[15px]">
+            <i class="far fa-images"></i> <span class="js-count">View photos</span>
           </button>
         </div>
       </div>
@@ -1186,13 +1320,41 @@ ALBUMS.forEach((a, i) => {
   const dot = document.createElement('button');
   dot.className = 'rail-dot';
   dot.dataset.on = i === 0 ? 'true' : 'false';
-  dot.setAttribute('aria-label', a.title);
-  dot.addEventListener('click', () => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  dot.setAttribute('aria-label', album.title);
+  dot.addEventListener('click', () => panel.scrollIntoView({ behavior:'smooth', block:'start' }));
   rail.appendChild(dot);
 });
 
 const panels   = Array.from(stack.children);
 const railDots = Array.from(rail.children);
+
+/* --- count each album's photos, then fill in the numbers and thumbnails --- */
+ALBUMS.forEach((album, i) => {
+  album.ready = findPhotos(album).then(list => {
+    album.images = list;
+    const panel = panels[i];
+
+    if(!list.length){
+      console.warn(`No photos found in ${PHOTO_FOLDER}/${album.folder}/ — check the folder name and that the files start at 1.jpg`);
+      panel.querySelector('.js-count').textContent = 'Photos coming soon';
+      return;
+    }
+
+    panel.querySelector('.js-count').textContent =
+      list.length === 1 ? 'View the photo' : `View all ${list.length} photos`;
+
+    /* if the cover guess was the wrong file type, use the first real photo */
+    const cover = panel.querySelector('.js-cover');
+    if(!cover.naturalWidth) cover.src = list[album.cover ? album.cover - 1 : 0] || list[0];
+
+    /* small preview row: photos 2, 3 and 4 */
+    panel.querySelector('.js-thumbs').innerHTML = list.slice(1, 4).map((src, k) => `
+      <button class="album-thumb w-16 h-16 rounded-xl overflow-hidden border border-[rgba(201,149,43,.5)]"
+              onclick="openLightbox(${i}, ${k + 1})" aria-label="Open photo ${k + 2}">
+        <img src="${src}" alt="" class="w-full h-full object-cover" loading="lazy">
+      </button>`).join('');
+  });
+});
 
 /* ==================================================================
    2. ONE SCROLL LOOP FOR EVERYTHING (rAF-throttled)
@@ -1204,6 +1366,8 @@ const bar      = document.getElementById('progress');
 const toTop    = document.getElementById('toTop');
 const gallery  = document.getElementById('gallery');
 const navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+const secDots  = Array.from(document.querySelectorAll('#sectionNav a'));
+const secInner = Array.from(document.querySelectorAll('.sec-inner'));
 const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 let ticking = false;
@@ -1227,6 +1391,15 @@ function onScroll(){
       heroInner.style.transform = `translate3d(0,${y * 0.10}px,0)`;
       heroInner.style.opacity = String(clamp(1 - y / (vh * 0.75), 0, 1));
     }
+
+    /* each section settles back as it leaves, so the next one owns the screen */
+    secInner.forEach(el => {
+      const r = el.getBoundingClientRect();
+      const out = clamp((vh * 0.5 - r.bottom) / (vh * 0.5), 0, 1);
+      const inn = clamp((vh - r.top) / (vh * 0.45), 0, 1);
+      el.style.opacity   = String((1 - 0.8 * out) * (0.35 + 0.65 * inn));
+      el.style.transform = `translate3d(0,${-34 * out}px,0) scale(${1 - 0.035 * out})`;
+    });
 
     /* stacked album cards: the outgoing one sinks back as the next rises */
     panels.forEach((p, i) => {
@@ -1254,6 +1427,7 @@ function onScroll(){
     if(sec.getBoundingClientRect().top <= vh * 0.35) current = sec.id;
   });
   navLinks.forEach(l => l.dataset.active = (l.dataset.nav === current) ? 'true' : 'false');
+  secDots.forEach(d => d.dataset.on = (d.dataset.for === current) ? 'true' : 'false');
 
   ticking = false;
 }
@@ -1279,7 +1453,16 @@ const revealObserver = new IntersectionObserver((entries, obs) => {
   });
 }, { threshold:0.12, rootMargin:'0px 0px -60px 0px' });
 
-document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+document.querySelectorAll('[data-reveal]:not([data-replay])').forEach(el => revealObserver.observe(el));
+
+/* blocks that re-animate when you come back down to them */
+const replayObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) e.target.classList.add('seen');
+    else if(e.boundingClientRect.top > 0) e.target.classList.remove('seen');
+  });
+}, { threshold:0.22 });
+document.querySelectorAll('[data-replay]').forEach(el => replayObserver.observe(el));
 
 /* headings whose lines unmask independently */
 document.querySelectorAll('h2 .mask-line, h3 .mask-line').forEach(el => {
@@ -1298,9 +1481,11 @@ const lbLoader  = document.getElementById('lbLoader');
 const lbThumbs  = document.getElementById('lbThumbs');
 let album = null, idx = 0;
 
-function openLightbox(id, start){
-  album = ALBUMS.find(a => a.id === id);
+async function openLightbox(index, start){
+  album = ALBUMS[index];
   if(!album) return;
+  if(!album.images) await album.ready;          // photo count may still be running
+  if(!album.images || !album.images.length) return;
   idx = start || 0;
 
   document.getElementById('lbTitle').textContent  = album.title;
