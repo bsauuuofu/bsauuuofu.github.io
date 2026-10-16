@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+========================================================================
+  BSAUU — NEW STUDENT GUIDE   (lives at  nw/index.html)
+========================================================================
+  Everything a new Bangladeshi student needs before and after landing
+  in Salt Lake City, plus the "Request help" form that writes an email
+  to the committee.
+
+  EASY EDITS
+  - Committee email ..... search for  BSA_EMAIL  in the script at the bottom
+  - Contact people ...... section id="contact"
+  - Sign-up sheet link .. search for  "new-student sheet"
+  - Apartment list ...... section id="housing" (table)
+  - Money calculator .... default numbers are the  value=""  of each input
+                          in section id="money"
+  Images and the logo come from ../assets (the main site's folder).
+========================================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Students | BSAUU — Bangladesh Student Association, University of Utah</title>
+<meta name="description" content="Arriving at the University of Utah from Bangladesh? Airport pickup, first meal, housing, SSN, bank, UCard, TRAX, shopping and money — the BSAUU guide for new students.">
+<meta name="theme-color" content="#004b37">
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ==================================================================
+   1. TOKENS — identical to the main site
+   ================================================================== */
+:root{
+  --paper:#fffdf8; --paper-2:#f7f2e8; --ink:#16211c; --muted:#5d6a63;
+  --green:#004b37; --green-700:#00382a; --green-900:#021c14;
+  --red:#e0283c; --red-700:#b5172b; --flag-red:#f42a41; --gold:#b8892b;
+  --line:rgba(0,75,55,.18);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Jost',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --shadow-soft:0 24px 60px -30px rgba(2,28,20,.35);
+  --shadow-lift:0 40px 90px -36px rgba(2,28,20,.5);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --jaali:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='72' viewBox='0 0 48 72'%3E%3Cpath d='M24 0C24 18 48 18 48 36C48 54 24 54 24 72M24 0C24 18 0 18 0 36C0 54 24 54 24 72' fill='none' stroke='%23004b37' stroke-opacity='.075'/%3E%3C/svg%3E");
+  --jaali-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='72' viewBox='0 0 48 72'%3E%3Cpath d='M24 0C24 18 48 18 48 36C48 54 24 54 24 72M24 0C24 18 0 18 0 36C0 54 24 54 24 72' fill='none' stroke='%23fffdf8' stroke-opacity='.08'/%3E%3C/svg%3E");
+  --kantha:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='18' viewBox='0 0 44 18'%3E%3Cg stroke='%23004b37' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M3 3h9M32 3h9M3 15h9M32 15h9'/%3E%3C/g%3E%3Cpath d='M22 3l6 6-6 6-6-6z' fill='none' stroke='%23e0283c' stroke-width='1.4'/%3E%3Ccircle cx='22' cy='9' r='1.6' fill='%23e0283c'/%3E%3Ccircle cx='0' cy='9' r='1.6' fill='%23004b37'/%3E%3Ccircle cx='44' cy='9' r='1.6' fill='%23004b37'/%3E%3C/svg%3E");
+  --kantha-light:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='18' viewBox='0 0 44 18'%3E%3Cg stroke='%23fffdf8' stroke-opacity='.55' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M3 3h9M32 3h9M3 15h9M32 15h9'/%3E%3C/g%3E%3Cpath d='M22 3l6 6-6 6-6-6z' fill='none' stroke='%23f42a41' stroke-width='1.4'/%3E%3Ccircle cx='22' cy='9' r='1.6' fill='%23f42a41'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.7;overflow-x:hidden;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:var(--green);text-underline-offset:3px}
+a:hover{color:var(--red)}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.08;margin:0;color:var(--green-900)}
+p{margin:0 0 .9em}
+ul,ol{margin:0 0 1em;padding-left:1.25em}
+li{margin-bottom:.35em}
+b,strong{font-weight:600}
+::selection{background:var(--red);color:#fff}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1220px;margin:0 auto;padding:0 22px}
+@media (min-width:640px){.wrap{padding:0 36px}}
+.hidden{display:none!important}
+.muted{color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+
+/* ornaments */
+.jaali{background-image:var(--jaali)}
+.kantha{height:18px;background:var(--kantha) repeat-x center/44px 18px}
+.kantha-light{height:18px;background:var(--kantha-light) repeat-x center/44px 18px}
+.orn{position:absolute;pointer-events:none;z-index:0}
+.orn svg{width:100%;height:100%;display:block;overflow:visible}
+.spin-slow{animation:spin 140s linear infinite}
+.spin-rev{animation:spin 170s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.flourish{width:200px;height:26px;display:block;color:var(--green);overflow:visible}
+.center .flourish{margin-left:auto;margin-right:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:.7rem;margin-bottom:1rem;font-size:12.5px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--red)}
+.eyebrow svg{width:22px;height:19px;color:var(--green);--o2:var(--red)}
+.eyebrow::after{content:'';width:42px;height:1px;background:currentColor;opacity:.5}
+.on-dark .eyebrow{color:#ffb3bd}
+.on-dark .eyebrow svg{color:#fffdf8;--o2:var(--flag-red)}
+.title{font-size:clamp(2.3rem,4.8vw,3.9rem);margin-bottom:.9rem}
+.title em{font-style:italic;color:var(--red)}
+.lede{font-size:1.12rem;color:var(--muted);max-width:64ch}
+.center{text-align:center}
+.center .lede{margin-left:auto;margin-right:auto}
+.center .eyebrow::before{content:'';width:42px;height:1px;background:currentColor;opacity:.5}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;border-radius:999px;font-weight:500;letter-spacing:.03em;text-decoration:none;padding:14px 26px;font-size:16px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s,color .3s,border-color .3s;white-space:nowrap}
+.btn:hover{transform:translateY(-3px)}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 16px 30px -16px rgba(224,40,60,.9)}
+.btn-red:hover{background:var(--red-700);color:#fff}
+.btn-green{background:var(--green);color:#fff;box-shadow:0 16px 30px -16px rgba(0,75,55,.9)}
+.btn-green:hover{background:var(--green-700);color:#fff}
+.btn-ghost{border:1.5px solid var(--green);color:var(--green);background:#fff}
+.btn-ghost:hover{background:var(--green);color:#fff}
+.btn-light{border:1.5px solid rgba(255,253,248,.75);color:#fff}
+.btn-light:hover{background:var(--paper);color:var(--green-900)}
+.btn-sm{padding:10px 20px;font-size:15px}
+
+/* ==================================================================
+   2. NAV + SECTION CHIPS
+   ================================================================== */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .4s,box-shadow .4s}
+#navbar.solid{background:rgba(255,253,248,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 40px -28px rgba(2,28,20,.55)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-mark{width:46px;height:46px;border-radius:50%;background:var(--paper);display:grid;place-items:center;flex:none;box-shadow:0 0 0 1.5px var(--green),0 0 0 4px var(--paper),0 0 0 5px rgba(224,40,60,.6)}
+.brand-mark img{width:30px;height:30px;object-fit:contain}
+.brand-name{font-family:var(--serif);font-weight:700;font-size:1.5rem;color:#fff;letter-spacing:.04em;line-height:1;transition:color .4s}
+.brand-sub{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#ffb3bd;margin-top:5px;font-weight:600;font-family:var(--sans)}
+.nav-links{display:none;align-items:center;gap:26px}
+@media (min-width:1024px){.nav-links{display:flex}}
+.navlink{color:#fff;text-decoration:none;font-weight:500;font-size:15.5px;position:relative;transition:color .3s}
+.navlink::after{content:'';position:absolute;left:50%;bottom:-6px;width:0;height:2px;background:var(--flag-red);transform:translateX(-50%);transition:width .35s var(--ease)}
+.navlink:hover{color:#fff}
+.navlink:hover::after,.navlink.on::after{width:100%}
+#navbar.solid .brand-name{color:var(--green-900)}
+#navbar.solid .brand-sub{color:var(--red)}
+#navbar.solid .navlink{color:var(--ink)}
+#navbar.solid .navlink:hover{color:var(--green)}
+#navbar.solid .navlink::after{background:var(--red)}
+#burger{color:#fff;font-size:24px;padding:6px}
+#navbar.solid #burger{color:var(--green-900)}
+@media (min-width:1024px){#burger{display:none}}
+#mobileMenu{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+#mobileMenu.open{max-height:520px}
+.mm-box{margin:0 16px 12px;border-radius:18px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow-lift);padding:10px}
+.mm-box a{display:block;padding:11px 16px;border-radius:12px;font-weight:500;text-decoration:none;color:var(--ink)}
+.mm-box a:hover{background:var(--paper-2)}
+
+/* section chips under the nav */
+#chips{position:fixed;left:0;right:0;top:70px;z-index:55;transform:translateY(-140%);opacity:0;transition:transform .45s var(--ease),opacity .3s;pointer-events:none}
+#chips.show{transform:none;opacity:1;pointer-events:auto}
+.chips-in{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:8px 22px;background:rgba(255,253,248,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.chips-in::-webkit-scrollbar{display:none}
+@media (min-width:1100px){.chips-in{justify-content:center}}
+.chips-in a{flex:none;font-size:13.5px;padding:6px 14px;border-radius:999px;text-decoration:none;color:var(--muted);border:1px solid transparent;transition:all .25s}
+.chips-in a:hover{color:var(--green);border-color:var(--line)}
+.chips-in a.on{background:var(--green);color:#fff}
+#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;background:linear-gradient(90deg,var(--green),var(--red))}
+
+/* ==================================================================
+   3. HERO
+   ================================================================== */
+.hero{position:relative;overflow:hidden;background:var(--green-900);color:var(--paper);padding:150px 0 120px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(90% 80% at 80% 30%,rgba(0,90,66,.6),transparent 60%),linear-gradient(180deg,rgba(2,28,20,0) 60%,rgba(140,16,32,.35))}
+.hero::after{content:'';position:absolute;inset:0;background-image:var(--jaali-dark)}
+.hero > .kantha-light{position:absolute;left:0;right:0;bottom:18px;z-index:2}
+.hero-grid{position:relative;z-index:3;display:grid;gap:40px;align-items:center}
+@media (min-width:1000px){.hero-grid{grid-template-columns:1.25fr .75fr}}
+.hero-kicker{display:inline-flex;align-items:center;gap:12px;font-family:var(--serif);font-style:italic;font-size:1.4rem;color:#ffb3bd;margin-bottom:14px}
+.hero-kicker svg{width:30px;height:26px;color:var(--paper);--o2:var(--flag-red)}
+.hero h1{color:#fff;font-size:clamp(3rem,7.4vw,5.8rem);line-height:.95;margin-bottom:22px}
+.hero h1 em{font-style:italic;color:#ff8a98;font-weight:500}
+.hero .lede{color:rgba(255,253,248,.85);font-weight:300;font-size:1.2rem;margin-bottom:32px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero-facts{display:grid;gap:14px}
+.fact{display:flex;gap:14px;align-items:center;padding:16px 18px;border-radius:18px;background:rgba(255,253,248,.07);border:1px solid rgba(255,253,248,.14);backdrop-filter:blur(4px)}
+.fact .ic{width:46px;height:46px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--flag-red);color:#fff;font-size:18px}
+.fact b{display:block;font-family:var(--serif);font-size:1.35rem;line-height:1.1;color:#fff}
+.fact span{font-size:14px;color:rgba(255,253,248,.72)}
+.hero-sun{position:absolute;right:-120px;top:50%;width:520px;height:520px;margin-top:-260px;border-radius:50%;background:radial-gradient(circle at 42% 40%,#f6455a,var(--red) 60%,var(--red-700));opacity:.16;z-index:1}
+
+/* ==================================================================
+   4. SECTIONS + SHARED CARDS
+   ================================================================== */
+.section{position:relative;padding:110px 0;overflow:hidden}
+@media (min-width:640px){.section{padding:130px 0}}
+.bg-paper{background-color:var(--paper)}
+.bg-ivory{background-color:var(--paper-2)}
+.section > .kantha.top{position:absolute;left:0;right:0;top:0;opacity:.85}
+.sec-in{position:relative;z-index:1}
+.head{margin-bottom:46px}
+.grid{display:grid;gap:22px}
+@media (min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.g3{grid-template-columns:repeat(3,1fr)}}
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:0 14px 40px -32px rgba(2,28,20,.6)}
+.card h3{font-size:1.65rem;margin-bottom:10px}
+.card h4{font-size:1.25rem;margin:18px 0 6px}
+.card p:last-child,.card ul:last-child,.card ol:last-child{margin-bottom:0}
+.card.kanthaed{padding-top:46px}
+.card.kanthaed::before{content:'';position:absolute;left:0;right:0;top:0;height:18px;background:var(--kantha) repeat-x center/44px 18px;border-bottom:1px solid var(--line);border-radius:24px 24px 0 0}
+.res-ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:20px;flex:none;background:var(--paper);box-shadow:0 0 0 1.5px currentColor,0 0 0 5px var(--paper),0 0 0 6px var(--line)}
+.res-ic.g{color:var(--green)}.res-ic.r{color:var(--red)}
+.card-top{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.card-top h3{margin:0}
+.note{display:flex;gap:14px;align-items:flex-start;border-radius:18px;padding:18px 20px;margin:18px 0 0;font-size:15.5px;line-height:1.55}
+.note i{margin-top:3px}
+.note.warn{background:#fff1f2;border:1px solid rgba(224,40,60,.3);color:#6b0f19}
+.note.warn i{color:var(--red)}
+.note.tip{background:#eef7f3;border:1px solid rgba(0,75,55,.2);color:#0b3a2c}
+.note.tip i{color:var(--green)}
+.tag{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:3px 10px;border-radius:99px;background:#eef7f3;color:var(--green);vertical-align:middle}
+.tag.red{background:#ffe4e7;color:var(--red-700)}
+.linklist{list-style:none;padding:0;margin:0}
+.linklist li{padding:9px 0;border-bottom:1px dashed var(--line);margin:0}
+.linklist li:last-child{border-bottom:0}
+.linklist a{font-weight:500}
+.ext::after{content:'\f35d';font-family:'Font Awesome 6 Free';font-weight:900;font-size:.7em;margin-left:6px;opacity:.6}
+[data-reveal]{opacity:0;transform:translate3d(0,40px,0);transition:opacity .9s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0ms)}
+[data-reveal].seen{opacity:1;transform:none}
+
+/* timeline */
+.timeline{display:grid;gap:18px;counter-reset:t}
+@media (min-width:760px){.timeline{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:1180px){.timeline{grid-template-columns:repeat(6,1fr)}}
+.tl{position:relative;background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 22px 22px;counter-increment:t}
+.tl::before{content:counter(t);position:absolute;top:-16px;left:22px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.1rem;background:var(--red);color:#fff;box-shadow:0 0 0 4px var(--paper)}
+.tl .when{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);font-weight:600;display:block;margin-bottom:6px}
+.tl h3{font-size:1.35rem;margin-bottom:8px}
+.tl ul{font-size:14.5px;padding-left:1.1em;margin:0;color:var(--muted)}
+.tl a{color:inherit}
+
+/* ==================================================================
+   5. THE REQUEST FORM
+   ================================================================== */
+#request{background:var(--green-900);color:var(--paper)}
+#request::before{content:'';position:absolute;inset:0;background-image:var(--jaali-dark)}
+#request .title{color:#fff}
+#request .lede{color:rgba(255,253,248,.8)}
+.req-grid{display:grid;gap:26px;align-items:start}
+@media (min-width:1080px){.req-grid{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
+.form{background:var(--paper);color:var(--ink);border-radius:26px;padding:12px;box-shadow:var(--shadow-lift)}
+fieldset{border:0;margin:0;padding:22px 20px;border-bottom:1px dashed var(--line)}
+fieldset:last-of-type{border-bottom:0}
+legend{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--green-900);padding:0;margin-bottom:14px;float:left;width:100%}
+legend + *{clear:both}
+legend .n{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-family:var(--sans);font-size:14px;font-weight:600;flex:none}
+.fgrid{display:grid;gap:14px}
+@media (min-width:600px){.fgrid.c2{grid-template-columns:1fr 1fr}.fgrid.c3{grid-template-columns:1fr 1fr 1fr}}
+.f{display:block}
+.f > span{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--green);margin-bottom:6px}
+.f > span i{color:var(--red);font-style:normal}
+.f small{display:block;font-size:12.5px;color:var(--muted);margin-top:4px;line-height:1.35}
+.in{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:11px 13px;font-size:16px;transition:border-color .2s,box-shadow .2s}
+.in:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 4px rgba(0,75,55,.1)}
+.in.bad{border-color:var(--red);box-shadow:0 0 0 4px rgba(224,40,60,.12)}
+textarea.in{min-height:90px;resize:vertical;line-height:1.5}
+select.in{appearance:auto}
+.needs{display:grid;gap:10px}
+@media (min-width:600px){.needs{grid-template-columns:1fr 1fr}}
+.need{position:relative;display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;cursor:pointer;background:#fff;transition:border-color .2s,background .2s}
+.need input{position:absolute;opacity:0;pointer-events:none}
+.need .box{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line);flex:none;display:grid;place-items:center;color:#fff;font-size:12px;margin-top:2px;transition:all .2s}
+.need b{display:block;font-weight:600;font-size:15.5px;line-height:1.25}
+.need small{display:block;font-size:13px;color:var(--muted);line-height:1.35;margin-top:2px}
+.need:has(input:checked){border-color:var(--green);background:#f1f8f5}
+.need:has(input:checked) .box{background:var(--green);border-color:var(--green)}
+.need:has(input:focus-visible){outline:3px solid var(--red);outline-offset:2px}
+.radios{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.radio{position:relative;cursor:pointer}
+.radio input{position:absolute;opacity:0}
+.radio span{display:inline-block;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);font-size:14.5px;background:#fff;transition:all .2s}
+.radio input:checked + span{background:var(--green);border-color:var(--green);color:#fff}
+.radio input:focus-visible + span{outline:3px solid var(--red);outline-offset:2px}
+
+.preview{position:sticky;top:130px}
+.letter{position:relative;background:var(--paper);color:var(--ink);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lift)}
+.letter-head{display:flex;align-items:center;gap:12px;padding:16px 20px;background:#fff;border-bottom:1px solid var(--line);font-size:14px}
+.letter-head .dot{width:10px;height:10px;border-radius:50%;background:var(--red)}
+.letter-head .dot + .dot{background:var(--gold)}
+.letter-head .dot + .dot + .dot{background:var(--green)}
+.letter-meta{padding:14px 20px 0;font-size:14px;color:var(--muted)}
+.letter-meta b{color:var(--ink);font-weight:600}
+.letter-meta div{padding:4px 0;border-bottom:1px solid var(--line)}
+#mailBody{display:block;width:100%;min-height:420px;border:0;background:transparent;padding:16px 20px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.6;resize:vertical;color:var(--ink)}
+#mailBody:focus{outline:0;background:#fff}
+.send{display:flex;flex-wrap:wrap;gap:10px;padding:16px 20px 20px;border-top:1px solid var(--line);background:#fff}
+.send .btn{flex:1 1 auto}
+.send-note{font-size:13px;color:rgba(255,253,248,.7);margin:14px 4px 0;line-height:1.5}
+.send-note a{color:#ffb3bd}
+#formMsg{margin:0 20px 16px;font-size:14px;color:var(--red-700);display:none}
+#formMsg.show{display:block}
+.other-mail{margin-top:18px;padding:20px 22px;border-radius:20px;background:rgba(255,253,248,.07);border:1px solid rgba(255,253,248,.15)}
+.other-mail h3{color:#fff;font-size:1.4rem;margin-bottom:4px}
+.soc-row{display:flex;flex-wrap:wrap;gap:10px}
+.other-mail p{color:rgba(255,253,248,.75);font-size:15px;margin-bottom:12px}
+
+/* ==================================================================
+   6. MONEY, PACKING, CHECKLISTS
+   ================================================================== */
+.calc{display:grid;gap:24px;align-items:start}
+@media (min-width:980px){.calc{grid-template-columns:1fr 1fr}}
+.calc-in{display:grid;gap:12px}
+.cin{display:grid;grid-template-columns:1fr 130px;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.cin label{font-size:15.5px;line-height:1.35}
+.cin label small{display:block;color:var(--muted);font-size:12.5px}
+.money{position:relative}
+.money::before{content:'$';position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px}
+.money .in{padding-left:24px;text-align:right}
+.unit .in{text-align:right}
+.result{background:var(--green-900);color:var(--paper);border-radius:24px;padding:28px;position:relative;overflow:hidden}
+.result::before{content:'';position:absolute;inset:0;background-image:var(--jaali-dark)}
+.result > *{position:relative}
+.result table{width:100%;border-collapse:collapse;font-size:15px}
+.result td{padding:8px 0;border-bottom:1px solid rgba(255,253,248,.12);vertical-align:top}
+.result td:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:12px}
+.result td small{display:block;color:rgba(255,253,248,.6);font-size:12.5px}
+.result tr.total td{border-bottom:0;padding-top:16px;font-family:var(--serif);font-size:1.6rem;font-weight:700;color:#fff}
+.result tr.total td:last-child{color:#ff9aa6;font-size:2.4rem}
+.result .formula{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;background:rgba(255,253,248,.08);border-radius:12px;padding:12px 14px;margin-top:16px;line-height:1.6;color:rgba(255,253,248,.85);overflow-x:auto}
+.paytl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:22px;position:relative}
+.paytl::before{content:'';position:absolute;left:12%;right:12%;top:15px;height:2px;background:repeating-linear-gradient(90deg,var(--green) 0 8px,transparent 8px 14px)}
+.pt{text-align:center;position:relative;padding:0 6px}
+.pt i{width:32px;height:32px;border-radius:50%;display:inline-grid;place-items:center;background:var(--green);color:#fff;font-size:13px;position:relative;box-shadow:0 0 0 4px var(--paper)}
+.pt.red i{background:var(--red)}
+.pt b{display:block;font-family:var(--serif);font-size:1.15rem;margin-top:8px;color:var(--green-900)}
+.pt span{display:block;font-size:12.5px;color:var(--muted);line-height:1.35}
+
+.pack{display:grid;gap:22px}
+@media (min-width:900px){.pack{grid-template-columns:1fr 1fr 1fr}}
+.checklist{list-style:none;padding:0;margin:0}
+.checklist li{margin:0;border-bottom:1px dashed var(--line)}
+.checklist li:last-child{border-bottom:0}
+.checklist label{display:flex;gap:12px;align-items:flex-start;padding:9px 0;cursor:pointer;font-size:15.5px;line-height:1.45}
+.checklist input{appearance:none;width:20px;height:20px;border:1.5px solid var(--line);border-radius:6px;flex:none;margin-top:2px;display:grid;place-items:center;background:#fff;transition:all .2s;cursor:pointer}
+.checklist input:checked{background:var(--green);border-color:var(--green)}
+.checklist input:checked::after{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;color:#fff;font-size:11px}
+.checklist input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(0,75,55,.4)}
+.checklist small{display:block;color:var(--muted);font-size:13px}
+.no-list{list-style:none;padding:0;margin:0}
+.no-list li{display:flex;gap:10px;padding:8px 0;border-bottom:1px dashed rgba(224,40,60,.25);font-size:15.5px;margin:0}
+.no-list li:last-child{border-bottom:0}
+.no-list i{color:var(--red);margin-top:5px}
+
+/* steps (first weeks, TA/RA, transit, ID) */
+.steps{display:grid;gap:14px;counter-reset:s}
+.step{position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:18px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 24px;counter-increment:s}
+.step::before{content:counter(s);width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.35rem;color:var(--green);background:var(--paper);box-shadow:0 0 0 1.5px var(--green),0 0 0 5px #fff,0 0 0 6px rgba(224,40,60,.5)}
+.step h3{font-size:1.45rem;margin:4px 0 6px}
+.step p,.step li{font-size:15.5px}
+.step .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.step.done{opacity:.6}
+.step .tick{position:absolute;top:18px;right:18px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);cursor:pointer}
+.step .tick input{width:18px;height:18px;accent-color:var(--green)}
+details.acc{background:#fff;border:1px solid var(--line);border-radius:20px;margin-bottom:12px;overflow:hidden}
+details.acc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:20px 24px;font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--green-900)}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary .n{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--green);color:#fff;font-family:var(--sans);font-size:15px}
+details.acc summary .when{margin-left:auto;font-family:var(--sans);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);font-weight:600;text-align:right}
+details.acc summary::after{content:'\f078';font-family:'Font Awesome 6 Free';font-weight:900;font-size:13px;color:var(--muted);transition:transform .3s}
+details.acc[open] summary::after{transform:rotate(180deg)}
+details.acc .body{padding:0 24px 22px 76px;font-size:15.5px}
+@media (max-width:600px){details.acc .body{padding:0 20px 20px}details.acc summary .when{display:none}}
+
+/* tables */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:20px;background:#fff}
+table.tbl{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+.tbl th,.tbl td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tr:last-child th,.tbl tr:last-child td{border-bottom:0}
+.tbl thead th{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);background:var(--paper)}
+.tbl tbody th{font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--green-900)}
+.tbl a{text-decoration:none}
+.tbl-link{white-space:nowrap}
+
+/* shopping chips */
+.shop{display:grid;gap:20px}
+@media (min-width:860px){.shop{grid-template-columns:1fr 1fr}}
+.shop-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px}
+.shop-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.shop-head h3{font-size:1.45rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);text-decoration:none;color:var(--ink);font-size:14.5px;background:var(--paper);transition:all .25s}
+.chip i{color:var(--red);font-size:12px}
+.chip:hover{border-color:var(--green);background:var(--green);color:#fff}
+.chip:hover i{color:#fff}
+
+/* phone mock steps for maps */
+.howto{display:grid;gap:16px}
+@media (min-width:760px){.howto{grid-template-columns:repeat(3,1fr)}}
+.howto .h{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px}
+.howto .h b{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:1.25rem;color:var(--green-900);margin-bottom:6px}
+.howto .h b span{width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-family:var(--sans);font-size:13px}
+.howto .h p{font-size:14.5px;margin:0;color:var(--muted)}
+
+/* contact */
+.contacts{display:grid;gap:18px}
+@media (min-width:760px){.contacts{grid-template-columns:repeat(3,1fr)}}
+.person{text-align:center;background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px 22px}
+.person .av{width:84px;height:84px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-size:2rem;font-weight:600;color:var(--paper);background:radial-gradient(circle at 35% 30%,#0a6b4f,var(--green) 55%,var(--green-900));box-shadow:0 0 0 4px #fff,0 0 0 5px rgba(224,40,60,.5)}
+.person h3{font-size:1.45rem}
+.person p{font-size:14.5px;color:var(--muted);margin:2px 0 14px}
+.person{display:block;text-decoration:none;color:inherit;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.person:hover{transform:translateY(-6px);box-shadow:var(--shadow-soft);color:inherit}
+.person .av i{font-size:1.7rem}
+.person .av.red{background:radial-gradient(circle at 35% 30%,#f6455a,var(--red) 60%,var(--red-700))}
+
+/* footer */
+footer{position:relative;background:var(--green-900);color:rgba(255,253,248,.7);padding:70px 0 34px}
+footer::before{content:'';position:absolute;inset:0;background-image:var(--jaali-dark)}
+footer > *{position:relative}
+footer a{color:rgba(255,253,248,.85);text-decoration:none}
+footer a:hover{color:#ff8a98}
+.f-row{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+.f-brand{display:flex;align-items:center;gap:14px}
+.f-brand span{font-family:var(--serif);font-size:1.8rem;font-weight:700;color:var(--paper)}
+.f-links{display:flex;flex-wrap:wrap;gap:20px;font-size:15px}
+.f-small{margin-top:30px;padding-top:20px;border-top:1px solid rgba(255,253,248,.12);font-size:12.5px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+#toTop{position:fixed;bottom:24px;right:24px;z-index:50;width:50px;height:50px;border-radius:50%;background:var(--paper);color:var(--green);box-shadow:0 0 0 1.5px var(--green),0 0 0 4px var(--paper),0 0 0 5px rgba(224,40,60,.5),0 14px 30px -14px rgba(2,28,20,.7);opacity:0;pointer-events:none;transition:opacity .4s,transform .4s;transform:translateY(12px)}
+#toTop.show{opacity:1;pointer-events:auto;transform:none}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,30px);background:var(--green-900);color:#fff;padding:12px 22px;border-radius:999px;font-size:15px;z-index:90;opacity:0;transition:all .4s var(--ease);pointer-events:none;box-shadow:0 20px 40px -20px #000}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  [data-reveal]{opacity:1!important;transform:none!important}
+}
+@media print{
+  #navbar,#chips,#toTop,.hero,#request,footer,.orn,.no-print{display:none!important}
+  .section{padding:20px 0}
+  [data-reveal]{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><clipPath id="archClip" clipPathUnits="objectBoundingBox"><path d="M0 1V.36C0 .2 .28 .12 .5 0C.72 .12 1 .2 1 .36V1Z"/></clipPath><symbol id="o-mandala" viewBox="-100 -100 200 200"><g fill="none" stroke="currentColor" stroke-width=".7"><circle r="97"/><circle r="92.5" style="stroke:var(--o2,currentColor)" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="0 4.84"/><path d="M0.0 -86.0A8.6 8.6 0 0 1 16.78 -84.35M16.78 -84.35A8.6 8.6 0 0 1 32.91 -79.45M32.91 -79.45A8.6 8.6 0 0 1 47.78 -71.51M47.78 -71.51A8.6 8.6 0 0 1 60.81 -60.81M60.81 -60.81A8.6 8.6 0 0 1 71.51 -47.78M71.51 -47.78A8.6 8.6 0 0 1 79.45 -32.91M79.45 -32.91A8.6 8.6 0 0 1 84.35 -16.78M84.35 -16.78A8.6 8.6 0 0 1 86.0 0.0M86.0 0.0A8.6 8.6 0 0 1 84.35 16.78M84.35 16.78A8.6 8.6 0 0 1 79.45 32.91M79.45 32.91A8.6 8.6 0 0 1 71.51 47.78M71.51 47.78A8.6 8.6 0 0 1 60.81 60.81M60.81 60.81A8.6 8.6 0 0 1 47.78 71.51M47.78 71.51A8.6 8.6 0 0 1 32.91 79.45M32.91 79.45A8.6 8.6 0 0 1 16.78 84.35M16.78 84.35A8.6 8.6 0 0 1 0.0 86.0M0.0 86.0A8.6 8.6 0 0 1 -16.78 84.35M-16.78 84.35A8.6 8.6 0 0 1 -32.91 79.45M-32.91 79.45A8.6 8.6 0 0 1 -47.78 71.51M-47.78 71.51A8.6 8.6 0 0 1 -60.81 60.81M-60.81 60.81A8.6 8.6 0 0 1 -71.51 47.78M-71.51 47.78A8.6 8.6 0 0 1 -79.45 32.91M-79.45 32.91A8.6 8.6 0 0 1 -84.35 16.78M-84.35 16.78A8.6 8.6 0 0 1 -86.0 0.0M-86.0 0.0A8.6 8.6 0 0 1 -84.35 -16.78M-84.35 -16.78A8.6 8.6 0 0 1 -79.45 -32.91M-79.45 -32.91A8.6 8.6 0 0 1 -71.51 -47.78M-71.51 -47.78A8.6 8.6 0 0 1 -60.81 -60.81M-60.81 -60.81A8.6 8.6 0 0 1 -47.78 -71.51M-47.78 -71.51A8.6 8.6 0 0 1 -32.91 -79.45M-32.91 -79.45A8.6 8.6 0 0 1 -16.78 -84.35M-16.78 -84.35A8.6 8.6 0 0 1 -0.0 -86.0"/><circle r="86"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(0.0)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(22.5)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(45.0)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(67.5)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(90.0)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(112.5)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(135.0)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(157.5)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(180.0)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(202.5)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(225.0)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(247.5)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(270.0)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(292.5)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(315.0)"/><path d="M0 -48C11 -58 11 -72 0 -82C-11 -72 -11 -58 0 -48ZM0 -53V-77" transform="rotate(337.5)"/><circle cx="13.66" cy="-68.65" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="38.89" cy="-58.2" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="58.2" cy="-38.89" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="68.65" cy="-13.66" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="68.65" cy="13.66" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="58.2" cy="38.89" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="38.89" cy="58.2" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="13.66" cy="68.65" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-13.66" cy="68.65" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-38.89" cy="58.2" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-58.2" cy="38.89" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-68.65" cy="13.66" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-68.65" cy="-13.66" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-58.2" cy="-38.89" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-38.89" cy="-58.2" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-13.66" cy="-68.65" r="1.7" style="fill:var(--o2,currentColor);stroke:none"/><circle r="46"/><circle r="42" style="stroke:var(--o2,currentColor)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="0 4.4"/><path d="M0 -17C13 -23 13 -33 0 -40C-13 -33 -13 -23 0 -17Z" style="stroke:var(--o2,currentColor)" transform="rotate(0)"/><path d="M0 -17C13 -23 13 -33 0 -40C-13 -33 -13 -23 0 -17Z" style="stroke:var(--o2,currentColor)" transform="rotate(45)"/><path d="M0 -17C13 -23 13 -33 0 -40C-13 -33 -13 -23 0 -17Z" style="stroke:var(--o2,currentColor)" transform="rotate(90)"/><path d="M0 -17C13 -23 13 -33 0 -40C-13 -33 -13 -23 0 -17Z" style="stroke:var(--o2,currentColor)" transform="rotate(135)"/><path d="M0 -17C13 -23 13 -33 0 -40C-13 -33 -13 -23 0 -17Z" style="stroke:var(--o2,currentColor)" transform="rotate(180)"/><path d="M0 -17C13 -23 13 -33 0 -40C-13 -33 -13 -23 0 -17Z" style="stroke:var(--o2,currentColor)" transform="rotate(225)"/><path d="M0 -17C13 -23 13 -33 0 -40C-13 -33 -13 -23 0 -17Z" style="stroke:var(--o2,currentColor)" transform="rotate(270)"/><path d="M0 -17C13 -23 13 -33 0 -40C-13 -33 -13 -23 0 -17Z" style="stroke:var(--o2,currentColor)" transform="rotate(315)"/><circle cx="11.86" cy="-28.64" r="1.3" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="28.64" cy="-11.86" r="1.3" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="28.64" cy="11.86" r="1.3" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="11.86" cy="28.64" r="1.3" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-11.86" cy="28.64" r="1.3" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-28.64" cy="11.86" r="1.3" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-28.64" cy="-11.86" r="1.3" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="-11.86" cy="-28.64" r="1.3" style="fill:var(--o2,currentColor);stroke:none"/><circle r="15"/><path d="M0 -3C3 -6 3 -10 0 -13C-3 -10 -3 -6 0 -3Z" transform="rotate(0)"/><path d="M0 -3C3 -6 3 -10 0 -13C-3 -10 -3 -6 0 -3Z" transform="rotate(45)"/><path d="M0 -3C3 -6 3 -10 0 -13C-3 -10 -3 -6 0 -3Z" transform="rotate(90)"/><path d="M0 -3C3 -6 3 -10 0 -13C-3 -10 -3 -6 0 -3Z" transform="rotate(135)"/><path d="M0 -3C3 -6 3 -10 0 -13C-3 -10 -3 -6 0 -3Z" transform="rotate(180)"/><path d="M0 -3C3 -6 3 -10 0 -13C-3 -10 -3 -6 0 -3Z" transform="rotate(225)"/><path d="M0 -3C3 -6 3 -10 0 -13C-3 -10 -3 -6 0 -3Z" transform="rotate(270)"/><path d="M0 -3C3 -6 3 -10 0 -13C-3 -10 -3 -6 0 -3Z" transform="rotate(315)"/><circle r="2.2" style="fill:var(--o2,currentColor);stroke:none"/></g></symbol><symbol id="o-star" viewBox="-100 -100 200 200"><g fill="none" stroke="currentColor" stroke-width=".8"><circle r="96"/><circle r="70"/><path d="M0 -96L14 -14L96 0L14 14L0 96L-14 14L-96 0L-14 -14Z"/><path style="stroke:var(--o2,currentColor)" d="M0 -96L14 -14L96 0L14 14L0 96L-14 14L-96 0L-14 -14Z" transform="rotate(45) scale(.72)"/><circle r="38" style="stroke:var(--o2,currentColor)" stroke-dasharray="0 4" stroke-linecap="round" stroke-width="1.6"/><circle cx="0.0" cy="-83.0" r="2.6"/><circle cx="21.48" cy="-80.17" r="2.6"/><circle cx="41.5" cy="-71.88" r="2.6"/><circle cx="58.69" cy="-58.69" r="2.6"/><circle cx="71.88" cy="-41.5" r="2.6"/><circle cx="80.17" cy="-21.48" r="2.6"/><circle cx="83.0" cy="0.0" r="2.6"/><circle cx="80.17" cy="21.48" r="2.6"/><circle cx="71.88" cy="41.5" r="2.6"/><circle cx="58.69" cy="58.69" r="2.6"/><circle cx="41.5" cy="71.88" r="2.6"/><circle cx="21.48" cy="80.17" r="2.6"/><circle cx="0.0" cy="83.0" r="2.6"/><circle cx="-21.48" cy="80.17" r="2.6"/><circle cx="-41.5" cy="71.88" r="2.6"/><circle cx="-58.69" cy="58.69" r="2.6"/><circle cx="-71.88" cy="41.5" r="2.6"/><circle cx="-80.17" cy="21.48" r="2.6"/><circle cx="-83.0" cy="0.0" r="2.6"/><circle cx="-80.17" cy="-21.48" r="2.6"/><circle cx="-71.88" cy="-41.5" r="2.6"/><circle cx="-58.69" cy="-58.69" r="2.6"/><circle cx="-41.5" cy="-71.88" r="2.6"/><circle cx="-21.48" cy="-80.17" r="2.6"/></g></symbol><symbol id="o-shapla" viewBox="0 0 100 86"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M50 64C41 47 43 24 50 9C57 24 59 47 50 64Z" transform="rotate(-66 50 64)"/><path d="M50 64C41 47 43 24 50 9C57 24 59 47 50 64Z" transform="rotate(-44 50 64)"/><path d="M50 64C41 47 43 24 50 9C57 24 59 47 50 64Z" transform="rotate(-22 50 64)"/><path d="M50 64C41 47 43 24 50 9C57 24 59 47 50 64Z" transform="rotate(22 50 64)"/><path d="M50 64C41 47 43 24 50 9C57 24 59 47 50 64Z" transform="rotate(44 50 64)"/><path d="M50 64C41 47 43 24 50 9C57 24 59 47 50 64Z" transform="rotate(66 50 64)"/><path d="M50 64C41 47 43 24 50 9C57 24 59 47 50 64Z" style="stroke:var(--o2,currentColor)"/><path d="M12 67Q50 79 88 67M24 72Q50 84 76 72"/></g></symbol><symbol id="o-paisley" viewBox="0 0 60 100"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M30 96C10 92 2 70 8 54C14 38 30 34 40 22C46 14 44 6 38 4C50 4 58 18 56 36C54 62 48 86 30 96Z"/><path style="stroke:var(--o2,currentColor)" d="M30 86C16 82 12 68 16 58C20 48 32 44 41 35C47 52 45 72 30 86Z"/><circle cx="30" cy="68" r="5"/><circle cx="30" cy="68" r="1.8" style="fill:var(--o2,currentColor);stroke:none"/><path d="M38 4C34 10 34 16 38 22" style="stroke:var(--o2,currentColor)"/></g></symbol><symbol id="o-corner" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 98V28C2 12 12 2 28 2H98"/><path d="M10 98V33C10 19 19 10 33 10H98" stroke-width=".8"/><path style="stroke:var(--o2,currentColor)" d="M2 30C17 30 30 17 30 2"/><path style="fill:var(--o2,currentColor);stroke:none" d="M19 12L26 19L19 26L12 19Z" stroke="none"/><circle cx="48" cy="6" r="1.6" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="62" cy="6" r="1.6" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="76" cy="6" r="1.6" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="6" cy="48" r="1.6" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="6" cy="62" r="1.6" style="fill:var(--o2,currentColor);stroke:none"/><circle cx="6" cy="76" r="1.6" style="fill:var(--o2,currentColor);stroke:none"/></g></symbol><symbol id="o-plane" viewBox="-12 -10 24 20"><path fill="currentColor" d="M11 0C11 -1.2 9.6 -1.6 8.4 -1.6H3.6L-1.4 -9H-4L-1.2 -1.6H-6.4L-8.6 -4.4H-10.6L-9.2 0L-10.6 4.4H-8.6L-6.4 1.6H-1.2L-4 9H-1.4L3.6 1.6H8.4C9.6 1.6 11 1.2 11 0Z"/></symbol><path id="bd" d="M353.6,369.0L354.5,373.4L354.8,375.7L353.6,386.9L354.5,404.4L354.5,406.3L355.3,410.0L357.7,417.4L358.0,418.2L358.0,418.9L357.5,420.2L356.0,421.5L354.5,422.5L353.1,422.6L352.3,421.8L351.8,420.3L351.3,417.3L349.9,414.3L348.1,414.0L345.9,414.4L343.0,414.1L341.5,413.6L340.8,413.2L340.3,412.6L339.8,411.3L339.5,410.1L339.3,408.9L338.3,407.6L336.1,406.9L333.6,410.1L331.4,410.0L330.2,410.2L329.4,411.6L328.7,414.8L326.7,417.5L326.2,418.8L326.2,420.3L326.7,423.1L326.7,424.6L326.2,426.8L326.0,428.0L326.5,429.2L327.0,430.2L328.7,431.8L328.9,432.8L329.4,434.0L332.1,436.4L331.9,439.1L331.6,442.2L331.9,445.2L332.6,447.9L334.6,450.9L335.1,451.6L335.1,453.1L336.3,456.9L336.8,457.8L337.1,458.6L337.1,459.4L336.3,460L336.1,459.8L335.6,459.1L335.3,458.9L334.6,458.3L333.1,454.4L328.4,445.9L327.2,441.1L327.0,440.3L323.3,437.4L322.5,436.4L321.5,434.3L320.8,433.0L317.6,429.4L317.1,428.3L317.1,426.7L317.6,422.0L317.6,420.3L317.1,418.8L313.4,411.8L312.7,411.2L311.9,410.7L311.4,409.7L311.0,408.4L310.7,407.1L311.2,407.1L311.2,407.4L311.2,407.5L311.4,407.5L311.7,407.6L312.2,406.3L312.9,404.9L314.2,404.1L315.4,404.6L314.4,403.8L313.9,402.4L313.4,400.9L313.4,399.6L313.9,398.7L314.9,397.8L315.6,396.8L315.4,395.6L316.4,394.3L316.6,393.8L316.4,393.1L316.6,392.3L316.6,391.7L316.1,391.2L315.6,391.1L315.9,390.4L316.1,389.7L316.1,389.0L315.9,388.5L315.6,389.1L315.6,389.2L315.4,389.5L315.9,389.5L314.9,392.0L314.2,393.1L312.9,393.1L312.4,392.2L312.7,391.0L312.9,389.9L312.9,389.0L312.4,389.0L312.2,390.2L311.4,390.1L311.0,389.2L310.7,388.2L311.0,386.6L311.4,386.1L312.4,386.0L313.4,385.0L312.9,384.5L311.9,385.3L311.4,384.6L311.9,383.6L313.4,382.9L313.4,382.4L310.2,382.6L309.0,383.1L307.8,383.4L307.3,382.8L307.3,381.0L308.0,379.5L309.2,378.8L308.7,378.0L309.0,377.4L309.7,376.8L310.7,376.4L310.7,375.8L310.0,375.9L309.2,376.2L308.7,376.8L308.2,377.4L308.0,376.5L307.8,374.9L307.3,372.1L307.3,371.3L306.3,370.2L306.0,369.6L306.0,366.7L304.3,359.2L304.1,356.7L304.8,357.0L305.0,357.1L304.6,356.1L304.1,356.4L303.6,357.2L303.6,358.6L303.1,358.6L302.3,357.4L301.8,355.7L301.3,354.0L301.3,352.1L301.6,351.0L302.1,350.3L302.8,349.8L303.1,349.1L303.1,347.9L302.6,347.3L301.8,346.9L301.3,346.5L301.1,344.6L302.3,343.8L304.1,343.3L305.5,342.5L306.3,341.1L307.8,335.9L307.5,335.9L306.5,335.9L306.3,337.0L305.5,339.9L305.8,340.4L305.3,340.9L304.6,341.6L303.3,342.5L302.3,343.0L302.1,343.4L300.4,344.3L299.9,345.0L300.1,346.1L300.9,346.8L301.6,347.0L302.3,347.5L302.1,348.9L301.1,349.9L299.6,349.8L298.4,348.0L297.4,339.6L296.7,336.9L292.0,327.8L283.1,315.5L280.9,314.6L279.9,313.5L278.9,312.1L278.2,311.0L277.7,311.2L277.2,310.9L277.0,310.1L277.0,309.2L277.0,308.4L277.7,307.4L278.2,305.2L279.2,302.1L279.2,300.3L278.7,300.3L278.4,301.7L277.2,305.6L276.7,306.4L275.2,306.9L274.3,308.1L273.8,309.7L274.0,311.5L273.0,310.7L272.0,310.2L270.8,310.0L269.3,310.0L269.3,310.5L270.8,311.0L271.1,311.6L270.3,312.2L269.1,312.6L265.6,312.6L266.9,313.0L267.9,313.6L268.3,314.0L268.3,315.1L267.4,315.7L266.4,316.0L265.1,316.1L265.1,316.0L262.9,315.5L262.7,315.6L262.4,315.6L262.4,315.4L262.4,314.2L262.4,314.0L261.4,313.7L260.5,313.6L258.2,313.5L258.2,314.0L259.0,314.7L259.2,315.6L258.7,316.1L257.3,316.1L257.3,316.6L261.2,317.6L262.9,318.4L263.7,319.9L263.7,320.9L262.9,321.9L262.2,324.8L261.0,326.1L259.5,327.1L257.8,327.6L254.3,328.3L251.8,327.0L250.4,325.0L249.6,321.9L249.1,321.0L248.4,319.6L247.4,317.4L246.9,316.8L245.9,317.1L246.9,318.1L247.9,320.1L248.4,322.4L248.4,323.8L246.9,324.5L244.7,324.8L242.7,324.8L241.7,324.0L241.3,322.9L239.5,321.6L239.0,320.9L238.8,320.3L237.8,318.9L237.3,316.8L236.6,316.5L234.4,316.6L234.1,316.3L233.4,313.5L232.9,313.1L232.1,312.9L231.6,312.5L231.2,311.1L230.2,309.7L229.9,309.2L229.9,308.5L229.2,306.4L228.7,303.8L228.0,302.6L227.5,301.5L227.0,300.2L226.7,298.6L226.5,297.7L221.1,290.4L220.3,288.4L220.1,287.5L220.1,286.8L221.1,282.3L221.1,279.2L221.6,277.5L222.3,276.1L222.8,274.7L222.5,273.3L223.0,273.3L221.8,270.9L221.8,269.9L222.5,269.3L222.3,269.2L222.0,269.2L222.0,269.1L222.0,268.7L220.3,269.3L219.1,267.8L218.3,265.5L218.3,264.2L218.3,259.7L218.8,258.0L220.6,257.0L224.5,257.0L226.2,256.1L226.2,253.3L226.0,252.3L225.5,251.9L225.0,251.8L223.8,251.9L223.5,252.2L224.0,252.9L225.2,253.8L224.8,255.5L223.8,254.7L222.8,254.7L221.6,255.5L219.8,256.0L218.8,256.7L218.6,256.3L217.6,253.4L217.9,251.3L218.8,249.5L220.6,248.8L220.1,248.3L220.1,248.5L220.1,248.7L219.6,248.8L219.1,248.0L218.1,248.2L215.4,249.3L215.9,250.3L215.6,250.9L214.7,251.3L213.7,251.3L212.4,251.3L211.7,250.9L210.0,249.8L210.5,250.9L211.5,251.7L212.4,252.2L213.7,252.3L216.1,252.4L216.6,253.1L216.9,259.7L216.6,260.5L216.1,261.0L215.6,262.1L215.1,263.4L215.1,264.5L212.7,263.6L199.4,261.0L196.7,260.0L194.5,258.5L194.5,259.4L195.0,260.1L203.8,265.5L205.0,266.4L205.5,267.3L206.0,268.3L206.5,268.9L208.7,269.4L210.7,270.4L211.7,270.8L216.1,271.3L216.9,271.8L218.8,274.8L219.1,276.1L219.3,278.7L219.1,278.2L218.6,277.5L217.9,276.9L218.1,278.4L218.6,282.8L218.3,284.5L216.4,287.2L215.9,287.5L215.1,287.4L214.9,286.8L215.4,286.0L215.9,285.5L215.9,285.0L215.4,285.0L214.7,286.0L213.9,286.8L212.9,287.3L211.7,287.5L209.2,287.5L208.3,287.9L208.0,289.0L208.0,289.5L208.3,291.2L209.2,293.6L210.7,295.7L211.9,297.6L212.2,298.0L211.9,298.8L212.2,299.3L212.4,299.5L212.7,299.5L212.9,299.5L213.2,299.8L213.9,300.5L214.2,301.0L213.9,301.6L212.9,302.1L211.9,302.0L210.7,301.7L210.0,301.8L208.5,303.5L208.0,306.0L207.0,308.0L205.3,308.5L206.3,309.5L206.0,310.5L205.0,310.9L204.3,310.0L202.8,311.0L203.8,311.7L205.8,312.4L207.0,313.0L207.8,311.6L208.7,311.9L210.0,312.9L210.7,314.0L211.0,314.7L211.2,317.1L212.2,319.5L212.4,322.0L212.2,322.6L211.5,323.5L211.0,323.8L209.2,324.0L208.7,324.5L208.3,325.5L207.5,329.6L207.5,330.8L207.8,330.0L208.3,329.5L208.5,329.3L209.0,328.8L209.0,328.0L208.7,326.5L209.0,325.8L209.5,324.8L210.7,324.1L211.9,323.9L213.2,324.1L215.6,325.8L216.9,327.9L217.6,330.3L218.8,332.9L217.9,332.5L217.4,332.3L217.4,334.0L217.9,335.4L219.3,338.0L219.6,339.5L219.6,341.0L219.3,344.0L217.1,349.8L215.4,352.2L214.2,352.6L212.2,353.6L211.5,354.2L211.2,354.9L211.2,355.9L210.7,357.1L208.7,360.5L208.0,361.4L207.3,361.7L206.3,361.5L205.3,361.0L204.3,360.4L203.8,359.7L204.1,357.9L205.8,354.4L206.0,352.6L205.3,350.5L205.3,349.5L205.5,347.3L205.3,346.3L204.3,346.0L204.6,347.5L203.8,350.8L204.1,351.9L204.6,352.4L205.0,352.5L205.3,352.9L205.5,353.6L205.5,354.1L205.3,354.6L204.8,355.1L204.6,355.2L204.6,355.4L204.3,355.7L204.1,356.7L203.8,356.7L203.6,356.5L203.3,356.7L203.1,357.4L202.8,359.7L202.6,360.6L202.3,361.4L201.1,363.2L200.1,364.2L200.1,364.5L199.6,365.7L198.4,368.5L198.2,369.8L197.9,372.6L197.2,375.4L196.7,376.8L195.9,377.8L192.2,381.0L191.3,381.7L190.0,381.9L188.5,381.8L185.8,380.7L184.9,380.4L183.6,379.8L183.4,378.5L183.9,377.7L184.9,377.9L184.4,376.8L184.9,376.2L185.6,375.4L185.8,374.6L185.8,373.9L185.6,373.6L185.6,373.1L185.8,372.3L185.3,373.2L184.1,376.3L183.4,376.9L182.6,377.0L181.9,378.0L181.2,378.4L180.7,378.3L179.7,377.5L178.9,377.4L179.4,375.4L179.7,371.4L180.4,369.8L180.9,369.2L181.9,368.8L182.6,368.2L183.1,367.2L183.4,366.1L183.6,365.2L183.9,364.3L184.6,363.2L187.3,360.7L187.6,360.2L188.1,359.4L188.5,359.0L189.0,358.6L189.8,358.9L190.3,359.1L190.5,359.2L192.0,358.2L193.2,356.5L193.7,354.6L193.5,352.6L192.2,355.7L191.3,357.5L190.3,358.2L188.5,358.5L187.3,359.1L183.4,363.5L182.9,364.2L182.4,365.8L181.4,367.2L181.2,367.7L180.9,368.1L179.9,368.3L179.2,368.2L177.0,367.2L177.5,366.2L177.5,365.1L178.0,364.2L178.7,363.7L179.2,363.3L179.7,362.8L179.9,361.7L179.7,359.5L179.9,358.7L180.2,357.6L180.9,356.9L181.7,356.5L182.1,356.1L182.6,355.1L180.9,355.9L179.9,357.1L178.9,360.7L178.4,361.5L176.5,363.3L176.0,364.0L176.2,367.3L176.0,368.3L175.0,369.2L173.8,368.7L172.8,367.5L172.3,366.0L172.3,365.3L171.6,363.6L171.6,362.7L171.3,357.2L170.6,354.2L170.6,352.4L170.3,351.6L169.3,350.3L169.1,349.5L168.8,348.5L168.8,347.8L168.8,347.0L169.1,346.0L170.6,342.6L176.0,334.4L176.5,333.5L176.7,332.5L177.2,331.8L178.0,331.0L176.0,332.3L176.0,332.5L173.8,334.8L172.8,336.0L172.3,337.1L171.8,338.4L170.6,338.0L168.6,336.4L168.6,337.9L169.1,339.1L169.3,340.4L169.1,342.0L166.1,347.5L167.1,349.1L167.9,351.7L168.6,356.7L168.6,359.2L168.6,360.5L167.9,361.5L166.9,362.1L165.6,362.0L164.7,361.7L163.4,361.7L163.4,362.2L164.9,362.8L166.1,363.6L166.9,364.8L167.1,366.5L167.1,367.2L166.6,368.6L166.9,369.3L167.1,369.9L167.9,371.4L168.6,372.8L169.1,373.7L169.6,374.7L169.1,375.8L168.6,376.1L167.1,376.3L165.4,377.9L164.9,378.4L164.9,378.7L164.7,379.0L163.9,379.4L162.7,379.9L161.9,380.0L161.7,379.7L161.2,378.5L160.5,378.8L159.5,379.5L158.5,379.9L157.3,379.8L156.0,379.5L155.1,379.0L154.1,378.4L153.8,377.8L153.6,377.0L153.6,376.2L154.3,374.9L154.1,374.2L153.1,372.8L151.1,376.9L152.1,378.3L153.3,380.0L154.8,381.8L156.3,382.4L156.8,383.1L156.0,384.6L154.6,385.6L152.8,385.3L152.1,384.6L151.4,384.6L149.6,385.0L149.4,385.4L150.1,387.4L150.4,388.0L149.1,389.4L147.7,388.4L145.7,385.4L145.7,384.1L145.0,381.0L145.2,379.4L145.7,378.4L146.9,376.9L147.4,375.8L147.7,374.6L147.4,369.3L147.9,365.0L148.4,363.5L149.9,360.6L150.4,359.0L150.1,357.4L149.4,355.9L148.6,354.5L147.7,353.4L147.7,352.2L149.9,349.5L150.4,348.3L150.4,346.8L150.6,345.3L151.1,343.8L151.6,342.5L150.9,343.0L150.4,344.0L149.4,346.0L148.6,346.8L148.4,347.5L148.9,349.1L148.6,349.8L147.2,350.8L146.4,352.1L146.4,353.1L147.9,355.6L148.4,356.5L148.4,357.2L148.4,359.0L148.4,359.9L147.7,361.2L147.4,362.0L146.9,366.7L146.7,367.7L145.2,368.5L144.7,367.3L144.7,364.0L145.0,363.2L145.4,361.7L145.7,360.7L142.5,353.4L142.2,351.9L142.7,348.5L142.5,347.1L142.0,345.5L141.5,345.5L140.8,350.4L141.5,359.7L142.0,359.7L142.0,358.7L142.2,357.7L142.7,357.2L142.7,357.4L143.0,358.0L143.2,359.0L143.5,359.9L144.0,360.5L144.2,361.4L144.2,362.3L143.7,364.2L143.5,364.6L142.5,364.7L142.2,365.0L142.5,365.5L142.5,365.8L142.7,366.2L143.2,367.1L144.0,369.0L144.5,369.6L144.5,370.1L144.0,373.9L143.2,374.8L142.2,375.6L141.5,376.4L140.8,377.7L140.5,378.7L140.8,379.9L141.0,381.7L140.8,383.4L140.0,384.8L139.0,386.0L136.6,388.1L135.8,388.2L134.1,386.3L133.9,385.1L133.6,383.3L133.9,379.9L134.4,378.5L135.1,376.3L135.3,374.6L135.1,373.1L133.9,370.6L133.4,369.3L132.9,369.3L132.6,370.4L132.6,371.4L133.1,372.3L133.4,373.3L133.4,374.6L133.1,375.2L132.1,376.4L131.4,377.3L130.9,378.0L129.9,380.8L129.4,381.3L129.2,381.4L128.7,380.4L128.2,380.4L128.2,382.3L128.9,385.1L128.7,387.0L127.5,389.5L127.7,390.4L129.2,391.0L128.5,392.0L127.2,392.8L126.0,393.3L124.5,393.5L123.3,392.7L122.8,391.4L123.0,390.1L123.8,389.5L124.0,388.7L121.8,382.6L121.8,382.0L121.8,381.2L121.3,380.9L120.8,381.3L120.1,382.0L119.8,382.6L119.3,383.0L118.6,382.8L117.1,381.9L116.4,381.3L116.1,380.9L114.4,374.8L114.2,373.6L114.4,372.1L115.2,369.0L115.2,367.2L114.7,365.7L113.2,363.6L112.7,362.5L113.2,359.1L112.9,357.7L112.9,357.6L114.2,356.1L114.2,354.4L113.7,352.9L113.2,351.6L110.2,347.8L109.5,346.1L110.5,345.5L109.2,343.5L109.0,342.6L108.3,338.6L108.3,338.0L108.3,337.3L109.0,336.3L109.0,335.6L108.8,333.9L107.5,331.0L106.8,328.3L106.0,327.6L103.8,326.8L105.5,325.8L105.8,324.0L105.5,322.0L104.8,320.1L104.1,318.6L103.8,316.9L103.6,316.0L102.8,313.9L102.6,312.5L103.1,311.5L103.8,310.5L104.6,309.4L104.8,308.4L105.1,307.0L105.3,305.5L105.1,304.5L104.3,303.7L102.3,303.1L101.6,302.2L100.1,298.7L99.4,297.6L98.2,295.8L97.9,295.1L97.9,293.6L98.4,291.4L98.7,287.7L99.6,285.8L103.3,281.8L105.1,280.3L105.8,279.6L106.0,278.7L106.0,278.1L105.8,277.9L103.8,277.9L103.3,277.7L102.6,277.5L97.9,275.7L96.7,275.5L95.9,275.7L95.2,276.1L94.7,276.5L94.2,276.7L93.5,276.7L89.0,275.3L88.1,274.5L87.3,273.1L87.3,271.4L88.1,269.9L89.5,267.3L93.0,258.5L93.2,256.9L92.2,256.1L91.3,256.9L90.5,258.1L89.8,258.4L88.6,256.3L87.8,256.0L85.8,254.6L84.9,253.4L83.1,250.6L82.2,249.4L81.7,249.3L80.2,249.4L79.4,249.2L78.9,248.4L78.9,247.9L78.9,247.3L79.2,246.4L78.9,246.1L78.2,246.0L77.5,245.6L77.5,244.8L78.9,238.1L78.7,237.3L78.2,236.2L78.2,235.4L78.7,234.7L79.7,233.1L79.9,232.3L79.9,231.5L79.9,230.9L79.7,230.2L79.9,229.5L81.2,228.6L82.4,228.5L83.9,228.6L85.1,228.3L86.1,227.7L88.6,225.1L89.3,224.3L89.5,222.9L89.3,221.3L88.8,219.9L88.6,219.0L89.3,217.5L90.0,216.5L90.0,215.7L88.3,215.3L88.3,214.4L86.8,213.3L86.6,212.4L86.6,211.8L87.1,210.1L87.1,209.4L86.8,207.9L86.8,207.1L87.3,206.2L87.8,205.4L89.5,204.9L90.5,204.4L90.8,203.8L91.5,202.5L91.8,201.9L91.5,201.7L91.5,200.4L91.3,200.1L91.0,197.1L89.3,194.9L87.1,193.5L85.6,193.3L84.9,194.9L83.9,196.6L82.4,196.7L78.9,195.6L74.5,195.3L73.0,194.9L67.9,190.9L49.9,181.5L47.9,181.0L47.9,180.5L47.2,179.5L46.7,178.7L46.4,178.3L46.2,177.9L46.2,174.0L45.9,173.6L45.0,172.6L44.5,171.1L43.2,170.6L42.0,170.2L42.3,167.9L43.0,166.5L43.7,165.2L44.0,161.9L45.0,161.7L45.7,161.4L46.2,160.8L46.2,159.8L46.4,158.9L46.9,158.4L47.9,158.5L48.4,157.1L49.4,156.2L50.1,155.2L49.9,153.8L48.9,151.1L48.7,150.5L48.4,150.1L48.4,149.7L51.6,147.9L53.1,147.4L54.3,147.5L55.3,148.3L56.3,149.6L57.0,151.1L57.0,152.5L57.8,152.5L60.7,153.3L62.0,153.4L62.4,152.9L63.7,150.7L66.1,147.5L66.9,145.7L67.1,143.8L68.9,141.8L69.6,139.6L70.1,134.7L70.1,130.3L70.6,129.2L73.0,128.7L74.0,129.0L76.2,129.8L78.0,130.3L78.5,130.6L78.7,130.6L79.4,130.3L79.9,130.1L80.9,129.0L81.4,128.9L83.9,128.9L85.8,129.3L90.0,130.8L94.2,131.3L94.7,130.8L95.5,129.3L95.7,128.7L96.4,128.5L96.7,128.8L97.2,129.0L101.9,130.7L103.6,130.8L102.6,129.2L103.8,128.9L104.1,128.1L103.8,127.1L104.1,126.1L104.6,125.3L107.3,123.4L107.8,122.7L107.8,121.9L107.8,121.2L107.3,120.6L103.8,120.7L102.1,120.5L101.1,119.3L100.6,118.9L99.1,118.9L98.7,118.7L98.2,118.3L96.4,116.3L96.2,115.5L96.2,114.7L95.9,114.1L95.2,113.6L95.2,113.1L96.2,110.4L96.2,108.7L95.7,107.8L94.7,107.1L94.0,106.0L93.2,105.5L91.3,104.6L91.3,106.0L90.5,106.3L90.0,106.3L89.3,106.2L88.8,106.3L88.1,106.9L87.6,107.6L86.8,108.2L86.1,108.5L84.6,108.1L82.4,106.7L81.2,106.0L78.2,105.9L76.7,105.6L76.0,104.9L75.5,103.9L73.8,102.4L73.0,100.9L70.3,99.6L69.3,98.6L69.1,94.0L67.4,91.9L62.4,88.5L58.3,83.7L56.0,82.6L52.8,83.5L51.9,84.1L50.4,84.8L49.1,84.8L48.4,83.9L47.9,82.3L47.4,81.7L46.4,80.5L46.4,79.9L46.4,79.1L45.9,78.0L45.5,74.6L45.7,74.2L46.2,74.1L46.4,73.5L47.7,69.2L49.1,66.7L50.9,65.2L51.4,63.8L51.1,62.9L50.9,62.5L50.4,62.3L50.1,61.9L50.1,61.1L50.1,60.7L50.4,60.4L51.1,57.9L51.6,57.0L53.8,55.5L54.6,55.0L55.1,54.4L55.6,53.9L56.3,53.7L57.5,53.3L61.5,52.0L62.7,51.2L63.4,50.1L63.2,47.2L63.4,46.2L64.4,44.8L65.6,43.7L68.9,41.7L69.3,41.0L69.6,40.4L70.1,40.0L70.6,40.5L71.1,40.7L71.8,40.8L72.5,40.7L73.0,40.5L74.5,40.8L74.3,38.8L73.0,34.7L72.1,33.0L70.1,32.1L66.1,31.4L64.7,30.7L64.2,30.7L63.9,31.2L63.7,33.0L63.4,33.4L62.4,33.2L62.0,32.1L62.0,31.0L62.2,29.9L63.2,28.4L64.7,23.5L65.2,22.5L65.9,21.0L66.9,20L67.4,20.5L67.6,21.9L67.4,23.5L67.6,25.0L68.6,26.1L71.1,26.8L72.1,27.4L73.0,28.4L73.8,29.0L74.5,29.9L75.0,30.5L76.5,31.4L78.0,32.0L78.7,32.1L80.2,32.1L80.9,32.5L81.4,33.2L81.7,34.1L82.4,34.8L83.1,35.2L83.9,35.6L85.4,36.0L85.1,36.7L84.9,37.3L85.1,37.8L85.6,37.9L86.1,38.2L86.1,39.6L86.6,40.1L88.1,40.9L89.0,41.7L89.3,42.6L88.6,44.0L87.6,44.8L85.1,46.1L84.6,46.6L85.8,47.5L91.5,45.4L94.0,46.3L94.7,47.5L95.0,48.8L95.7,49.9L96.9,50.4L97.9,49.9L98.9,47.5L100.4,46.5L102.1,46.8L105.3,49.9L107.3,50.6L110.2,49.8L111.7,48.8L111.2,47.4L110.5,47.2L109.7,47.1L109.2,46.6L109.5,45.0L108.8,45.4L108.3,45.5L107.5,45.4L107.3,44.8L106.5,42.6L104.8,41.7L102.8,41.0L101.4,39.5L101.4,38.2L102.1,36.8L102.8,35.5L103.8,34.7L104.8,34.2L105.5,34.3L106.0,35.0L107.3,35.8L108.0,36.1L109.0,37.4L109.5,37.9L110.5,38.2L112.0,38.6L112.4,39.1L112.7,40.0L112.4,40.7L112.7,41.2L113.7,41.7L115.4,42.2L115.9,42.7L115.9,43.7L115.4,44.0L114.4,43.6L113.7,43.7L113.7,45.8L114.2,47.0L115.4,49.3L115.9,50.4L116.6,55.1L117.1,56.5L117.9,57.5L122.3,59.5L123.5,60.1L124.0,61.0L124.5,62.5L125.0,63.2L127.5,64.3L129.2,66.3L130.4,67.2L131.9,67.8L132.9,67.9L134.1,67.3L134.9,66.5L135.6,66.5L136.6,68.1L137.1,68.2L137.3,68.2L137.6,68.2L138.1,68.1L141.8,67.7L142.0,67.8L142.5,67.8L142.7,68.1L143.7,69.7L144.2,70.5L145.0,70.9L145.9,70.8L146.4,70.0L146.7,69.1L146.4,68.1L147.2,66.0L150.1,63.4L150.6,62.2L150.1,61.3L149.4,61.1L148.4,61.4L147.7,61.0L147.7,60.1L148.4,59.5L149.4,58.9L150.1,58.4L148.9,58.3L147.9,57.8L147.4,56.8L148.2,55.5L148.6,55.0L148.9,54.8L149.4,54.7L150.9,55.2L150.9,54.8L150.4,53.9L150.4,51.6L150.9,51.0L152.3,50.4L153.6,50.7L153.8,51.9L153.8,53.4L153.8,55.1L153.8,55.3L153.8,55.5L154.8,55.9L155.3,56.0L156.5,55.9L157.3,55.9L158.0,56.6L158.5,57.7L158.7,58.9L159.2,60.0L160.2,61.3L160.2,62.2L160.0,63.2L160.2,64.5L160.5,65.2L161.9,67.0L162.4,68.1L162.9,68.6L163.2,68.7L163.7,68.5L164.2,68.1L164.4,67.9L164.7,67.9L164.7,68.1L165.6,69.2L165.4,70.3L164.4,71.0L162.9,71.5L164.4,72.3L165.4,72.4L165.9,72.8L165.6,74.6L162.7,79.9L162.4,81.8L163.7,88.6L165.2,92.5L165.9,95.4L165.4,100.8L165.2,106.4L164.2,110.3L163.7,112.2L163.4,112.9L163.2,115.1L163.4,117.8L164.2,120.5L164.9,121.9L165.9,122.1L168.4,121.1L171.1,121.0L186.1,127.5L196.9,129.8L202.3,132.1L204.6,132.2L211.7,130.7L217.1,131.2L219.8,130.4L220.8,130.6L221.8,130.8L223.3,131.5L225.7,131.8L226.2,131.8L226.7,131.6L227.5,130.8L227.7,130.7L228.9,130.8L229.7,131.3L230.7,132.0L231.6,132.5L233.6,132.7L241.3,131.6L241.7,131.6L244.0,130.8L255.0,129.0L258.7,129.2L259.5,129.0L261.2,128.3L261.7,128.1L265.1,129.9L275.2,133.0L277.9,133.4L278.7,133.3L279.9,132.7L280.7,132.7L281.4,132.5L282.6,131.6L283.1,131.3L284.4,131.3L284.8,132.0L285.3,132.9L286.6,133.8L287.6,134.0L289.3,134.1L291.0,133.9L291.7,133.1L292.0,132.0L292.7,131.8L293.7,132.4L294.2,132.5L294.7,132.1L295.2,131.2L295.7,130.8L296.7,130.7L299.9,131.0L307.3,130.1L311.2,130.6L312.4,130.2L314.2,129.7L316.4,129.7L318.6,130.3L320.6,131.0L321.1,131.5L321.5,132.5L322.0,132.9L322.5,133.1L323.5,133.1L324.0,133.5L324.5,133.6L325.5,133.4L326.0,133.5L326.5,133.9L327.5,135.2L328.4,136.1L329.2,136.6L330.2,137.1L331.4,137.3L334.8,137.8L335.3,138.2L336.6,139.9L338.5,140.6L340.3,141.7L340.5,143.1L340.5,143.8L341,144.0L342.2,144.3L342.2,144.6L344.4,146.3L345.2,146.6L345.4,146.9L345.4,147.0L344.9,147.5L346.7,148.2L347.2,148.8L347.6,150.1L347.9,151.4L347.6,152.2L346.7,153.8L344.4,154.4L340.3,155.8L339.5,155.7L339.0,155.4L338.8,155.0L338.5,154.5L333.9,151.6L331.4,150.7L329.4,151.6L328.9,152.9L329.2,154.3L330.2,156.7L330.4,157.8L330.2,159.1L330.2,160.3L326.7,170.1L326.0,173.0L325.7,175.5L325.2,176.7L324.5,177.8L324.3,177.9L323.5,178.6L322.5,179.2L321.8,180.1L321.3,181.5L321.8,186.1L321.5,188.2L320.1,190.0L318.3,190.8L316.4,191.0L310.7,190.5L310.7,191.4L312.2,193.9L312.2,194.9L311.0,194.4L309.5,193.4L308.7,192.8L307.3,193.3L307.0,194.7L307.8,197.6L307.8,199.1L306.3,205.4L305.8,206.8L304.8,207.3L303.6,207.0L301.3,204.9L301.1,204.2L301.1,202.5L300.9,202.0L300.1,202.0L295.9,201.0L295.2,202.0L295.4,203.6L295.7,205.1L295.9,206.3L294.9,207.5L293.7,208.0L292.5,207.7L291.3,207.0L290.8,205.8L289.5,202.8L288.8,202.5L288.3,203.4L287.8,208.1L287.1,209.8L286.6,210.8L285.6,211.4L283.9,211.9L281.2,212.3L278.4,212.0L273.3,210.9L270.6,211.1L269.6,213.0L269.6,216.0L268.8,219.0L268.1,219.5L267.4,219.4L266.9,219.2L266.6,219.1L265.6,219.0L264.4,219.5L263.7,220.4L262.9,221.3L260.5,225.4L260.2,226.6L260.2,227.6L261.0,229.4L261.2,230.2L261.2,231.6L259.7,235.7L259.0,236.9L257.8,237.6L256.5,237.7L255.3,238.1L254.8,239.6L255.0,241.2L256.0,241.7L257.3,242.2L257.8,243.2L257.0,244.5L256.0,244.4L255.3,244.5L255.0,246.4L255.3,247.7L257.3,251.4L257.8,252.7L258.5,255.1L259.0,256.3L259.7,256.9L260.7,257.6L261.2,258.4L261.4,258.9L261.7,260.8L262.7,263.9L263.4,265.4L264.2,266.0L265.1,266.3L265.4,266.8L265.1,267.4L264.4,268.1L263.9,268.7L263.9,269.3L264.4,269.9L264.7,270.7L266.1,282.6L267.1,285.8L268.8,287.9L271.1,288.5L271.3,286.2L270.1,279.9L270.1,276.6L270.3,274.8L271.1,273.7L272.8,273.7L274.0,274.7L275.0,276.1L275.5,277.2L275.7,276.7L275.7,276.6L276.2,277.2L276.2,277.7L276.2,278.1L276.2,278.5L277.2,279.5L277.5,279.5L277.9,281.9L278.2,282.6L279.7,288.0L280.2,289.9L280.4,290.2L280.9,290.3L281.2,290.7L281.2,292.8L281.4,293.6L282.4,294.6L283.4,294.9L284.1,295.1L285.1,295.6L285.6,296.3L285.6,297.1L285.8,297.3L286.8,296.7L287.3,296.2L287.6,295.4L287.8,294.8L288.5,294.6L289.0,294.7L289.5,294.8L290.0,294.9L290.5,294.8L291.3,294.6L293.2,294.1L294.0,293.6L294.5,293.1L295.7,291.9L296.2,291.4L297.4,289.7L297.4,289.4L297.4,289.0L297.4,288.7L297.7,288.4L297.9,288.4L298.6,288.4L298.9,288.4L299.9,287.3L300.1,286.5L299.9,285.7L298.9,283.4L297.9,278.4L296.9,276.0L296.7,273.0L297.9,269.3L299.9,265.8L301.6,263.4L302.8,262.4L306.5,260.8L307.5,260.0L308.5,259.0L310.0,256.3L310.2,253.4L308.2,244.8L308.2,242.0L308.5,240.3L308.7,239.3L309.7,239.3L310.7,240.3L311.4,241.7L314.4,245.0L315.4,245.5L317.1,245.1L318.1,244.1L320.3,241.0L321.5,239.7L324.5,238.7L325.7,240.8L326.5,243.6L327.5,245.0L328.4,244.0L329.2,240.5L330.4,239.8L331.9,240.6L331.9,240.8L331.9,242.2L331.1,245.4L331.4,247.9L334.1,256.3L334.4,260.0L334.8,261.1L335.1,261.6L336.1,262.5L336.3,263.1L336.6,263.8L336.3,264.8L336.6,265.3L336.8,265.8L337.8,266.5L338.0,266.9L338.0,267.6L337.8,269.1L337.8,269.8L338.3,270.9L338.5,271.7L338.5,272.5L338.0,273.8L336.8,276.4L336.6,277.5L336.6,280.5L338.3,291.1L338.3,296.2L338.8,298.7L340.0,300.6L342.2,301.6L343.2,302.8L344.0,308.6L344.4,310.9L345.2,312.0L346.9,313.6L347.6,314.7L348.1,315.9L348.4,321.5L348.4,325.9L348.6,327.1L349.6,329.4L349.6,330.6L353.6,354.9L353.6,356.7L352.8,357.1L351.6,357.1L350.9,357.7L352.3,362.7L353.3,367.6L353.6,368.3ZM309.7,385.0L310.0,388.2L312.4,393.2L312.9,396.1L312.9,397.7L312.2,400.7L312.2,402.4L311.4,403.7L310.0,403.8L308.2,403.4L307.0,403.7L307.0,404.0L307.3,404.5L307.3,405.1L306.5,405.5L305.8,405.5L305.0,405.1L304.8,404.5L304.3,403.2L304.3,402.7L304.3,402.2L305.3,400.5L305.5,399.8L305.5,398.1L305.0,395.1L303.8,390.2L304.1,387.5L304.8,386.0L305.3,385.4L306.0,385.4L307.0,386.3L307.5,387.1L307.3,388.2L306.5,389.5L306.5,390.5L307.5,389.2L308.0,387.4L307.8,385.5L307.3,383.9L308.5,383.8L309.7,383.4L309.7,384.6ZM116.9,383.4L118.4,384.5L118.8,386.5L117.9,387.7L115.9,386.8L112.4,382.5L112.4,382.3L112.9,381.8L113.2,380.4L113.2,379.0L112.4,376.5L112.4,375.4L112.0,374.1L112.0,373.4L112.7,373.3L113.2,373.6L113.4,373.9L113.4,374.3L113.7,375.4L114.4,380.3L115.2,382.5ZM306.5,377.2L306.3,378.3L305.3,380.2L304.8,382.8L303.3,386.8L302.6,387.5L302.1,386.3L303.1,380.2L302.6,376.4L302.8,375.1L303.3,374.2L305.0,372.3L305.3,372.6L305.3,372.8L305.5,373.3L306.3,376.2ZM217.9,368.3L217.9,369.8L218.1,370.2L218.3,370.7L218.8,371.8L217.6,372.1L217.1,373.7L216.4,373.3L215.9,373.3L215.4,374.8L214.2,376.4L212.9,377.5L211.7,377.4L211.7,376.9L212.2,376.8L213.2,376.4L213.7,376.4L213.2,375.6L212.7,375.2L212.2,374.8L212.7,374.3L212.7,373.8L212.4,373.1L212.7,372.3L212.9,371.8L213.2,371.4ZM200.1,371.8L201.6,369.0L202.6,367.7L204.3,367.2L204.1,368.8L202.3,371.8L200.6,377.5L200.1,378.4L199.4,378.8L199.1,378.7L199.1,375.2L199.4,373.4ZM203.8,363.7L203.3,365.6L201.4,367.8L200.9,369.3L200.6,369.3L200.9,367.7L201.8,365.6L202.8,364.0ZM207.0,364.2L209.7,367.0L210.5,369.0L210.0,371.3L208.5,372.2L206.8,374.1L205.8,374.7L204.8,374.2L204.3,373.1L204.3,371.8L204.6,370.7L205.0,369.9L205.5,369.1L205.5,367.5L205.5,365.2L205.8,364.5L206.5,363.7ZM214.4,362.7L214.2,362.2L211.2,364.0L210.7,364.7L210.5,364.7L210.5,363.0L211.0,361.4L211.7,360.2L212.9,359.7L213.7,359.1L215.6,357.1L216.4,357.1L217.1,356.2L217.9,355.5L218.6,355.1L219.3,355.1L217.9,359.7L217.9,359.0L217.9,358.5L217.4,357.6L216.6,360.2L216.1,363.0L215.6,365.6L214.2,367.2L212.9,367.7L212.2,367.3L211.7,366.5L211.7,365.5L212.2,364.8ZM241.7,352.1L242.0,351.6L242.2,351.6L242.5,351.9L242.7,352.6L242.7,356.6L242.2,358.4L240.8,358.6L240.3,357.5L240.3,355.5L240.8,353.2L241.3,351.6ZM244.0,353.6L244.2,349.6L244.5,348.1L245.4,348.5L245.4,349.9L245.4,351.5L244.9,352.9ZM242.5,350.5L241.5,350.1L241.5,349.0L242.2,347.8L242.7,346.8L243.0,343.4L243.5,341.6L244.0,340.4L244.7,341.0L244.9,342.1L245.2,343.5L245.2,345.0L244.9,346.5ZM255.8,340.9L256.3,342.8L257.5,343.6L258.0,346.4L258.2,348.0L258.5,350.5L257.3,352.7L256.8,353.9L256.3,354.7L255.3,356.5L254.1,357.6L253.1,358.4L252.1,358.5L251.4,359.9L250.1,360.6L248.4,360.6L247.2,360.2L246.4,359.7L245.9,358.6L247.9,356.4L249.4,354.4L249.6,353.1L250.4,349.5L250.4,344.3L250.9,338.5L252.1,338.4L254.3,339.6ZM219.6,335.9L219.3,335.6L218.8,335.6L218.3,335.5L218.3,334.6L218.3,334.1L218.8,334.0L219.3,334.1L219.6,334.4L220.6,335.4L221.6,337.1L222.3,339.3L222.5,341.0L221.8,339.5L221.6,338.9L221.1,340.3L221.6,343.3L221.1,344.5L220.8,343.9L220.6,343.0L220.6,342.3L220.6,341.5L221.1,341.5L220.6,340.1L220.1,337.3ZM221.6,335.9L222.0,331.5L222.0,331.8L222.5,331.8L222.8,332.6L223.0,333.4L223.0,334.9L222.3,335.3L222.0,335.4ZM256.5,330.0L259.5,329.3L260.2,330.6L259.5,332.4L258.0,333.4L256.5,334.0L254.8,334.0L253.6,333.1L254.1,331.1ZM277.7,323.9L283.9,331.9L284.4,335.1L283.6,337.6L280.4,338.0L278.2,336.8L276.2,333.8L275.0,330.9L274.7,328.5L276.2,324.6ZM231.4,330.6L234.4,333.4L235.8,335.1L234.4,342.1L234.6,354.1L233.9,356.0L230.2,361.7L229.2,362.7L228.9,362.5L228.7,361.7L227.0,363.3L226.5,363.7L224.5,366.7L224.0,367.0L223.0,367.5L222.3,367.8L221.6,367.7L221.1,366.1L221.8,364.0L223.0,361.7L224.0,359.7L220.1,365.3L219.1,365.5L218.6,364.1L218.8,362.0L219.6,359.9L220.6,358.2L219.8,356.6L220.6,353.9L223.3,347.6L223.8,346.4L224.0,345.0L224.0,340.6L224.3,339.4L223.8,337.1L223.8,335.8L224.0,334.9L224.0,334.4L223.3,333.0L222.3,328.5L221.6,326.8L220.6,325.8L216.6,323.0L215.4,322.8L215.1,320.0L215.4,317.4L216.9,311.2L217.4,310.5L218.1,309.9L219.3,309.5L220.6,309.1L221.8,309.0L222.5,311.2L223.3,313.9L224.0,315.9L225.2,318.4L226.2,320.1L227.2,321.4L228.4,323.1L228.9,326.8L229.7,329.0ZM221.3,304.5L222.8,306.0L223.8,307.5L222.5,307.7L220.3,307.2L217.6,307.1L215.6,308.9L214.7,309.4L213.7,310.4L213.4,312.2L213.9,313.4L212.9,314.6L212.2,313.9L211.5,313.0L211.2,312.4L211.0,311.6L210.2,311.1L208.5,310.5L209.0,309.6L209.2,309.0L209.0,306.9L209.0,305.6L209.2,304.2L209.7,303.2L210.5,302.8L212.9,303.3L214.2,303.1L214.4,302.1L215.1,302.0L217.9,302.0L218.8,302.3L220.1,303.8ZM223.0,296.7L221.1,296.8L220.6,296.7L221.3,297.2L222.0,298.0L222.5,298.6L223.0,299.3L220.8,299.1L220.1,298.8L219.6,298.2L218.8,296.7L218.3,296.3L217.6,296.1L217.4,296.2L217.1,296.4L216.4,296.7L215.6,296.8L213.9,296.8L213.2,296.7L211.9,295.1L213.4,292.7L215.6,290.8L217.4,290.7L218.8,291.9L221.6,295.1L223.0,296.3ZM212.2,288.2L212.7,288.8L212.4,289.4L211.5,290.4L210.0,292.3L209.5,292.7L208.7,289.7L208.5,288.5L211.2,288.5L211.7,288.4ZM213.2,269.3L211.9,269.8L210.7,269.4L209.2,268.6L207.3,266.3L206.5,265.3L206.8,264.5L208.5,264.5L211.0,265.4L214.2,267.2L216.9,269.2L217.4,270.8L214.9,268.9L213.4,268.4Z"/></defs></svg>
+<div id="progress"></div>
+
+<!-- ================================================================
+     NAVIGATION
+     ================================================================ -->
+<nav id="navbar">
+  <div class="wrap nav-row">
+    <a href="../index.html" class="brand" aria-label="BSAUU home">
+      <span class="brand-mark"><img src="../assets/logo.png" alt=""></span>
+      <span><span class="brand-name">BSAUU</span><span class="brand-sub">New student guide</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="../index.html" class="navlink">Home</a>
+      <a href="#timeline" class="navlink">Timeline</a>
+      <a href="#first-weeks" class="navlink">First weeks</a>
+      <a href="#housing" class="navlink">Housing</a>
+      <a href="#money" class="navlink">Money</a>
+      <a href="#contact" class="navlink">Contact</a>
+      <a href="#request" class="btn btn-red btn-sm"><i class="fas fa-plane-arrival"></i> Request pickup</a>
+    </div>
+    <button id="burger" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+  </div>
+  <div id="mobileMenu">
+    <div class="mm-box">
+      <a href="#request" class="mlink"><i class="fas fa-plane-arrival" style="color:var(--red)"></i> Request pickup &amp; help</a>
+      <a href="#timeline" class="mlink">Timeline</a>
+      <a href="#before" class="mlink">Before you fly</a>
+      <a href="#first-weeks" class="mlink">First weeks</a>
+      <a href="#ta-ra" class="mlink">TA / RA steps</a>
+      <a href="#housing" class="mlink">Housing</a>
+      <a href="#money" class="mlink">Money</a>
+      <a href="#contact" class="mlink">Contact</a>
+      <a href="#departments" class="mlink">Department contacts</a>
+      <a href="../index.html">← Back to the main site</a>
+    </div>
+  </div>
+</nav>
+
+<nav id="chips" aria-label="Jump to a topic">
+  <div class="chips-in">
+    <a href="#timeline">Timeline</a>
+    <a href="#request">Request help</a>
+    <a href="#before">Before you fly</a>
+    <a href="#packing">Packing list</a>
+    <a href="#money">Money to bring</a>
+    <a href="#first-weeks">First weeks</a>
+    <a href="#ta-ra">TA / RA</a>
+    <a href="#housing">Housing</a>
+    <a href="#transit">Getting around</a>
+    <a href="#banks">Banks</a>
+    <a href="#license">ID &amp; licence</a>
+    <a href="#shopping">Shopping</a>
+    <a href="#health">Health</a>
+    <a href="#contact">Contact</a>
+    <a href="#departments">Departments</a>
+  </div>
+</nav>
+
+<!-- ================================================================
+     HERO
+     ================================================================ -->
+<header class="hero on-dark" id="top">
+  <span class="hero-sun" aria-hidden="true"></span>
+  <div class="orn spin-slow" style="width:640px;height:640px;left:-300px;top:-260px;color:rgba(255,253,248,.14);--o2:rgba(244,42,65,.45)" aria-hidden="true"><svg><use href="#o-mandala"/></svg></div>
+  <div class="orn spin-rev" style="width:560px;height:560px;right:-200px;bottom:-300px;color:rgba(255,253,248,.12);--o2:rgba(244,42,65,.4)" aria-hidden="true"><svg><use href="#o-star"/></svg></div>
+
+  <div class="wrap hero-grid">
+    <div>
+      <p class="hero-kicker"><svg aria-hidden="true"><use href="#o-shapla"/></svg> Congratulations on your admission</p>
+      <h1>Welcome to <em>Utah</em>.<br>We've got you.</h1>
+      <p class="lede">From your flight to your first paycheck — housing, airport pickup, your first meal and grocery run, UCard, SSN, bank, TRAX and everything in between. Written by Bangladeshi students who did it all a year or two before you.</p>
+      <div class="hero-ctas">
+        <a href="#request" class="btn btn-red"><i class="fas fa-plane-arrival"></i> Tell us you're coming</a>
+        <a href="#first-weeks" class="btn btn-light"><i class="fas fa-list-check"></i> First-week checklist</a>
+      </div>
+    </div>
+    <div class="hero-facts">
+      <div class="fact"><span class="ic"><i class="fas fa-car-side"></i></span><div><b>Airport pickup</b><span>plus your first meal and first grocery trip — just ask</span></div></div>
+      <div class="fact"><span class="ic"><i class="fas fa-train-subway"></i></span><div><b>Free TRAX &amp; buses</b><span>with your UCard, once you're enrolled</span></div></div>
+      <div class="fact"><span class="ic"><i class="fas fa-people-group"></i></span><div><b>A community waiting</b><span>Eid, Boishakh, cricket — and people to call</span></div></div>
+    </div>
+  </div>
+  <div class="kantha-light"></div>
+</header>
+
+<!-- ================================================================
+     TIMELINE
+     ================================================================ -->
+<section id="timeline" class="section bg-paper jaali">
+  <div class="orn spin-rev" style="width:560px;height:560px;right:-280px;top:-200px;color:rgba(0,75,55,.1);--o2:rgba(224,40,60,.16)" aria-hidden="true"><svg><use href="#o-mandala"/></svg></div>
+  <div class="wrap sec-in">
+    <div class="head center" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>The big picture</span>
+      <h2 class="title">Your journey, <em>step by step</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">Six stages from admission to settled. Each one links to the details further down.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl" data-reveal="rise"><span class="when">3–6 months before</span><h3>Housing</h3>
+        <ul><li>Apply for on-campus housing early</li><li>Start an off-campus search</li><li><a href="#housing">Housing guide</a></li></ul></div>
+      <div class="tl" data-reveal="rise" style="--d:60ms"><span class="when">1–2 months before</span><h3>Paperwork</h3>
+        <ul><li>ISSS pre-arrival check-in</li><li>MMR vaccine proof</li><li>Register 9+ credits (grad)</li></ul></div>
+      <div class="tl" data-reveal="rise" style="--d:120ms"><span class="when">2–4 weeks before</span><h3>Tell us</h3>
+        <ul><li><a href="#request">Send your arrival details</a></li><li>Arrange a SIM / eSIM</li><li>Pack — <a href="#packing">see the list</a></li></ul></div>
+      <div class="tl" data-reveal="rise" style="--d:180ms"><span class="when">Arrival day</span><h3>Land at SLC</h3>
+        <ul><li>Airport Wi-Fi → message your pickup</li><li>First meal</li><li>Rest!</li></ul></div>
+      <div class="tl" data-reveal="rise" style="--d:240ms"><span class="when">First week</span><h3>Set up</h3>
+        <ul><li>ISSS post-arrival check-in</li><li>UCard, bank, phone plan</li><li>HR paperwork if TA/RA</li></ul></div>
+      <div class="tl" data-reveal="rise" style="--d:300ms"><span class="when">First month</span><h3>Settle in</h3>
+        <ul><li>SSN, TB test</li><li>First paycheck</li><li>State ID / licence</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     REQUEST FORM — writes an email to the committee
+     ================================================================ -->
+<section id="request" class="section on-dark">
+  <div class="orn spin-slow" style="width:760px;height:760px;right:-380px;top:-160px;color:rgba(255,253,248,.08);--o2:rgba(244,42,65,.3)" aria-hidden="true"><svg><use href="#o-mandala"/></svg></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Request help</span>
+      <h2 class="title">Tell us you're <em>coming</em></h2>
+      <p class="lede">Fill in whatever you know so far — only your email is needed, and you can write again when your visa or flight is confirmed. Your email to us is written on the right as you type; check it, then press send.</p>
+    </div>
+
+    <div class="req-grid">
+      <form class="form" id="arrivalForm" novalidate autocomplete="on">
+        <fieldset>
+          <legend><span class="n">1</span>About you</legend>
+          <div class="fgrid c2">
+            <label class="f"><span>Full name</span><input class="in" name="name" autocomplete="name" placeholder="As on your passport"></label>
+            <label class="f"><span>Degree</span><input class="in" name="degree" list="degreeList" placeholder="Pick or type, e.g. PhD"></label>
+            <label class="f"><span>Department / program</span><input class="in" name="dept" list="deptList" placeholder="Pick or type, e.g. Chemistry"></label>
+            <label class="f"><span>Starting term</span><input class="in" name="term" list="termList" placeholder="Pick or type, e.g. Fall 2027"></label>
+            <label class="f"><span>Funding</span>
+              <select class="in" name="funding">
+                <option value="">Choose…</option><option>Teaching assistant (TA)</option><option>Research assistant (RA)</option><option>Fellowship</option><option>Self-funded</option><option>Not sure yet</option>
+              </select></label>
+            <label class="f"><span>Previous university / degree</span><input class="in" name="prev" placeholder="e.g. BSc, BUET"></label>
+          </div>
+          <datalist id="degreeList"><option value="PhD"><option value="MS"><option value="MEng / professional master's"><option value="Undergraduate (BS / BA)"><option value="Exchange / visiting"></datalist>
+          <datalist id="termList"></datalist>
+          <datalist id="deptList"><option value="Chemistry"><option value="Chemical Engineering"><option value="Civil &amp; Environmental Engineering"><option value="Computer Science"><option value="Electrical &amp; Computer Engineering"><option value="Geology &amp; Geophysics"><option value="Materials Science &amp; Engineering"><option value="Mechanical Engineering"><option value="Physics &amp; Astronomy"><option value="Biomedical Engineering"><option value="Mathematics"><option value="Economics"></datalist>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="n">2</span>Your flight</legend>
+          <div class="radios" role="radiogroup" aria-label="Flight status">
+            <label class="radio"><input type="radio" name="flightStatus" value="booked" checked><span><i class="fas fa-ticket"></i> Flight booked</span></label>
+            <label class="radio"><input type="radio" name="flightStatus" value="estimated"><span><i class="far fa-calendar"></i> Estimated date</span></label>
+            <label class="radio"><input type="radio" name="flightStatus" value="visa"><span><i class="fas fa-passport"></i> Waiting for visa</span></label>
+          </div>
+          <div class="fgrid c2">
+            <label class="f"><span id="dateLabel">Arrival date</span><input class="in" type="date" name="date"><small id="dateHint"></small></label>
+            <label class="f booked-only"><span>Arrival time (Utah time)</span><input class="in" type="time" name="time"></label>
+            <label class="f booked-only"><span>Airline &amp; flight number</span><input class="in" name="flight" placeholder="e.g. Delta DL 1234"></label>
+            <label class="f booked-only"><span>Last stop before SLC</span><input class="in" name="via" placeholder="e.g. Atlanta (ATL)"></label>
+          </div>
+          <div class="fgrid c3" style="margin-top:14px">
+            <label class="f"><span>People travelling</span><input class="in" type="number" name="people" min="1" max="10" value="1"></label>
+            <label class="f"><span>Large suitcases</span><input class="in" type="number" name="bags" min="0" max="12" value="2"></label>
+            <label class="f"><span>Carry-on bags</span><input class="in" type="number" name="carry" min="0" max="12" value="1"></label>
+          </div>
+          <label class="f" style="margin-top:14px"><span>Who is travelling with you?</span><input class="in" name="with" placeholder="e.g. my wife and our 3-year-old son"></label>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="n">3</span>What would help?</legend>
+          <div class="needs">
+            <label class="need"><input type="checkbox" name="need" value="pickup" checked><span class="box"><i class="fas fa-check"></i></span><span><b>Airport pickup</b><small>Someone meets you at SLC</small></span></label>
+            <label class="need"><input type="checkbox" name="need" value="meal" checked><span class="box"><i class="fas fa-check"></i></span><span><b>First meal</b><small>Dinner on your first night</small></span></label>
+            <label class="need"><input type="checkbox" name="need" value="shopping" checked><span class="box"><i class="fas fa-check"></i></span><span><b>First grocery shopping</b><small>A ride to Walmart / desi store</small></span></label>
+            <label class="need"><input type="checkbox" name="need" value="stay"><span class="box"><i class="fas fa-check"></i></span><span><b>A place for the first night(s)</b><small>If your lease hasn't started</small></span></label>
+            <label class="need"><input type="checkbox" name="need" value="sim"><span class="box"><i class="fas fa-check"></i></span><span><b>Temporary US SIM card</b><small>Until you choose a plan</small></span></label>
+            <label class="need"><input type="checkbox" name="need" value="housing"><span class="box"><i class="fas fa-check"></i></span><span><b>Help finding housing / roommate</b><small>Bangladeshi roommates welcome</small></span></label>
+            <label class="need"><input type="checkbox" name="need" value="errands"><span class="box"><i class="fas fa-check"></i></span><span><b>Someone to go with me</b><small>UCard, bank, SSN office</small></span></label>
+            <label class="need"><input type="checkbox" name="need" value="intro"><span class="box"><i class="fas fa-check"></i></span><span><b>Introduce me to the community</b><small>To the Utah Bangladeshi email list</small></span></label>
+          </div>
+          <label class="f" style="margin-top:14px" id="nightsWrap"><span>How many nights?</span><input class="in" type="number" name="nights" min="1" max="14" value="2"></label>
+          <label class="f" style="margin-top:14px"><span>Food preferences</span>
+            <select class="in" name="food"><option>Halal</option><option>Vegetarian</option><option>No preference</option><option>Other (see notes)</option></select></label>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="n">4</span>Where you'll live</legend>
+          <div class="radios" role="radiogroup" aria-label="Housing status">
+            <label class="radio"><input type="radio" name="housing" value="found" checked><span>I have a place</span></label>
+            <label class="radio"><input type="radio" name="housing" value="temp"><span>Airbnb / hotel at first</span></label>
+            <label class="radio"><input type="radio" name="housing" value="none"><span>Not found yet</span></label>
+          </div>
+          <div class="fgrid c2" id="addrWrap">
+            <label class="f"><span id="addrLabel">Address</span><input class="in" name="address" autocomplete="street-address" placeholder="Street, apartment number, city"></label>
+            <label class="f"><span>Move-in date</span><input class="in" type="date" name="movein"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend><span class="n">5</span>How to reach you</legend>
+          <div class="fgrid c2">
+            <label class="f"><span>Email <i>*</i></span><input class="in" type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
+            <label class="f"><span>WhatsApp (with country code)</span><input class="in" type="tel" name="whatsapp" placeholder="+880 1XXX-XXXXXX"></label>
+            <label class="f"><span>US phone number</span><input class="in" type="tel" name="usphone" placeholder="If you already have one"></label>
+            <label class="f"><span>Facebook / Messenger</span><input class="in" name="facebook" placeholder="Profile link or name"></label>
+            <label class="f"><span>Instagram</span><input class="in" name="instagram" placeholder="@username"></label>
+            <label class="f"><span>Emergency contact in Bangladesh</span><input class="in" name="emergency" placeholder="Name, relation, phone"></label>
+          </div>
+          <label class="f" style="margin-top:14px"><span>Anything else we should know?</span><textarea class="in" name="notes" placeholder="Allergies, a late-night arrival, a wheelchair, travelling with a baby…"></textarea></label>
+        </fieldset>
+      </form>
+
+      <div class="preview">
+        <div class="letter">
+          <div class="letter-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span style="margin-left:6px">Your email to BSAUU</span></div>
+          <div class="letter-meta">
+            <div><b>To:</b> <span id="mailTo"></span></div>
+            <div><b>Subject:</b> <span id="mailSubject"></span></div>
+          </div>
+          <label class="sr-only" for="mailBody">Email text (you can edit it)</label>
+          <textarea id="mailBody" spellcheck="true"></textarea>
+          <p id="formMsg" role="alert"></p>
+          <div class="send">
+            <button type="button" class="btn btn-red" id="sendMail"><i class="fas fa-paper-plane"></i> Send email</button>
+            <button type="button" class="btn btn-ghost" id="sendGmail"><i class="fab fa-google"></i> Gmail</button>
+            <button type="button" class="btn btn-ghost" id="copyMail"><i class="far fa-copy"></i> Copy</button>
+          </div>
+        </div>
+        <p class="send-note"><i class="fas fa-lock"></i> “Send email” opens your own email app with the message ready — nothing is stored on this website. Your answers are saved only in this browser so you can come back later. If nothing opens, use <b>Gmail</b> or <b>Copy</b> and paste it to <a href="mailto:bsauu.uofu@gmail.com">bsauu.uofu@gmail.com</a>.</p>
+
+        <div class="other-mail">
+          <h3>Something else?</h3>
+          <p>A question about housing, your department, or anything not on the form — write to us directly.</p>
+          <button type="button" class="btn btn-light btn-sm" id="customMail"><i class="far fa-envelope"></i> Write a custom email</button>
+        </div>
+        <div class="other-mail">
+          <h3>Follow &amp; message us</h3>
+          <p>Announcements, new-student meetups and day-to-day questions.</p>
+          <div class="soc-row">
+            <a class="btn btn-light btn-sm" href="https://www.facebook.com/BSAUofU" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a>
+            <a class="btn btn-light btn-sm" href="https://www.instagram.com/bsa_uofu_utah/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     BEFORE YOU FLY
+     ================================================================ -->
+<section id="before" class="section bg-paper jaali">
+  <div class="kantha top"></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Before you fly</span>
+      <h2 class="title">Sort these out <em>from home</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+    </div>
+    <div class="grid g3">
+      <div class="card kanthaed" data-reveal="rise">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-passport"></i></span><h3>ISSS immigration check-in</h3></div>
+        <p>Every new international student completes the <b>Immigration Check-in</b> in <a class="ext" href="https://isss.utah.edu/new-students/immigration-check-in.php" target="_blank" rel="noopener">UAtlas</a> in two parts:</p>
+        <ul>
+          <li><b>Pre-arrival</b> — before you enter the US (includes the orientation fee).</li>
+          <li><b>Post-arrival</b> — after you land: US address, I-94, emergency contact.</li>
+        </ul>
+        <p class="muted" style="font-size:14.5px">A missing check-in puts a hold on your record and blocks registration — and you need it before ISSS can help with your SSN.</p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:80ms">
+        <div class="card-top"><span class="res-ic g"><i class="fas fa-mobile-screen"></i></span><h3>Phone &amp; SIM</h3></div>
+        <p>All US airports have free Wi-Fi, so you can message your pickup person as soon as you land.</p>
+        <ul>
+          <li>If your phone supports <b>eSIM</b>, buy a plan before you fly and switch it on at the airport.</li>
+          <li>Need a physical SIM? We can have one waiting — tick it on the form.</li>
+          <li>Popular: <b>Mint Mobile</b> (cheapest, most new students), Google Fi, Tello, H2O, Ultra, or the big three — Verizon, T-Mobile, AT&amp;T.</li>
+        </ul>
+        <p class="muted" style="font-size:14.5px">Check your handset is unlocked and works on US networks.</p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:160ms">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-plane-arrival"></i></span><h3>Arrival &amp; pickup</h3></div>
+        <p>You'll land at <a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=Salt+Lake+City+International+Airport" target="_blank" rel="noopener">Salt Lake City International (SLC)</a>. We'll do our best to have someone meet you — <a href="#request">send us your flight details</a> and stay in touch with your pickup person.</p>
+        <p>If we can't find a driver, use <b>Uber</b> or <b>Lyft</b>. They don't take cash, so carry a card that works internationally (a dual-currency card from your Bangladeshi bank).</p>
+        <p class="muted" style="font-size:14.5px">Campus is about 20–25 minutes from the airport by car.</p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise">
+        <div class="card-top"><span class="res-ic g"><i class="fas fa-syringe"></i></span><h3>Health records</h3></div>
+        <ul>
+          <li>Proof of <b>two MMR</b> (measles, mumps, rubella) doses, in English — the U requires it.</li>
+          <li>Don't get a TB test at home: Utah only accepts TB tests done <b>after you arrive</b>.</li>
+          <li>As an F-1 student you're automatically enrolled in the student health insurance (TA/RAs get it subsidised).</li>
+        </ul>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:80ms">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-book-open"></i></span><h3>Courses</h3></div>
+        <p>Graduate students must register for <b>at least 9 credits</b> — it activates your UCard, counts as full-time for your visa, and is needed for the SSN letter.</p>
+        <p>Not sure what to take? Ask your advisor or grad coordinator; you can usually change courses for a few weeks after classes start.</p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:160ms">
+        <div class="card-top"><span class="res-ic g"><i class="fas fa-credit-card"></i></span><h3>Money &amp; cards</h3></div>
+        <ul>
+          <li>Get a <b>dual-currency (international) card</b> from your Bangladeshi bank — for Uber, Airbnb and your first shopping.</li>
+          <li>Carry the rest as cash endorsed on your passport; declare it if it's over $10,000.</li>
+          <li>Plan for about two months of costs before pay settles in — <a href="#money">use the calculator</a>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     MONEY TO BRING
+     ================================================================ -->
+<section id="money" class="section bg-paper jaali">
+  <div class="kantha top"></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Money</span>
+      <h2 class="title">How much should <em>you bring?</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">Your first paycheck can take three to six weeks to arrive — longer if paperwork is late. Bring enough to cover a deposit, setting up, and about two months of living. Change the numbers to match your plans.</p>
+    </div>
+
+    <div class="calc">
+      <div class="card" data-reveal="rise">
+        <h3 style="margin-bottom:6px">Your numbers</h3>
+        <p class="muted" style="font-size:14.5px">Defaults are for a single student sharing a 2-bedroom near campus (average rent ≈ $1,575, so ≈ $790 each — Zumper, Oct 2026).</p>
+        <div class="calc-in" id="calc">
+          <div class="cin"><label for="cRent">Rent — your share, per month</label><div class="money"><input class="in" id="cRent" type="number" min="0" step="10" value="790"></div></div>
+          <div class="cin"><label for="cDeposit">Security deposit <small>usually about one month's rent</small></label><div class="money"><input class="in" id="cDeposit" type="number" min="0" step="10" value="790"></div></div>
+          <div class="cin"><label for="cFood">Groceries &amp; food, per month</label><div class="money"><input class="in" id="cFood" type="number" min="0" step="10" value="320"></div></div>
+          <div class="cin"><label for="cBills">Phone, internet &amp; utilities share, per month</label><div class="money"><input class="in" id="cBills" type="number" min="0" step="5" value="90"></div></div>
+          <div class="cin"><label for="cMonths">Months to cover before pay settles in <small>2 is safe; 3 if self-funded</small></label><div class="unit"><input class="in" id="cMonths" type="number" min="1" max="12" step="1" value="2"></div></div>
+          <div class="cin"><label for="cSetup">Setting up: bedding, kitchen, furniture</label><div class="money"><input class="in" id="cSetup" type="number" min="0" step="10" value="450"></div></div>
+          <div class="cin"><label for="cWinter">Winter clothes</label><div class="money"><input class="in" id="cWinter" type="number" min="0" step="10" value="200"></div></div>
+          <div class="cin"><label for="cTemp">Airbnb / hotel before your lease <small>nights × about $90</small></label><div class="money"><input class="in" id="cTemp" type="number" min="0" step="10" value="0"></div></div>
+          <div class="cin"><label for="cBuffer">Emergency buffer</label><div class="money"><input class="in" id="cBuffer" type="number" min="0" step="10" value="300"></div></div>
+        </div>
+      </div>
+
+      <div data-reveal="rise" style="--d:100ms">
+        <div class="result">
+          <p class="eyebrow" style="margin-bottom:10px"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Bring about</p>
+          <table id="calcOut"></table>
+          <div class="formula" id="calcFormula"></div>
+        </div>
+        <div class="card" style="margin-top:22px">
+          <h3 style="font-size:1.4rem">When does the first paycheck come? <span class="tag">TA / RA</span></h3>
+          <p style="font-size:15.5px">University of Utah pays graduate assistants twice a month: work from the <b>1st–15th</b> is paid on the <b>22nd</b>; work from the <b>16th–end of month</b> is paid on the <b>7th</b> of the next month. For a typical fall start on August 16:</p>
+          <div class="paytl">
+            <div class="pt"><i class="fas fa-plane"></i><b>Early Aug</b><span>you land</span></div>
+            <div class="pt"><i class="fas fa-briefcase"></i><b>Aug 16</b><span>contract starts</span></div>
+            <div class="pt red"><i class="fas fa-dollar-sign"></i><b>Sep 7</b><span>first pay — if HR paperwork is done</span></div>
+            <div class="pt"><i class="fas fa-rotate"></i><b>Sep 22</b><span>then every 7th &amp; 22nd</span></div>
+          </div>
+          <p class="muted" style="font-size:14px;margin-top:18px">Rent for August and September, plus the deposit, is usually due before Sep 7. If your I-9 or direct deposit is late, the first payment slips to the next pay day — so plan for at least two months.</p>
+        </div>
+        <div class="note tip"><i class="fas fa-lightbulb"></i><span>Carry part as cash endorsed on your passport and part on a dual-currency (international) card from your Bangladeshi bank. Deposit the cash in a US account in your first week — cash isn't welcome in many shops.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     FIRST WEEKS
+     ================================================================ -->
+<section id="first-weeks" class="section bg-ivory jaali">
+  <div class="kantha top"></div>
+  <div class="orn spin-rev" style="width:640px;height:640px;right:-320px;top:80px;color:rgba(0,75,55,.08);--o2:rgba(224,40,60,.14)" aria-hidden="true"><svg><use href="#o-mandala"/></svg></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>After you land</span>
+      <h2 class="title">Your first <em>two weeks</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">Do these roughly in order — each step unlocks the next. Tick them off as you go; ticks are saved on this device.</p>
+    </div>
+    <div class="steps" id="weekSteps">
+      <div class="step" data-reveal="rise"><label class="tick"><input type="checkbox" data-step="1"> Done</label><div>
+        <h3>Finish the ISSS post-arrival check-in</h3>
+        <p>In <a class="ext" href="https://isss.utah.edu/new-students/immigration-check-in.php" target="_blank" rel="noopener">UAtlas → Requests → Immigration Check-in</a>: add your US address, upload your I-94 (download it free at <a class="ext" href="https://i94.cbp.dhs.gov/" target="_blank" rel="noopener">i94.cbp.dhs.gov</a>) and an emergency contact. ISSS is in the Union Building, Room 410 · 801-581-8876.</p>
+      </div></div>
+      <div class="step" data-reveal="rise"><label class="tick"><input type="checkbox" data-step="2"> Done</label><div>
+        <h3>Get your UCard</h3>
+        <p>The UCard is your student ID, library card <b>and free transit pass</b>. The U is mobile-first: upload your photo on the <a class="ext" href="https://ucard.utah.edu/" target="_blank" rel="noopener">UCard website</a> (approval takes 24–48 h) and add the card to your phone. Prefer plastic? Visit the UCard Office, <a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=A.+Ray+Olpin+University+Union+University+of+Utah" target="_blank" rel="noopener">Olpin Union, Room 158</a>, Mon–Fri 8 am–5 pm, with your passport.</p>
+        <p class="muted" style="font-size:14.5px">It only works for transit once you're enrolled for the current semester.</p>
+      </div></div>
+      <div class="step" data-reveal="rise"><label class="tick"><input type="checkbox" data-step="3"> Done</label><div>
+        <h3>Get a phone plan</h3>
+        <p>If you're on our temporary SIM, choose your own plan before it runs out — see <a href="#before">Phone &amp; SIM</a>.</p>
+      </div></div>
+      <div class="step" data-reveal="rise"><label class="tick"><input type="checkbox" data-step="4"> Done</label><div>
+        <h3>Open a bank account</h3>
+        <p>Deposit your cash and get a debit card. Several banks open accounts without an SSN — see <a href="#banks">banks near campus</a> for where to go and what to bring.</p>
+      </div></div>
+      <div class="step" data-reveal="rise"><label class="tick"><input type="checkbox" data-step="5"> Done</label><div>
+        <h3>TA or RA? Start your HR paperwork</h3>
+        <p>I-9 in person, W-4, direct deposit and GLACIER — so your first paycheck isn't delayed. Full steps in <a href="#ta-ra">TA / RA steps</a>.</p>
+      </div></div>
+      <div class="step" data-reveal="rise"><label class="tick"><input type="checkbox" data-step="6"> Done</label><div>
+        <h3>Apply for your Social Security Number</h3>
+        <p>Needed for work. Once you've done the post-arrival check-in and are enrolled full-time, request the SSN letter through UAtlas — <a href="#ta-ra">steps here</a>. Office: <a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=Social+Security+Administration+175+E+400+S+Salt+Lake+City+UT" target="_blank" rel="noopener">Social Security Administration, 175 E 400 S, Suite 500</a> — easy by TRAX.</p>
+      </div></div>
+      <div class="step" data-reveal="rise"><label class="tick"><input type="checkbox" data-step="7"> Done</label><div>
+        <h3>TB test &amp; health portal</h3>
+        <p>Book a TB test at the <a href="#health">Student Health Center</a> (about $10) and fill in the TB Risk Assessment in your patient portal. Upload your MMR record if you haven't.</p>
+      </div></div>
+      <div class="step" data-reveal="rise"><label class="tick"><input type="checkbox" data-step="8"> Done</label><div>
+        <h3>Learn to get around</h3>
+        <p>TRAX, buses, campus shuttles and SafeRide — <a href="#transit">how to use them</a>. Then come and find us at the next event!</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     TA / RA
+     ================================================================ -->
+<section id="ta-ra" class="section bg-paper jaali">
+  <div class="kantha top"></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>PhD &amp; MS on a TA / RA</span>
+      <h2 class="title">Getting set up <em>to be paid</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">Your department's grad coordinator is your guide — but this is the usual order. Tap a step to open it.</p>
+    </div>
+
+    <div data-reveal>
+      <details class="acc" open><summary><span class="n">1</span>Before you arrive<span class="when">Pre-arrival</span></summary><div class="body">
+        <ul>
+          <li>Accept your offer and keep the <b>offer letter</b> — you'll need it for HR and the SSN.</li>
+          <li>Complete the ISSS <b>pre-arrival</b> check-in in UAtlas.</li>
+          <li>Register for <b>at least 9 credits</b>. Your tuition benefit covers up to 12 graduate credits, but your department must submit a <b>Tuition Benefit</b> form each semester, and you accept it in Campus Information Services — miss it and you can be charged tuition.</li>
+          <li>Ask your grad coordinator for the department's <b>new-hire paperwork</b> list and how to book your I-9 appointment.</li>
+        </ul></div></details>
+
+      <details class="acc"><summary><span class="n">2</span>Check in, UCard, enrolment<span class="when">Days 1–3</span></summary><div class="body">
+        <ul>
+          <li>Finish the ISSS <b>post-arrival</b> check-in (address, I-94).</li>
+          <li>Meet your grad coordinator / advisor; get your UCard; confirm you're registered full-time.</li>
+          <li>Change your default Campus Information Services (CIS) password and log in to <b>Employee Self Service</b>.</li>
+        </ul></div></details>
+
+      <details class="acc"><summary><span class="n">3</span>HR paperwork — I-9, W-4, direct deposit<span class="when">Before your start date</span></summary><div class="body">
+        <ul>
+          <li><b>Form I-9</b> — in person, with <b>original</b> documents (photocopies aren't accepted). For F-1 students this is usually your passport + I-20 + I-94.</li>
+          <li>In <b>Employee Self Service → Payroll, Taxes and Salary</b>: fill your <b>W-4</b>, choose electronic W-2, and set up <b>direct deposit</b> to your new US account. Without direct deposit a paper cheque is mailed to your CIS address.</li>
+          <li>Finish any trainings your department assigns (TA training, lab safety, etc.).</li>
+        </ul>
+        <div class="note tip"><i class="fas fa-calendar-check"></i><span>Paid twice a month: 1st–15th on the <b>22nd</b>, 16th–end on the <b>7th</b>. A late I-9 or direct deposit pushes your first pay to the next date — see <a href="#money">money</a>.</span></div>
+      </div></details>
+
+      <details class="acc"><summary><span class="n">4</span>Taxes for nonresidents — GLACIER<span class="when">First weeks</span></summary><div class="body">
+        <p>As a nonresident alien you'll be invited to complete a <b>GLACIER</b> tax review. It decides whether a tax treaty applies (with Form 8233 if so) and sets up your FICA exemption — F-1 students are generally exempt from Social Security/Medicare tax for their first 5 calendar years, as long as you're enrolled.</p>
+        <p>Nonresident W-4s are always filed as <b>Single</b> with no extra allowances. Questions: University Tax Services, <a href="https://financialservices.utah.edu/tax-services/foreign-nationals/employee-compensation/" class="ext" target="_blank" rel="noopener">financialservices.utah.edu</a> · 801-581-6976.</p>
+        <p class="muted" style="font-size:14.5px">Every spring, all F-1 students file Form 8843 — and a 1040-NR if you earned income. ISSS shares free nonresident tax software each year.</p>
+      </div></details>
+
+      <details class="acc"><summary><span class="n">5</span>Social Security Number<span class="when">After check-in &amp; enrolment</span></summary><div class="body">
+        <ol>
+          <li>Download ISSS's <a class="ext" href="https://isss.utah.edu/forms-publications/documents/f-1/on-campus-employment-offer-letter-for-social-security-number-application-and-instructions.pdf" target="_blank" rel="noopener">On-Campus Employment Offer Letter for SSN Application</a>. Your department / HR fills in the top part.</li>
+          <li>Submit it in <b>UAtlas</b> (“Social Security Number Application Letter for On-Campus Employment” e-form). Processing takes up to <b>10 business days</b>.</li>
+          <li>When ISSS emails your umail, take the <b>original</b> form to ISSS (Union 410) for a signature.</li>
+          <li>Fill the SS-5 application online at <a class="ext" href="https://www.ssa.gov/number-card/request-number-first-time" target="_blank" rel="noopener">ssa.gov</a> and book an appointment.</li>
+          <li>Bring to the <a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=Social+Security+Administration+175+E+400+S+Salt+Lake+City+UT" target="_blank" rel="noopener">Social Security office (175 E 400 S, Suite 500)</a>: the signed letter, passport (and old passport if it holds your visa), I-20, I-94, and your SS-5 confirmation.</li>
+          <li>Your card arrives by post in a few weeks — give the number to HR and your bank.</li>
+        </ol>
+      </div></details>
+
+      <details class="acc"><summary><span class="n">6</span>Health insurance &amp; TB test<span class="when">First month</span></summary><div class="body">
+        <ul>
+          <li>TA/RAs on a tuition benefit get <b>GSHIP</b> — the Graduate School pays 100% of the single-student premium and enrols you; don't buy a plan yourself. (Spouse/children aren't subsidised.)</li>
+          <li>Take the TB test at the Student Health Center after you arrive.</li>
+        </ul></div></details>
+
+      <details class="acc"><summary><span class="n">7</span>Keep it going<span class="when">Every semester</span></summary><div class="body">
+        <ul>
+          <li>Stay enrolled (9+ credits) — your FICA exemption and tuition benefit depend on it, including in summer if you're paid.</li>
+          <li>RAs on grants: complete <b>effort reporting</b> (ePAR) when prompted each quarter.</li>
+          <li>Keep your I-20 signed for travel and tell ISSS when you move house.</li>
+        </ul></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     HOUSING
+     ================================================================ -->
+<section id="housing" class="section bg-ivory jaali">
+  <div class="kantha top"></div>
+  <div class="orn spin-slow" style="width:560px;height:560px;left:-280px;top:120px;color:rgba(224,40,60,.08);--o2:rgba(0,75,55,.15)" aria-hidden="true"><svg><use href="#o-mandala"/></svg></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Housing</span>
+      <h2 class="title">Finding a <em>place to live</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">You'll need to find your own place — we can share information, look for Bangladeshi roommates, and sometimes visit a place for you. Start early.</p>
+    </div>
+
+    <div class="grid g2">
+      <div class="card kanthaed" data-reveal="rise">
+        <div class="card-top"><span class="res-ic g"><i class="fas fa-building-columns"></i></span><h3>On campus</h3></div>
+        <p>Cheaper and closer, but competitive — apply <b>3–6 months</b> ahead, and even then it isn't guaranteed. Check the <a class="ext" href="https://apartments.utah.edu/apartment-info/apts-avail.php" target="_blank" rel="noopener">current wait times</a>.</p>
+        <ul class="linklist">
+          <li><a class="ext" href="https://apartments.utah.edu/housing-options/single/spruce.php" target="_blank" rel="noopener">Spruce</a> — single graduate students</li>
+          <li><a class="ext" href="https://apartments.utah.edu/housing-options/family/cedar-east.php" target="_blank" rel="noopener">Cedar</a> — students with a spouse / family (very popular)</li>
+          <li><a class="ext" href="https://apartments.utah.edu/housing-options/family/cottonwood.php" target="_blank" rel="noopener">Cottonwood</a> — newer family apartments, higher rent</li>
+          <li><a class="ext" href="https://apartments.utah.edu/" target="_blank" rel="noopener">University Student Apartments</a> — all options &amp; applying</li>
+        </ul>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:80ms">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-magnifying-glass-location"></i></span><h3>Off campus — where to search</h3></div>
+        <ul class="linklist">
+          <li><a class="ext" href="https://www.offcampushousing.utah.edu/" target="_blank" rel="noopener">U of U Off-Campus Housing</a> — the university's own listing site</li>
+          <li><a class="ext" href="https://homes.ksl.com/" target="_blank" rel="noopener">KSL Homes &amp; Rentals</a> — Utah's local classifieds, lots of private landlords</li>
+          <li><a class="ext" href="https://www.apartments.com/salt-lake-city-ut/" target="_blank" rel="noopener">Apartments.com</a> · <a class="ext" href="https://www.zillow.com/salt-lake-city-ut/rentals/" target="_blank" rel="noopener">Zillow</a> · <a class="ext" href="https://www.zumper.com/apartments-for-rent/salt-lake-city-ut" target="_blank" rel="noopener">Zumper</a> · <a class="ext" href="https://hotpads.com/salt-lake-city-ut/apartments-for-rent" target="_blank" rel="noopener">HotPads</a></li>
+          <li><a class="ext" href="https://findmyplace.co/student-housing/utah/" target="_blank" rel="noopener">FindMyPlace</a> — student housing, linked by the U</li>
+          <li>Facebook: <b>ISA at the University of Utah</b>, <b>University of Utah (UofU) Housing, Sublets &amp; Roommates</b>, and Marketplace</li>
+          <li><a class="ext" href="https://www.airbnb.com/" target="_blank" rel="noopener">Airbnb</a> — for a gap between arrival and your lease</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:22px">
+      <div class="note tip" style="margin:0" data-reveal><i class="fas fa-route"></i><span><b>The 30-minute rule.</b> Check the public-transit time from a listing to your department on Google Maps. Don't know your building yet? Use the <b>A. Ray Olpin University Union</b>. Aim for 30 minutes or less.</span></div>
+      <div class="note warn" style="margin:0" data-reveal><i class="fas fa-triangle-exclamation"></i><span><b>Watch for scams.</b> Never send a deposit for a place you haven't seen or had someone visit. Fake “landlords” on Facebook and Craigslist ask for money and send forged leases — ask us to check first. Without an SSN, some landlords may refuse you; ask if they accept your I-20 and offer letter.</span></div>
+    </div>
+
+    <h3 style="font-size:1.8rem;margin:56px 0 8px" data-reveal>Apartments near campus</h3>
+    <p class="muted" style="margin-bottom:18px" data-reveal>From our community's list, in no particular order — call or check the website for rent and availability.</p>
+    <div class="tbl-wrap" data-reveal>
+      <table class="tbl">
+        <thead><tr><th>Apartment</th><th>Address (opens Maps)</th><th>Phone</th><th>Link</th></tr></thead>
+        <tbody>
+        <tr>
+          <th scope="row">Brigadoon Apartments</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Brigadoon+Apartments+1059+E+600+S%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 1059 E 600 S 84102</a></td>
+          <td><a href="tel:+18448839528">844-883-9528</a></td>
+          <td><a href="https://www.apartments.com/brigadoon-apartments-salt-lake-city-ut/5jp01sn/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Hightower</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Hightower+40+S+900+E%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 40 S 900 E 84102</a></td>
+          <td><a href="tel:+18015326644">(801) 532-6644</a></td>
+          <td><a href="https://www.hightowerslc.com/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Princeton Lofts</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Princeton+Lofts+104+S+900+E%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 104 S 900 E 84102</a></td>
+          <td><a href="tel:+18442487787">844-248-7787</a></td>
+          <td><a href="https://www.apartments.com/princeton-lofts-salt-lake-city-ut/jje1ly4/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">The Preserve</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=The+Preserve+531+S+900+E%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 531 S 900 E 84102</a></td>
+          <td><a href="tel:+18016370898">(801) 637-0898</a></td>
+          <td><a href="https://www.apartments.com/2-bedroom-in-salt-lake-city-ut-84102-salt-lake-city-ut/g6jcxww/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Cedar Cliff Apartments</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Cedar+Cliff+Apartments+250+S+900+E%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 250 S 900 E 84102</a></td>
+          <td><a href="tel:+18013223744">(801) 322-3744</a></td>
+          <td><a href="https://www.apartments.com/cedar-cliff-apartments-salt-lake-city-ut/ql5j66z/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">La Parisienne Apartments</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=La+Parisienne+Apartments+261+S+800+E%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 261 S 800 E 84102</a></td>
+          <td><a href="tel:+13853551189">(385) 355-1189</a></td>
+          <td><a href="https://www.zumper.com/apartments-for-rent/15528209/2-bedroom-east-central-salt-lake-city-ut" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Lanai Apartments</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Lanai+Apartments+1070+E+Broadway%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 1070 E Broadway 84102</a></td>
+          <td><a href="tel:+18013283912">(801) 328-3912</a></td>
+          <td><a href="https://www.apartmenthomeliving.com/apartment-finder/Lanai-Salt-Lake-City-UT-84102-1871721" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">The New Broadmoor</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=The+New+Broadmoor+930+E+300+S%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 930 E 300 S 84102</a></td>
+          <td><a href="tel:+18448237252">844-823-7252</a></td>
+          <td><a href="https://www.apartments.com/the-new-broadmoor-salt-lake-city-ut/sph21c6/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">University Heights</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=University+Heights+130+S+1300+E%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 130 S 1300 E 84102</a></td>
+          <td><span class="muted">—</span></td>
+          <td><a href="https://www.apartments.com/university-heights-salt-lake-city-ut/kfftwdb/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Belaire Gardens Apartments</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Belaire+Gardens+Apartments+750+E+200+S%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 750 E 200 S 84102</a></td>
+          <td><a href="tel:+18015974420">(801) 597-4420</a></td>
+          <td><a href="https://belairegardensapartments.com/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Caledonian Apartments</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Caledonian+Apartments+475+E+600+S%2C+Salt+Lake+City%2C+UT+84111" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 475 E 600 S 84111</a></td>
+          <td><span class="muted">—</span></td>
+          <td><a href="https://www.apartments.com/caledonian-apartments-salt-lake-city-ut/rsm3333/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Incline Terrace</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Incline+Terrace+1032+E+400+S%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 1032 E 400 S 84102</a></td>
+          <td><a href="tel:+18013559591">(801) 355-9591</a></td>
+          <td><a href="https://www.zumper.com/apartment-buildings/p201124/incline-terrace-east-central-salt-lake-city-ut" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Seven65 Lofts</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Seven65+Lofts+765+E+400+S%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 765 E 400 S 84102</a></td>
+          <td><span class="muted">—</span></td>
+          <td><a href="https://www.apartments.com/seven65-lofts-salt-lake-city-ut/30pt6ce/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Concept Property Management</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Concept+Property+Management+25+S+1100+E%2C+Salt+Lake+City%2C+UT+84102" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 25 S 1100 E 84102</a></td>
+          <td><a href="tel:+13853435497">385-343-5497</a></td>
+          <td><a href="https://www.conceptproperty.com/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        <tr>
+          <th scope="row">Bridges Apartment Homes</th>
+          <td><a href="https://www.google.com/maps/search/?api=1&amp;query=Bridges+Apartment+Homes+59+N+600+W%2C+Salt+Lake+City%2C+UT+84116" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i> 59 N 600 W 84116</a></td>
+          <td><a href="tel:+18019214681">801-921-4681</a></td>
+          <td><a href="https://utah.weidner.com/apartments/ut/salt-lake-city/bridges-apartment-homes/" target="_blank" rel="noopener" class="tbl-link">Website <i class="fas fa-arrow-up-right-from-square"></i></a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     GETTING AROUND
+     ================================================================ -->
+<section id="transit" class="section bg-paper jaali">
+  <div class="kantha top"></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Getting around</span>
+      <h2 class="title">TRAX and buses are <em>free</em> with your UCard</h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+    </div>
+
+    <div class="grid g2">
+      <div class="card kanthaed" data-reveal="rise">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-train-subway"></i></span><h3>UTA — TRAX, buses &amp; more</h3></div>
+        <p>Once you're enrolled, your UCard is your transit pass for <b>buses, TRAX, FrontRunner, S-Line and UTA On Demand</b> (not ski buses). Schedules and maps: <a class="ext" href="https://www.rideuta.com/" target="_blank" rel="noopener">rideuta.com</a> · <a class="ext" href="https://rideuta.com/Fares-And-Passes/Pass-Programs/UTA-School-Pass-Programs/University-of-Utah" target="_blank" rel="noopener">U of U pass details</a>.</p>
+        <div class="note warn"><i class="fas fa-id-card"></i><span><b>Tap on and tap off — every ride.</b> On TRAX tap your UCard at the reader on the platform before boarding and again when you get off; on buses tap by the door when you get on and when you get off.</span></div>
+        <p style="margin-top:16px">Before your UCard works, pay a regular fare. On a bus, pull the cord above the window before your stop — buses only stop when asked. TRAX stops at every station.</p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:80ms">
+        <div class="card-top"><span class="res-ic g"><i class="fas fa-bus"></i></span><h3>On campus</h3></div>
+        <ul>
+          <li><b>Campus shuttles</b> — free, no tap needed. Routes and live tracking at <a class="ext" href="https://www.uofubus.com/" target="_blank" rel="noopener">uofubus.com</a> or the <b>TransLoc</b> app. Weekdays only; limited routes after 6 pm.</li>
+          <li><b>SafeRide</b> — a free evening ride between campus locations (weekdays, roughly 6 pm–12:30 am). Book it in TransLoc → <b>OnDemand</b>. Great after late lab work.</li>
+          <li>Ask the shuttle driver if you're unsure of your stop — they're friendly.</li>
+        </ul>
+        <p class="muted" style="font-size:14.5px">Handy apps: <b>Transit</b> (live UTA times), <b>TransLoc</b> (shuttles), Google Maps, Apple Maps.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.7rem;margin:50px 0 18px" data-reveal>Find any bus or TRAX in three taps</h3>
+    <div class="grid g2">
+      <div class="card" data-reveal="rise">
+        <h4 style="margin-top:0"><i class="fab fa-google" style="color:var(--red)"></i> Google Maps</h4>
+        <div class="howto">
+          <div class="h"><b><span>1</span>Search</b><p>Type where you're going, e.g. “Walmart”, and tap <b>Directions</b>.</p></div>
+          <div class="h"><b><span>2</span>Transit</b><p>Tap the <b>train icon</b> to see bus and TRAX options.</p></div>
+          <div class="h"><b><span>3</span>Follow</b><p>Pick a route — it shows the stop, the line number and when to get off.</p></div>
+        </div>
+      </div>
+      <div class="card" data-reveal="rise" style="--d:80ms">
+        <h4 style="margin-top:0"><i class="fab fa-apple" style="color:var(--green)"></i> Apple Maps</h4>
+        <div class="howto">
+          <div class="h"><b><span>1</span>Search</b><p>Search the place, tap it, then tap the <b>directions</b> button.</p></div>
+          <div class="h"><b><span>2</span>Transit</b><p>Choose <b>Transit</b> at the top instead of Drive.</p></div>
+          <div class="h"><b><span>3</span>Go</b><p>Tap <b>Go</b> for step-by-step directions and live times.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     BANKS
+     ================================================================ -->
+<section id="banks" class="section bg-ivory jaali">
+  <div class="kantha top"></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Banking</span>
+      <h2 class="title">Open an account in your <em>first week</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">Shops prefer cards, and your pay goes by direct deposit. These banks are near campus and have opened accounts for our students without an SSN — call or book ahead.</p>
+    </div>
+    <div class="grid g3">
+      <div class="card kanthaed" data-reveal="rise">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-building-columns"></i></span><h3>UFirst Credit Union</h3></div>
+        <p class="muted" style="font-size:14.5px;margin-top:-6px">formerly University Federal Credit Union</p>
+        <p><b>On campus</b> — branches in the Union Building and by the Campus Store. Bring your I-20, passport, UCard, address and phone; students get a debit card the same day. Tell them your SSN once you have it.</p>
+        <p><a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=UFirst+Credit+Union+University+of+Utah" target="_blank" rel="noopener">Open in Maps</a> · <a class="ext" href="https://www.ucreditu.com/" target="_blank" rel="noopener">ucreditu.com</a></p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:80ms">
+        <div class="card-top"><span class="res-ic g"><i class="fas fa-building-columns"></i></span><h3>Chase</h3></div>
+        <p><b>Fourth &amp; 4th branch</b><br>376 E 400 S, Suite 100<br><a href="tel:+18012391801">(801) 239-1801</a> · ATM in the Union food court</p>
+        <p>Accepts a passport as main ID for non-residents; SSN not always required. Book a meeting online so a banker is free.</p>
+        <p><a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=Chase+Bank+376+E+400+S+Salt+Lake+City+UT" target="_blank" rel="noopener">Open in Maps</a> · <a class="ext" href="https://locator.chase.com/" target="_blank" rel="noopener">Book an appointment</a></p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:160ms">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-building-columns"></i></span><h3>Wells Fargo</h3></div>
+        <p><b>University branch</b><br>235 S 1300 E — walkable from campus<br><a href="tel:+18015821235">(801) 582-1235</a> · ATM by the Union bowling alley</p>
+        <p>Big ATM network; ask for a student checking account.</p>
+        <p><a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=Wells+Fargo+Bank+235+S+1300+E+Salt+Lake+City+UT" target="_blank" rel="noopener">Open in Maps</a> · <a class="ext" href="https://www.wellsfargo.com/locator/" target="_blank" rel="noopener">Book an appointment</a></p>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:22px">
+      <div class="card" data-reveal="rise">
+        <h3 style="font-size:1.45rem">What to bring</h3>
+        <ul class="checklist" data-key="bank">
+          <li><label><input type="checkbox"><span>Passport (with visa) — originals, not copies</span></label></li>
+          <li><label><input type="checkbox"><span>I-20 and your I-94 printout</span></label></li>
+          <li><label><input type="checkbox"><span>UCard or admission letter</span></label></li>
+          <li><label><input type="checkbox"><span>Proof of address — your lease or a utility bill</span></label></li>
+          <li><label><input type="checkbox"><span>US phone number and email</span></label></li>
+          <li><label><input type="checkbox"><span>Offer letter (TA/RA) and your SSN if you have one</span></label></li>
+          <li><label><input type="checkbox"><span>Cash or card for the first deposit</span></label></li>
+        </ul>
+      </div>
+      <div class="card" data-reveal="rise" style="--d:80ms">
+        <h3 style="font-size:1.45rem">Good to know</h3>
+        <ul>
+          <li>Ask for a <b>student checking</b> account — usually no monthly fee.</li>
+          <li>Set up <b>Zelle</b> in your bank app — it's how everyone splits rent and dinner.</li>
+          <li>After your SSN arrives, a student or secured <b>credit card</b> helps build a US credit history (useful for leases later). Pay it in full each month.</li>
+          <li>Other options: Bank of America, Mountain America, America First, KeyBank — <a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=banks+near+University+of+Utah" target="_blank" rel="noopener">all banks near the U</a>.</li>
+          <li>Money questions? The U's free <b>Personal Money Management Center</b>: 801-585-7379.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     ID & DRIVER LICENCE
+     ================================================================ -->
+<section id="license" class="section bg-paper jaali">
+  <div class="kantha top"></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>ID &amp; driving</span>
+      <h2 class="title">State ID or <em>driver licence</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">A <b>Utah ID card</b> lets you leave your passport at home (it can't be used to drive). A Bangladeshi licence is only valid in Utah for <b>6 months</b> — after that you need a Utah licence. F-1 students get a <b>limited-term</b> licence or ID, valid for the length of your stay.</p>
+    </div>
+    <div class="steps">
+      <div class="step" data-reveal="rise"><div><h3>Wait for your SSN</h3><p>You need your Social Security card — or, if you aren't eligible, a letter from the Social Security office saying so.</p></div></div>
+      <div class="step" data-reveal="rise"><div><h3>Gather your documents</h3>
+        <ul><li>Passport with visa, I-94 and I-20</li><li>Social Security card (or ineligibility letter)</li><li><b>Two</b> proofs of your Utah address with your name — lease, bank statement, utility bill</li><li>For a licence: your Bangladeshi licence or proof of a Utah driver-education course</li></ul></div></div>
+      <div class="step" data-reveal="rise"><div><h3>Book an appointment</h3><p>Start the application and book a slot on the <a class="ext" href="https://dld.utah.gov/make-appointment" target="_blank" rel="noopener">Utah Driver License Division</a> website (choose “limited-term”). <a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=Utah+Driver+License+Division+office+Salt+Lake+City" target="_blank" rel="noopener">Find an office</a> — most need TRAX plus a bus.</p></div></div>
+      <div class="step" data-reveal="rise"><div><h3>Study &amp; take the tests</h3><p>Read the <a class="ext" href="https://dld.utah.gov/" target="_blank" rel="noopener">Utah Driver Handbook</a>. At the office: eye test, photo, medical questions and the <b>written knowledge test</b>. The <b>road test</b> is often done with a certified third-party tester (driving school).</p></div></div>
+      <div class="step" data-reveal="rise"><div><h3>Get your card</h3><p>You'll leave with a temporary paper licence; the card comes by post. Check the current fees on dld.utah.gov before you go.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SHOPPING
+     ================================================================ -->
+<section id="shopping" class="section bg-ivory jaali">
+  <div class="kantha top"></div>
+  <div class="orn spin-rev" style="width:600px;height:600px;right:-300px;bottom:-220px;color:rgba(0,75,55,.08);--o2:rgba(224,40,60,.15)" aria-hidden="true"><svg><use href="#o-star"/></svg></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Shopping</span>
+      <h2 class="title">Groceries, desi food &amp; <em>winter clothes</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">Tap any name to open it in Google Maps — then tap <b>Directions → Transit</b> to see the bus or TRAX.</p>
+    </div>
+    <div class="shop">
+      <div class="shop-card" data-reveal="rise">
+        <div class="shop-head"><span class="res-ic g"><i class="fas fa-basket-shopping"></i></span><h3>Everyday groceries</h3></div>
+        <div class="chips">
+          <a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Smith%27s+Food+and+Drug+near+University+of+Utah%2C+Salt+Lake+City" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Smith&#x27;s</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Walmart+Supercenter+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Walmart Supercenter</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Trader+Joe%27s+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Trader Joe&#x27;s</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Harmons+Grocery+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Harmons</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Target+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Target</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Costco+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Costco (membership)</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Sprouts+Farmers+Market+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Sprouts / organic</a>
+        </div>
+      </div>
+      <div class="shop-card" data-reveal="rise">
+        <div class="shop-head"><span class="res-ic r"><i class="fas fa-pepper-hot"></i></span><h3>Desi groceries, fish &amp; halal meat</h3></div>
+        <div class="chips">
+          <a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Shop+n+Go+Indian+grocery+Salt+Lake+City" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Shop-n-Go (Indian)</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Namaste+Nanglo+Salt+Lake+City" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Namaste Nanglo</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Halal+Market+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Halal Market</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Shahrazad+Market+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Shahrazad Market</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Ocean+City+Seafood+Market+Salt+Lake+City" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Ocean City Seafood</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Rancho+Markets+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Rancho Markets</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Chinatown+Supermarket+Salt+Lake+City" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Chinatown Supermarket</a>
+        </div>
+      </div>
+      <div class="shop-card" data-reveal="rise">
+        <div class="shop-head"><span class="res-ic g"><i class="fas fa-shirt"></i></span><h3>Clothes, winter wear &amp; household</h3></div>
+        <div class="chips">
+          <a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Ross+Dress+for+Less+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Ross Dress for Less</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=TJ+Maxx+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>TJ Maxx</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Burlington+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Burlington</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Deseret+Industries+thrift+store+Salt+Lake+City" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Deseret Industries (thrift)</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Dollar+Tree+Salt+Lake+City+UT" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Dollar Tree</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=IKEA+Draper+Utah" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>IKEA (Draper)</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=University+of+Utah+Campus+Store" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>University Campus Store</a>
+        </div>
+      </div>
+      <div class="shop-card" data-reveal="rise">
+        <div class="shop-head"><span class="res-ic r"><i class="fas fa-place-of-worship"></i></span><h3>Places of worship</h3></div>
+        <div class="chips">
+          <a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=mosque+near+University+of+Utah" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Mosques near campus</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Khadeeja+Islamic+Center+West+Valley+City+Utah" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Khadeeja Islamic Center</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Sri+Ganesha+Hindu+Temple+of+Utah" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Sri Ganesha Hindu Temple</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=Buddhist+temple+Salt+Lake+City" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Buddhist temples</a><a class="chip" href="https://www.google.com/maps/search/?api=1&amp;query=church+near+University+of+Utah" target="_blank" rel="noopener"><i class="fas fa-location-dot"></i>Churches near campus</a>
+        </div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:22px">
+      <div class="note tip" style="margin:0" data-reveal><i class="fas fa-drumstick-bite"></i><span><b>Halal meat:</b> Walmart carries Crescent halal chicken; for beef, mutton and goat try Halal Market or Shahrazad. Costco and Restaurant Depot need memberships — go with someone who has one.</span></div>
+      <div class="note tip" style="margin:0" data-reveal><i class="fas fa-truck-fast"></i><span><b>Delivery:</b> Walmart+, Instacart and Amazon (Prime is free for 6 months with your umail). Spotify, Hulu and others have student prices too.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     HEALTH & WELLBEING
+     ================================================================ -->
+<section id="health" class="section bg-paper jaali">
+  <div class="kantha top"></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Health &amp; happiness</span>
+      <h2 class="title">Look after <em>yourself</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+    </div>
+    <div class="grid g3">
+      <div class="card kanthaed" data-reveal="rise">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-house-medical"></i></span><h3>Student Health Center</h3></div>
+        <p><a class="ext" href="https://www.google.com/maps/search/?api=1&amp;query=University+of+Utah+Student+Health+Center+555+Foothill+Dr" target="_blank" rel="noopener">555 Foothill Dr, Level 1 (Madsen Health Center)</a><br>Appointments: <a href="tel:+18015816431">801-581-6431</a> — always call ahead.</p>
+        <p>Green campus shuttle, or UTA bus 21. Expect a small co-pay even with insurance.</p>
+        <p class="muted" style="font-size:14.5px"><a class="ext" href="https://studenthealth.utah.edu/" target="_blank" rel="noopener">studenthealth.utah.edu</a></p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:80ms">
+        <div class="card-top"><span class="res-ic g"><i class="fas fa-heart"></i></span><h3>When it feels heavy</h3></div>
+        <p>Homesickness, stress and winter blues are normal — and help is confidential.</p>
+        <ul>
+          <li><a class="ext" href="https://counselingcenter.utah.edu/" target="_blank" rel="noopener">University Counseling Center</a></li>
+          <li><a class="ext" href="https://healthcare.utah.edu/uni/safe-ut/" target="_blank" rel="noopener">SafeUT app</a> — chat or call, 24/7</li>
+          <li>In a crisis, call or text <b>988</b>. Emergency: <b>911</b>.</li>
+        </ul>
+        <p>And talk to us — that's what we're here for.</p>
+      </div>
+      <div class="card kanthaed" data-reveal="rise" style="--d:160ms">
+        <div class="card-top"><span class="res-ic r"><i class="fas fa-mountain-sun"></i></span><h3>Free with your UCard</h3></div>
+        <ul>
+          <li>Red Butte Garden</li>
+          <li>Natural History Museum of Utah</li>
+          <li>Utah Museum of Fine Arts</li>
+          <li>Liberty Park and the Utah State Capitol — free for everyone</li>
+        </ul>
+        <p>More ideas on <a class="ext" href="https://www.tripadvisor.com/Attractions-g60922-Activities-Salt_Lake_City_Utah.html" target="_blank" rel="noopener">TripAdvisor</a> — and at <a href="../index.html#events">our events</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     CONTACT
+     ================================================================ -->
+<section id="contact" class="section bg-ivory jaali">
+  <div class="kantha top"></div>
+  <div class="orn spin-slow" style="width:600px;height:600px;left:50%;top:50%;margin:-300px 0 0 -300px;color:rgba(0,75,55,.07);--o2:rgba(224,40,60,.12)" aria-hidden="true"><svg><use href="#o-mandala"/></svg></div>
+  <div class="wrap sec-in">
+    <div class="head center" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Contact for help</span>
+      <h2 class="title">We're <em>one message</em> away</h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+    </div>
+    <div class="contacts">
+      <a class="person" href="https://www.facebook.com/BSAUofU" target="_blank" rel="noopener" data-reveal="rise">
+        <div class="av"><i class="fab fa-facebook-f"></i></div><h3>Facebook</h3><p>Posts, events and messages — the quickest way to reach us</p>
+        <span class="btn btn-ghost btn-sm">BSAUofU <i class="fas fa-arrow-up-right-from-square" style="font-size:12px"></i></span>
+      </a>
+      <a class="person" href="mailto:bsauu.uofu@gmail.com" data-reveal="rise" style="--d:80ms">
+        <div class="av red"><i class="fas fa-envelope"></i></div><h3>Email</h3><p>Pickup requests and anything longer</p>
+        <span class="btn btn-red btn-sm">bsauu.uofu@gmail.com</span>
+      </a>
+      <a class="person" href="https://www.instagram.com/bsa_uofu_utah/" target="_blank" rel="noopener" data-reveal="rise" style="--d:160ms">
+        <div class="av"><i class="fab fa-instagram"></i></div><h3>Instagram</h3><p>Photos and reels from our events</p>
+        <span class="btn btn-ghost btn-sm">@bsa_uofu_utah <i class="fas fa-arrow-up-right-from-square" style="font-size:12px"></i></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================
+     DEPARTMENTAL CONTACTS — add or edit a <tr> row per department
+     ================================================================ -->
+<section id="departments" class="section bg-paper jaali">
+  <div class="kantha top"></div>
+  <div class="wrap sec-in">
+    <div class="head" data-reveal>
+      <span class="eyebrow"><svg aria-hidden="true"><use href="#o-shapla"/></svg>Departmental info</span>
+      <h2 class="title">Ask someone from <em>your department</em></h2>
+      <svg class="flourish" viewBox="0 0 240 30" aria-hidden="true"><path d="M0 15H86M154 15H240" stroke="currentColor" stroke-width="1"/><path d="M0 19H70M170 19H240" stroke="currentColor" stroke-width=".6" stroke-dasharray="4 4"/><path d="M95 15l5-5 5 5-5 5zM135 15l5-5 5 5-5 5z" fill="var(--red)"/><use href="#o-shapla" x="106" y="1" width="28" height="24" style="color:var(--green);--o2:var(--red)"/></svg>
+      <p class="lede" style="margin-top:14px">Questions about advisors, courses, TA duties or labs are best answered by someone already there. Press <b>Ask</b> and we'll pass your question on.</p>
+    </div>
+    <div class="tbl-wrap" data-reveal>
+      <table class="tbl">
+        <thead><tr><th>Department</th><th>Who can help</th><th>Level</th><th></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Chemistry</th><td>Abdullah Arafat · Md Alamgir Kabir</td><td>PhD</td><td><button type="button" class="chip dept-ask" data-dept="Chemistry"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Chemical Engineering</th><td>Wahidur Rahman</td><td>PhD</td><td><button type="button" class="chip dept-ask" data-dept="Chemical Engineering"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Computer Science</th><td>Shamit Fatin</td><td>PhD</td><td><button type="button" class="chip dept-ask" data-dept="Computer Science"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Electrical &amp; Computer Engineering</th><td>Shad Iqbal Pathan</td><td>Undergraduate</td><td><button type="button" class="chip dept-ask" data-dept="Electrical &amp; Computer Engineering"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Geology &amp; Geophysics</th><td>Faiyad H Rishal</td><td>PhD</td><td><button type="button" class="chip dept-ask" data-dept="Geology &amp; Geophysics"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Mechanical Engineering</th><td>Toushiqul Islam (Sizan)</td><td>PhD</td><td><button type="button" class="chip dept-ask" data-dept="Mechanical Engineering"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Nutrition &amp; Integrative Physiology</th><td>Md Shariful Islam</td><td>PhD</td><td><button type="button" class="chip dept-ask" data-dept="Nutrition &amp; Integrative Physiology"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Oncological Sciences</th><td>Mumtaz Shirin</td><td>PhD</td><td><button type="button" class="chip dept-ask" data-dept="Oncological Sciences"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Physics &amp; Astronomy</th><td>Arshe Alavee Aziz</td><td>PhD</td><td><button type="button" class="chip dept-ask" data-dept="Physics &amp; Astronomy"><i class="far fa-envelope"></i>Ask</button></td></tr>
+          <tr><th scope="row">Health &amp; Human Services</th><td>Monisha Deepta</td><td>—</td><td><button type="button" class="chip dept-ask" data-dept="Health &amp; Human Services"><i class="far fa-envelope"></i>Ask</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="margin-top:18px" data-reveal>Department not listed? <button type="button" class="chip dept-ask" data-dept=""><i class="far fa-envelope"></i>Email us</button> — we'll find a Bangladeshi student or alum in your field.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-row">
+      <a class="f-brand" href="../index.html"><span class="brand-mark"><img src="../assets/logo.png" alt=""></span><span>BSAUU</span></a>
+      <div class="f-links">
+        <a href="../index.html">Home</a><a href="../index.html#events">Calendar</a><a href="../index.html#gallery">Gallery</a><a href="../index.html#committee">Committee</a><a href="#request">Request help</a>
+      </div>
+    </div>
+    <div class="f-small">
+      <p>&copy; 2026 Bangladesh Student Association at the University of Utah. Information checked October 2026 — always confirm with the official office linked.</p>
+      <p style="color:#ff8a98;font-family:var(--serif);font-style:italic;font-size:15px">Run by students, for students.</p>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+/* ==================================================================
+   SETTINGS
+   ================================================================== */
+const BSA_EMAIL = 'bsauu.uofu@gmail.com';     // where the request emails go
+const SAVE_KEY  = 'bsauu-newstudent-form';
+const TICK_KEY  = 'bsauu-newstudent-ticks';
+
+const $ = s => document.querySelector(s);
+const store = {
+  get(k, d){ try{ return JSON.parse(localStorage.getItem(k)) ?? d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove('show'), 2600);
+}
+
+/* ==================================================================
+   1. ARRIVAL REQUEST — builds the email as you type
+   ================================================================== */
+const form = $('#arrivalForm');
+const body = $('#mailBody');
+let bodyEdited = false;                 // once you edit the email by hand, typing in the form won't overwrite it
+
+/* starting-term suggestions: the next five terms (you can also type your own) */
+(function fillTerms(){
+  const sel = $('#termList');
+  const now = new Date(), y = now.getFullYear(), m = now.getMonth();   // 0 = Jan
+  const order = [['Spring', 0], ['Summer', 4], ['Fall', 7]];
+  const opts = [];
+  for(let yr = y; yr <= y + 2 && opts.length < 5; yr++){
+    for(const [name, startMonth] of order){
+      if(yr === y && startMonth + 1 < m) continue;
+      if(opts.length < 5) opts.push(`${name} ${yr}`);
+    }
+  }
+  sel.innerHTML = opts.map(o => `<option value="${o}">`).join('');
+})();
+
+const val = n => { const el = form.elements[n]; return el ? String(el.value || '').trim() : ''; };
+const needs = () => Array.from(form.querySelectorAll('input[name="need"]:checked')).map(i => i.value);
+const fmtDate = d => {
+  if(!d) return '';
+  const dt = new Date(d + 'T12:00:00');
+  return isNaN(dt) ? d : dt.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+};
+const fmtTime = t => {
+  if(!t) return '';
+  const [h, mi] = t.split(':').map(Number);
+  return `${((h + 11) % 12) + 1}:${String(mi).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
+};
+const yn = (on, yes, no) => on ? yes : no;
+
+const flightStatus = () => (form.querySelector('input[name="flightStatus"]:checked') || {}).value || 'booked';
+function subject(){
+  const n = val('name') || 'New student';
+  const d = val('date') ? new Date(val('date') + 'T12:00:00').toLocaleDateString('en-US', { month:'short', day:'numeric' }) : '';
+  const fs = flightStatus();
+  const when = fs === 'visa' ? ' – waiting for visa' : d ? (fs === 'booked' ? ` – landing ${d}` : ` – arriving around ${d}`) : '';
+  return `New student arrival: ${n}` + when + (val('term') ? ` (${val('term')})` : '');
+}
+
+function compose(){
+  const nd = needs();
+  const people = Math.max(1, parseInt(val('people')) || 1);
+  const L = [];
+  L.push('Hello BSAUU team,', '');
+  let intro = `My name is ${val('name') || '[your name]'}. I have been admitted to the University of Utah`
+    + (val('degree') || val('dept') ? ` for ${[val('degree'), val('dept') && 'in ' + val('dept')].filter(Boolean).join(' ')}` : '')
+    + (val('term') ? `, starting ${val('term')}` : '') + '.';
+  if(val('funding')) intro += ` My funding: ${val('funding')}.`;
+  L.push(intro);
+  if(val('prev')) L.push(`Before this I studied at ${val('prev')}.`);
+  L.push('', 'ARRIVAL');
+  const pl = (n, w) => `${n} ${w}${+n === 1 ? '' : 's'}`;
+  const fs = flightStatus();
+  if(fs === 'booked'){
+    L.push(`• My flight is booked: landing at Salt Lake City International Airport (SLC)` + (val('date') ? ` on ${fmtDate(val('date'))}` : '') + (val('time') ? ` at ${fmtTime(val('time'))} (Utah time)` : ''));
+    if(val('flight') || val('via')) L.push(`• Flight: ${val('flight') || '—'}` + (val('via') ? `, arriving from ${val('via')}` : ''));
+  }else if(fs === 'estimated'){
+    L.push(`• I haven't booked my flight yet. I expect to arrive` + (val('date') ? ` around ${fmtDate(val('date'))}` : ' soon') + ' and will send my flight details once booked.');
+  }else{
+    L.push(`• I am still waiting for my visa` + (val('date') ? `; I hope to arrive around ${fmtDate(val('date'))}` : '') + '. I will update you when it is approved.');
+  }
+  L.push(`• Travelling: ${people === 1 ? 'alone' : people + ' people'}` + (val('with') ? ` (${val('with')})` : ''));
+  L.push(`• Luggage: ${pl(val('bags') || 0, 'large suitcase')} and ${pl(val('carry') || 0, 'carry-on bag')}`);
+  L.push('', 'WHAT I NEED HELP WITH');
+  L.push(`• Airport pickup: ${yn(nd.includes('pickup'), 'Yes, please', 'Not needed')}`);
+  L.push(`• First meal after landing: ${yn(nd.includes('meal'), 'Yes, please', 'Not needed')}`);
+  L.push(`• First grocery shopping trip: ${yn(nd.includes('shopping'), 'Yes, please', 'Not needed')}`);
+  if(nd.includes('stay'))    L.push(`• A place to stay for the first ${val('nights') ? pl(val('nights'), 'night') : 'few nights'}: Yes, please`);
+  if(nd.includes('sim'))     L.push('• A temporary US SIM card: Yes, please');
+  if(nd.includes('housing')) L.push('• Help finding housing / a roommate: Yes, please');
+  if(nd.includes('errands')) L.push('• Someone to go with me for the UCard, bank or SSN: Yes, please');
+  if(nd.includes('intro'))   L.push('• Please introduce me to the Utah Bangladeshi community email list');
+  L.push(`• Food preference: ${val('food') || 'No preference'}`);
+  L.push('', 'HOUSING');
+  const h = (form.querySelector('input[name="housing"]:checked') || {}).value;
+  if(h === 'found')     L.push(`• I have found a place: ${val('address') || '[address]'}` + (val('movein') ? ` (move-in ${fmtDate(val('movein'))})` : ''));
+  else if(h === 'temp') L.push(`• I will stay at an Airbnb/hotel at first: ${val('address') || '[address]'}` + (val('movein') ? `. My lease starts ${fmtDate(val('movein'))}` : ''));
+  else                  L.push('• I have not found a place yet.');
+  L.push('', 'MY CONTACT DETAILS');
+  L.push(`• Email: ${val('email') || '[email]'}`);
+  if(val('whatsapp'))  L.push(`• WhatsApp: ${val('whatsapp')}`);
+  if(val('usphone'))   L.push(`• US phone: ${val('usphone')}`);
+  if(val('facebook'))  L.push(`• Facebook / Messenger: ${val('facebook')}`);
+  if(val('instagram')) L.push(`• Instagram: ${val('instagram')}`);
+  if(val('emergency')) L.push(`• Emergency contact in Bangladesh: ${val('emergency')}`);
+  if(val('notes')){ L.push('', 'ANYTHING ELSE', val('notes')); }
+  L.push('', 'Thank you so much — I look forward to meeting you all!', '', 'Best regards,', val('name') || '[your name]');
+  return L.join('\n');
+}
+
+function refresh(){
+  $('#mailTo').textContent = BSA_EMAIL;
+  $('#mailSubject').textContent = subject();
+  if(!bodyEdited) body.value = compose();
+  /* show/hide dependent fields */
+  $('#nightsWrap').style.display = needs().includes('stay') ? '' : 'none';
+  const h = (form.querySelector('input[name="housing"]:checked') || {}).value;
+  $('#addrWrap').style.display = h === 'none' ? 'none' : '';
+  $('#addrLabel').textContent = h === 'temp' ? 'Airbnb / hotel address' : 'Address';
+  const fs = flightStatus();
+  document.querySelectorAll('.booked-only').forEach(el => el.style.display = fs === 'booked' ? '' : 'none');
+  $('#dateLabel').textContent = fs === 'booked' ? 'Arrival date' : fs === 'estimated' ? 'Estimated arrival date' : 'Hoped-for arrival date (optional)';
+  $('#dateHint').textContent = fs === 'booked' ? '' : 'Send us another email once your flight is booked.';
+  save();
+}
+
+function save(){
+  const data = {};
+  Array.from(form.elements).forEach(el => {
+    if(!el.name) return;
+    if(el.type === 'checkbox'){ (data[el.name + ':' + el.value] = el.checked); }
+    else if(el.type === 'radio'){ if(el.checked) data[el.name] = el.value; }
+    else data[el.name] = el.value;
+  });
+  store.set(SAVE_KEY, data);
+}
+function restore(){
+  const data = store.get(SAVE_KEY, null); if(!data) return;
+  Array.from(form.elements).forEach(el => {
+    if(!el.name) return;
+    if(el.type === 'checkbox'){ const k = el.name + ':' + el.value; if(k in data) el.checked = !!data[k]; }
+    else if(el.type === 'radio'){ el.checked = data[el.name] === el.value; }
+    else if(data[el.name] != null) el.value = data[el.name];
+  });
+}
+
+/* only your email address is required — everything else can follow later */
+function okToSend(){
+  const el = form.elements.email;
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(el.value || '').trim());
+  el.classList.toggle('bad', !ok);
+  const msg = $('#formMsg');
+  if(!ok){
+    msg.textContent = 'Please add your email address (section 5) so we can reply.';
+    msg.classList.add('show');
+    el.focus();
+    return false;
+  }
+  msg.classList.remove('show');
+  return true;
+}
+
+const mailtoURL = (subj, text) => `mailto:${BSA_EMAIL}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(text)}`;
+const gmailURL  = (subj, text) => `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(BSA_EMAIL)}&su=${encodeURIComponent(subj)}&body=${encodeURIComponent(text)}`;
+
+$('#sendMail').addEventListener('click', () => { if(okToSend()) window.location.href = mailtoURL(subject(), body.value); });
+$('#sendGmail').addEventListener('click', () => { if(okToSend()) window.open(gmailURL(subject(), body.value), '_blank', 'noopener'); });
+$('#copyMail').addEventListener('click', async () => {
+  const text = `To: ${BSA_EMAIL}\nSubject: ${subject()}\n\n${body.value}`;
+  try{ await navigator.clipboard.writeText(text); toast('Copied — paste it into an email to ' + BSA_EMAIL); }
+  catch(e){ body.select(); document.execCommand('copy'); toast('Copied'); }
+});
+document.querySelectorAll('.dept-ask').forEach(b => b.addEventListener('click', () => {
+  const d = b.dataset.dept.replace(/&amp;/g, '&'), n = val('name');
+  const text = `Hello BSAUU team,\n\n${n ? `My name is ${n}, ` : 'I am '}an incoming ${val('degree') ? val('degree') + ' ' : ''}student${d ? ` in ${d}` : val('dept') ? ` in ${val('dept')}` : ''}. Could you connect me with someone${d ? ' from the department' : ' in my field'}?\n\nMy question:\n[Write your question here]\n\nThank you,\n${n || ''}`;
+  window.location.href = mailtoURL(d ? `Question about the ${d} department` : 'Question about my department', text);
+}));
+$('#customMail').addEventListener('click', () => {
+  const n = val('name');
+  const text = `Hello BSAUU team,\n\n${n ? `My name is ${n}` + (val('dept') ? `, an incoming ${val('degree') || ''} student in ${val('dept')}` : '') + '.\n\n' : ''}[Write your question here]\n\nThank you,\n${n || ''}`;
+  window.location.href = mailtoURL('Question from a new student' + (n ? ` – ${n}` : ''), text);
+});
+
+form.addEventListener('input', e => { e.target.classList.remove('bad'); refresh(); });
+form.addEventListener('change', refresh);
+body.addEventListener('input', () => { bodyEdited = true; });
+body.addEventListener('focus', () => { if(!bodyEdited) toast('You can edit the email here before sending'); }, { once:true });
+restore(); refresh();
+
+/* ==================================================================
+   2. MONEY CALCULATOR
+   ================================================================== */
+const ids = ['cRent','cDeposit','cFood','cBills','cMonths','cSetup','cWinter','cTemp','cBuffer'];
+const usd = n => '$' + Math.round(n).toLocaleString('en-US');
+let depositLinked = true;                                     // deposit follows rent until you change it yourself
+function calc(){
+  const v = Object.fromEntries(ids.map(id => [id, Math.max(0, parseFloat($('#' + id).value) || 0)]));
+  const M = Math.max(1, Math.round(v.cMonths));
+  const living = v.cFood + v.cBills;
+  const rows = [
+    ['Security deposit', '', v.cDeposit],
+    ['Rent', `${usd(v.cRent)} × ${M} month${M > 1 ? 's' : ''}`, v.cRent * M],
+    ['Food, phone &amp; bills', `${usd(living)} × ${M} month${M > 1 ? 's' : ''}`, living * M],
+    ['Setting up home', '', v.cSetup],
+    ['Winter clothes', '', v.cWinter],
+    ['Temporary stay', '', v.cTemp],
+    ['Emergency buffer', '', v.cBuffer]
+  ].filter(r => r[2] > 0);
+  const total = rows.reduce((s, r) => s + r[2], 0);
+  const rounded = Math.ceil(total / 100) * 100;
+  $('#calcOut').innerHTML = rows.map(r => `<tr><td>${r[0]}${r[1] ? `<small>${r[1]}</small>` : ''}</td><td>${usd(r[2])}</td></tr>`).join('')
+    + `<tr class="total"><td>Total</td><td>${usd(rounded)}</td></tr>`;
+  $('#calcFormula').innerHTML =
+    `Total = deposit + M × (rent + food + bills) + one-time costs<br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = ${usd(v.cDeposit)} + ${M} × (${usd(v.cRent)} + ${usd(v.cFood)} + ${usd(v.cBills)}) + ${usd(v.cSetup + v.cWinter + v.cTemp + v.cBuffer)}<br>` +
+    `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = ${usd(total)} → rounded up to <b>${usd(rounded)}</b>`;
+}
+ids.forEach(id => $('#' + id).addEventListener('input', () => {
+  if(id === 'cDeposit') depositLinked = false;
+  if(id === 'cRent' && depositLinked) $('#cDeposit').value = $('#cRent').value;
+  calc();
+}));
+calc();
+
+/* ==================================================================
+   3. TICK BOXES — packing list, bank list, first-week steps (saved)
+   ================================================================== */
+(function ticks(){
+  const saved = store.get(TICK_KEY, {});
+  document.querySelectorAll('.checklist[data-key]').forEach(list => {
+    const k = list.dataset.key;
+    list.querySelectorAll('input').forEach((box, i) => {
+      box.checked = !!saved[k + i];
+      box.addEventListener('change', () => { saved[k + i] = box.checked; store.set(TICK_KEY, saved); });
+    });
+  });
+  document.querySelectorAll('#weekSteps input[data-step]').forEach(box => {
+    const k = 'step' + box.dataset.step, step = box.closest('.step');
+    box.checked = !!saved[k]; step.classList.toggle('done', box.checked);
+    box.addEventListener('change', () => { saved[k] = box.checked; step.classList.toggle('done', box.checked); store.set(TICK_KEY, saved); });
+  });
+})();
+
+/* ==================================================================
+   4. NAV, CHIPS, REVEALS
+   ================================================================== */
+const nav = $('#navbar'), chips = $('#chips'), bar = $('#progress'), toTop = $('#toTop');
+const chipLinks = Array.from(document.querySelectorAll('.chips-in a'));
+const sections = chipLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+let ticking = false;
+function onScroll(){
+  const y = window.scrollY, vh = window.innerHeight, max = document.documentElement.scrollHeight - vh;
+  bar.style.width = (max > 0 ? y / max * 100 : 0) + '%';
+  nav.classList.toggle('solid', y > 40);
+  chips.classList.toggle('show', y > vh * 0.7);
+  toTop.classList.toggle('show', y > vh);
+  let cur = null;
+  sections.forEach(s => { if(s.getBoundingClientRect().top <= 160) cur = s.id; });
+  chipLinks.forEach(a => {
+    const on = a.getAttribute('href') === '#' + cur;
+    if(on && !a.classList.contains('on')) a.scrollIntoView({ block:'nearest', inline:'center' });
+    a.classList.toggle('on', on);
+  });
+  ticking = false;
+}
+window.addEventListener('scroll', () => { if(!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, { passive:true });
+onScroll();
+
+const io = new IntersectionObserver((es, obs) => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('seen'); obs.unobserve(e.target); } }), { threshold:.08, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+const burger = $('#burger'), menu = $('#mobileMenu');
+burger.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', String(open));
+  burger.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+  if(open) nav.classList.add('solid');
+});
+document.querySelectorAll('.mlink').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); burger.innerHTML = '<i class="fas fa-bars"></i>'; }));
+toTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+</script>
+</body>
+</html>
