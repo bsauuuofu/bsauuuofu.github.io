@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-16T18:43:56.229Z",
+  "updated": "2026-10-16T18:45:04.056Z",
   "terms": [
     {
       "id": "term-2026-2027",
@@ -98,7 +98,8 @@
         },
         {
           "name": "Mohi Uddin",
-          "role": "Vice President"
+          "role": "Vice President",
+          "photo": "assets/committee/2025-2026/mohi-uddin-kw1n.jpg"
         },
         {
           "name": "Khalid Adnan",
