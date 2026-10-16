@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-16T18:45:04.056Z",
+  "updated": "2026-10-16T18:47:56.625Z",
   "terms": [
     {
       "id": "term-2026-2027",
@@ -87,10 +87,9 @@
       ]
     },
     {
-      "id": "term-2025-2026",
+      "id": "term-7ij18z",
       "label": "2025 – 2026",
-      "intro": "Thank you to the outgoing committee, who built most of what this association runs on today.",
-      "layout": "list",
+      "layout": "cards",
       "members": [
         {
           "name": "Maksudur Rahman Shihab",
@@ -98,12 +97,7 @@
         },
         {
           "name": "Mohi Uddin",
-          "role": "Vice President",
-          "photo": "assets/committee/2025-2026/mohi-uddin-kw1n.jpg"
-        },
-        {
-          "name": "Khalid Adnan",
-          "role": "General Secretary"
+          "role": "Vice President"
         }
       ]
     }
