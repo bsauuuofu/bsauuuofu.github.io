@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "updated": "2026-10-16T18:43:56.229Z",
+  "terms": [
+    {
+      "id": "term-2026-2027",
+      "label": "2026 – 2027",
+      "layout": "cards",
+      "members": [
+        {
+          "name": "Abdullah Arafat",
+          "role": "President",
+          "dept": "PhD, Chemistry",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/p.jpg"
+        },
+        {
+          "name": "Md Alamgir Kabir",
+          "role": "Vice President",
+          "dept": "PhD, Chemistry",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/vp.jpeg"
+        },
+        {
+          "name": "Shad Iqbal Pathan",
+          "role": "General Secretary",
+          "dept": "Undergraduate, Electrical & Computer Engineering",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/gs.jpeg"
+        },
+        {
+          "name": "Faiyad H Rishal",
+          "role": "Cultural Secretary",
+          "dept": "PhD, Geology",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/cs.jpeg"
+        },
+        {
+          "name": "Mumtaz Shirin",
+          "role": "Outreach Secretary",
+          "dept": "PhD, Oncological Sciences",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/os.jpeg"
+        },
+        {
+          "name": "Md Shariful Islam",
+          "role": "Treasurer",
+          "dept": "PhD, Nutrition & Integrative Physiology",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/t2.jpeg"
+        },
+        {
+          "name": "Monisha Deepta",
+          "role": "Treasurer",
+          "dept": "Health & Human Services",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/t1.jpeg"
+        },
+        {
+          "name": "Wahidur Rahman",
+          "role": "Sports Secretary",
+          "dept": "PhD, Chemical Engineering",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/ss.jpeg"
+        },
+        {
+          "name": "Toushiqul Islam (Sizan)",
+          "role": "Organizing Secretary",
+          "dept": "PhD, Mechanical Engineering",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/org.jpeg"
+        },
+        {
+          "name": "Arshe Alavee Aziz",
+          "role": "Executive Committee",
+          "dept": "PhD, Physics",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/ec2.jpg"
+        },
+        {
+          "name": "Shamit Fatin",
+          "role": "Executive Committee",
+          "dept": "PhD, Computer Science",
+          "email": "bsauu.uofu@gmail.com",
+          "photo": "assets/2026_committee/ec1.jpg"
+        }
+      ]
+    },
+    {
+      "id": "term-2025-2026",
+      "label": "2025 – 2026",
+      "intro": "Thank you to the outgoing committee, who built most of what this association runs on today.",
+      "layout": "list",
+      "members": [
+        {
+          "name": "Maksudur Rahman Shihab",
+          "role": "President"
+        },
+        {
+          "name": "Mohi Uddin",
+          "role": "Vice President"
+        },
+        {
+          "name": "Khalid Adnan",
+          "role": "General Secretary"
+        }
+      ]
+    }
+  ]
+}
