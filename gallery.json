@@ -1,7 +1,20 @@
 {
   "version": 1,
-  "updated": "2026-10-16T18:23:42.175Z",
+  "updated": "2026-10-16T18:39:06.492Z",
   "albums": [
+    {
+      "id": "album-6pphdk",
+      "title": "Picnic and New Student Orientation",
+      "season": "Fall 2026",
+      "blurb": "",
+      "folder": "assets/gallery/picnic-and-new-student-orientation-v4ft",
+      "cover": 0,
+      "photos": [
+        {
+          "src": "assets/gallery/picnic-and-new-student-orientation-v4ft/mvbba3gdr9z.jpg"
+        }
+      ]
+    },
     {
       "id": "2026_pohela_boishak",
       "title": "Pohela Boishakh 1433",
