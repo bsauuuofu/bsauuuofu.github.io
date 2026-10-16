@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "updated": "2026-10-16T18:23:42.175Z",
+  "albums": [
+    {
+      "id": "2026_pohela_boishak",
+      "title": "Pohela Boishakh 1433",
+      "season": "Spring 2026",
+      "blurb": "The Bengali new year, welcomed the way it should be — panta bhat, red and white, and far too much singing.",
+      "folder": "assets/2026_pohela_boishak",
+      "cover": 0,
+      "photos": [
+        {
+          "src": "assets/2026_pohela_boishak/1.jpg"
+        },
+        {
+          "src": "assets/2026_pohela_boishak/2.jpg"
+        },
+        {
+          "src": "assets/2026_pohela_boishak/3.jpg"
+        }
+      ]
+    },
+    {
+      "id": "2026_committee_handover",
+      "title": "Committee handover ceremony",
+      "season": "Summer 2026",
+      "blurb": "The outgoing committee passed the association on to the 2026–2027 term.",
+      "folder": "assets/2026_committee_handover",
+      "cover": 0,
+      "photos": [
+        {
+          "src": "assets/2026_committee_handover/1.jpg"
+        },
+        {
+          "src": "assets/2026_committee_handover/2.jpg"
+        }
+      ]
+    },
+    {
+      "id": "2026_watch_party",
+      "title": "World Cup final watch party",
+      "season": "Summer 2026",
+      "blurb": "One screen, one room, and everyone shouting at it together.",
+      "folder": "assets/2026_watch_party",
+      "cover": 0,
+      "photos": [
+        {
+          "src": "assets/2026_watch_party/1.jpg"
+        },
+        {
+          "src": "assets/2026_watch_party/2.jpg"
+        },
+        {
+          "src": "assets/2026_watch_party/3.jpg"
+        },
+        {
+          "src": "assets/2026_watch_party/4.jpg"
+        },
+        {
+          "src": "assets/2026_watch_party/5.jpg"
+        },
+        {
+          "src": "assets/2026_watch_party/6.jpg"
+        }
+      ]
+    },
+    {
+      "id": "get_involved_fair_2026",
+      "title": "Get Involved Fair 2026",
+      "season": "Fall 2026",
+      "blurb": "Our table on campus, meeting the students who joined us this year.",
+      "folder": "assets/get_involved_fair_2026",
+      "cover": 0,
+      "photos": [
+        {
+          "src": "assets/get_involved_fair_2026/1.jpg"
+        },
+        {
+          "src": "assets/get_involved_fair_2026/2.jpg"
+        },
+        {
+          "src": "assets/get_involved_fair_2026/3.jpg"
+        },
+        {
+          "src": "assets/get_involved_fair_2026/4.jpg"
+        },
+        {
+          "src": "assets/get_involved_fair_2026/5.jpg"
+        },
+        {
+          "src": "assets/get_involved_fair_2026/6.jpg"
+        }
+      ]
+    }
+  ]
+}
