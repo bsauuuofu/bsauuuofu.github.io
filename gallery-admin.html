@@ -3,15 +3,20 @@
 <head>
 <!--
 ========================================================================
-  BSAUU GALLERY EDITOR
+  BSAUU SITE EDITOR — gallery and committee
 ========================================================================
   Put this file next to index.html in the website's GitHub repository.
   Open it on the live site (…/gallery-admin.html), sign in with a
-  GitHub token, and edit albums, photos and captions.
+  GitHub token, and edit:
+     Gallery tab    albums, photos, captions
+     Committee tab  committees (terms), members, roles, photos,
+                    LinkedIn and email
 
   "Publish" saves everything in ONE commit to the repository:
-     gallery.json              the album list, titles, text, captions
-     assets/gallery/<album>/   the photos you uploaded (resized)
+     gallery.json                 albums, titles, text, captions
+     committee.json               committees and their members
+     assets/gallery/<album>/      gallery photos you uploaded (resized)
+     assets/committee/<term>/     member photos (square, 600px)
   GitHub Pages then rebuilds the site, usually within a minute.
 
   Your token is only ever sent to api.github.com. It is kept in this
@@ -21,7 +26,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Gallery editor | BSAUU</title>
+<title>Site editor | BSAUU</title>
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -178,6 +183,44 @@ textarea.in{resize:vertical;min-height:110px;line-height:1.5}
 .bar-in p b{color:#ff9aa6}
 @media (max-width:640px){.bar-in{border-radius:22px;flex-wrap:wrap;margin:0 10px 10px;padding:14px}.bar-in p{width:100%}}
 
+/* view switch */
+.views{display:flex;gap:4px;background:rgba(255,253,248,.08);padding:4px;border-radius:999px}
+.views button{color:rgba(255,253,248,.75);padding:8px 16px;border-radius:999px;font-size:14.5px;font-weight:500;position:relative;transition:background .25s,color .25s}
+.views button:hover{color:#fff}
+.views button.on{background:var(--paper);color:var(--green-900)}
+.views button.has-changes::after{content:'';position:absolute;top:6px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--flag-red)}
+@media (max-width:720px){.views{order:5;width:100%;justify-content:center}}
+
+/* committee */
+.avatar{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;overflow:hidden;flex:none;
+  background:radial-gradient(circle at 35% 30%,#0a6b4f,var(--green) 55%,var(--green-900));box-shadow:0 0 0 2px #fff,0 0 0 3px rgba(224,40,60,.5)}
+.avatar .ini{font-family:var(--serif);font-weight:600;color:var(--paper);font-size:1.05rem;letter-spacing:.03em}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.avatar.big{width:112px;height:112px;box-shadow:0 0 0 4px #fff,0 0 0 5.5px var(--green),0 0 0 9px #fff,0 0 0 10px rgba(224,40,60,.5)}
+.avatar.big .ini{font-size:2.5rem}
+.athumb.stack{background:none;display:flex;align-items:center;width:62px;overflow:visible}
+.athumb.stack .avatar{width:32px;height:32px;margin-right:-14px}
+.athumb.stack .avatar .ini{font-size:.8rem}
+.mlist{display:flex;flex-direction:column;gap:16px}
+.mrow{display:grid;gap:18px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+@media (min-width:760px){.mrow{grid-template-columns:150px minmax(0,1fr) 40px;align-items:start}}
+.mphoto{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.mphoto .avatar{margin:8px 0 6px}
+.mfields label.f{margin-bottom:12px}
+.mtools{display:flex;gap:4px}
+@media (min-width:760px){.mtools{flex-direction:column}}
+.mtools button{width:36px;height:34px;border-radius:9px;color:var(--muted)}
+.mtools button:hover{background:#fff;color:var(--green)}
+.mtools button.del:hover{background:#ffe4e7;color:var(--red-700)}
+.mtools button:disabled{opacity:.25;cursor:default;background:none}
+.btn-xs{padding:6px 14px;font-size:13px}
+.linkbtn{font-size:13px;color:var(--red-700);text-decoration:underline;text-underline-offset:3px}
+.muted{color:var(--muted);font-size:12.5px;line-height:1.3}
+.tag.green{background:#dff1ea;color:var(--green)}
+.in.bad{border-color:var(--red);box-shadow:0 0 0 4px rgba(224,40,60,.1)}
+.bad-note{color:var(--red-700)!important}
+select.in{appearance:auto}
+
 /* busy overlay + toasts */
 .busy{position:fixed;inset:0;z-index:60;background:rgba(2,28,20,.7);backdrop-filter:blur(4px);display:grid;place-items:center;padding:20px}
 .busy-box{background:#fff;border-radius:22px;padding:30px 34px;width:min(440px,100%);text-align:center}
@@ -201,8 +244,12 @@ textarea.in{resize:vertical;min-height:110px;line-height:1.5}
   <div class="top-in">
     <a class="brand" href="index.html#gallery" title="Back to the website">
       <span class="brand-mark"><img src="assets/logo.png" alt=""></span>
-      <span><b>BSAUU</b><small>Gallery editor</small></span>
+      <span><b>BSAUU</b><small>Site editor</small></span>
     </a>
+    <nav class="views hidden" id="views" aria-label="What to edit">
+      <button data-view="gallery"><i class="far fa-images"></i> Gallery</button>
+      <button data-view="committee"><i class="fas fa-users"></i> Committee</button>
+    </nav>
     <span class="status hidden" id="status">All changes published</span>
     <span class="who hidden" id="who"><img id="whoImg" alt=""><span id="whoName"></span></span>
     <a class="btn btn-light btn-sm" href="index.html#gallery" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> View site</a>
@@ -214,8 +261,8 @@ textarea.in{resize:vertical;min-height:110px;line-height:1.5}
 <section class="login" id="loginView">
   <div class="card">
     <p class="kicker">Committee only</p>
-    <h1>Gallery <em>editor</em></h1>
-    <p class="lede">Sign in with a GitHub token to add albums, upload photos and edit the text on the website's gallery.</p>
+    <h1>Site <em>editor</em></h1>
+    <p class="lede">Sign in with a GitHub token to update the website's gallery and committee — albums, photos, members, roles and contact links.</p>
     <div class="err hidden" id="loginErr"></div>
     <form id="loginForm" autocomplete="off">
       <label class="f"><span>GitHub token</span>
@@ -242,7 +289,7 @@ textarea.in{resize:vertical;min-height:110px;line-height:1.5}
   <div class="card help">
     <h2>Getting a token (2 minutes)</h2>
     <ol>
-      <li>Sign in to GitHub and open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Fine-grained tokens → Generate new token</a>.</li>
+      <li>Sign in to GitHub and open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token</a>. (Developer settings is the last item in the left sidebar of Settings.)</li>
       <li>Give it a name like <b>BSAUU gallery</b> and an expiry date (e.g. the end of your term).</li>
       <li><b>Resource owner:</b> the account or organisation that owns the website repository.</li>
       <li><b>Repository access:</b> “Only select repositories” → pick the website repository.</li>
@@ -257,11 +304,11 @@ textarea.in{resize:vertical;min-height:110px;line-height:1.5}
 <div class="app hidden" id="appView">
   <aside class="side">
     <div class="side-head">
-      <h2>Albums</h2>
-      <button class="btn btn-green btn-sm" id="addAlbum"><i class="fas fa-plus"></i> New album</button>
+      <h2 id="sideTitle">Albums</h2>
+      <button class="btn btn-green btn-sm" id="addAlbum"><i class="fas fa-plus"></i> <span id="addBtnText">New album</span></button>
     </div>
     <ul class="alist" id="albumList"></ul>
-    <p class="hint" style="margin:14px 6px 4px;font-size:13px">The order here is the order of the slideshow. Use ↑ ↓ to move an album.</p>
+    <p class="hint" id="sideHint" style="margin:14px 6px 4px;font-size:13px"></p>
   </aside>
 
   <main class="main" id="editor"></main>
@@ -290,9 +337,10 @@ const KNOWN_ALBUMS = [
   { folder:'2026_watch_party',        title:'World Cup final watch party',  season:'Summer 2026', blurb:'One screen, one room, and everyone shouting at it together.' },
   { folder:'get_involved_fair_2026',  title:'Get Involved Fair 2026',       season:'Fall 2026',   blurb:'Our table on campus, meeting the students who joined us this year.' }
 ];
-const SKIP_FOLDERS = ['2026_committee', 'gallery'];   // never imported as albums
-const MAX_SIDE  = 2000;    // photos are resized so the long side is at most this many pixels
-const JPEG_Q    = 0.86;    // JPEG quality for uploaded photos
+const SKIP_FOLDERS = ['2026_committee', 'gallery', 'committee'];   // never imported as albums
+const MAX_SIDE   = 2000;   // gallery photos: long side at most this many pixels
+const PORTRAIT   = 600;    // committee photos: cropped square, this many pixels
+const JPEG_Q     = 0.86;
 const API = 'https://api.github.com';
 const CFG_KEY = 'bsauu-gallery-cfg', TOKEN_KEY = 'bsauu-gallery-token';
 
@@ -300,12 +348,11 @@ const CFG_KEY = 'bsauu-gallery-cfg', TOKEN_KEY = 'bsauu-gallery-token';
 let cfg   = { owner:'', repo:'', branch:'', root:'' };
 let token = '';
 let me    = null;
-let data  = { version:1, albums:[] };
-let fileSha = null;           // git sha of gallery.json when loaded (null = file not created yet)
-let sel   = 0;                // selected album
-let dirty = false;
+let view  = 'gallery';
+/* one record per file the editor manages */
+const G = { file:'gallery.json',   data:{ albums:[] }, sha:null, needsImport:false, dirty:false, sel:0 };
+const C = { file:'committee.json', data:{ terms:[]  }, sha:null, needsImport:false, dirty:false, sel:0 };
 let deleted = new Set();      // repo paths of photos to delete on publish
-let needsImport = false;
 
 const $ = id => document.getElementById(id);
 const el = (tag, props = {}, kids = []) => {
@@ -339,6 +386,19 @@ const encPath = p => p.split('/').map(encodeURIComponent).join('/');
 const repoPath = p => (cfg.root ? cfg.root.replace(/^\/+|\/+$/g, '') + '/' : '') + p;
 const rawURL = p => `https://raw.githubusercontent.com/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/${encPath(cfg.branch)}/${encPath(repoPath(p))}`;
 
+/* same rule as the website: "Md Alamgir Kabir" -> "AK" */
+function initials(name){
+  const skip = /^(md\.?|mohd\.?|mohammad|mohammed|muhammad|mohamed|dr\.?|mr\.?|ms\.?|mrs\.?|prof\.?)$/i;
+  let w = String(name || '').replace(/\(.*?\)/g, ' ').trim().split(/\s+/).filter(Boolean);
+  const core = w.filter(x => !skip.test(x));
+  if(core.length) w = core;
+  if(!w.length) return '?';
+  return (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase();
+}
+const fixURL  = u => { u = String(u || '').trim(); if(!u) return ''; return /^https?:\/\//i.test(u) ? u : 'https://' + u.replace(/^\/+/, ''); };
+const okURL   = u => !u || /^https?:\/\/[^\s"<>]+\.[^\s"<>]+/i.test(fixURL(u));
+const okMail  = e => !e || /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(String(e).trim());
+
 function b64ToText(b64){
   const bin = atob(b64.replace(/\s/g, ''));
   return new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
@@ -351,7 +411,7 @@ function blobToB64(blob){
     r.readAsDataURL(blob);
   });
 }
-/* the same id git gives a file, so we know gallery.json's version after publishing */
+/* the same id git gives a file, so we know each file's version after publishing */
 async function gitBlobSha(text){
   const body = new TextEncoder().encode(text);
   const head = new TextEncoder().encode(`blob ${body.length}\0`);
@@ -384,10 +444,10 @@ function friendly(err){
   return err.message || String(err);
 }
 
-/* ---------------- data shape ---------------- */
-function normalize(d){
+/* ---------------- data shapes ---------------- */
+function normalizeGallery(d){
   const albums = Array.isArray(d && d.albums) ? d.albums : [];
-  return { version:1, albums: albums.map(a => ({
+  return { albums: albums.map(a => ({
     id: a.id || 'album-' + rand(5),
     title: a.title || '', season: a.season || '', blurb: a.blurb || '',
     hidden: !!a.hidden, folder: a.folder || '',
@@ -395,13 +455,32 @@ function normalize(d){
     photos: (a.photos || []).filter(p => p && p.src).map(p => ({ src: p.src, caption: p.caption || '' }))
   }))};
 }
-/* what gets written to gallery.json (no editor-only fields) */
-function cleanData(){
-  return { version:1, updated: new Date().toISOString(), albums: data.albums.map(a => ({
+function cleanGallery(){
+  return { version:1, updated: new Date().toISOString(), albums: G.data.albums.map(a => ({
     id:a.id, title:a.title.trim(), season:a.season.trim(), blurb:a.blurb.trim(), hidden:a.hidden || undefined,
     folder:a.folder || undefined,
     cover: Math.max(0, Math.min(a.cover, a.photos.length - 1)),
     photos: a.photos.map(p => p.caption.trim() ? { src:p.src, caption:p.caption.trim() } : { src:p.src })
+  }))};
+}
+function normalizeCommittee(d){
+  const terms = Array.isArray(d && d.terms) ? d.terms : [];
+  return { terms: terms.map(t => ({
+    id: t.id || 'term-' + rand(5),
+    label: t.label || '', intro: t.intro || '', layout: t.layout === 'list' ? 'list' : 'cards', hidden: !!t.hidden,
+    members: (t.members || []).filter(Boolean).map(m => ({
+      name: m.name || '', role: m.role || '', dept: m.dept || '', linkedin: m.linkedin || '', email: m.email || '', photo: m.photo || ''
+    }))
+  }))};
+}
+function cleanCommittee(){
+  const opt = v => (v || '').trim() || undefined;
+  return { version:1, updated: new Date().toISOString(), terms: C.data.terms.map(t => ({
+    id:t.id, label:t.label.trim(), intro:opt(t.intro), layout:t.layout, hidden:t.hidden || undefined,
+    members: t.members.map(m => ({
+      name:m.name.trim(), role:opt(m.role), dept:opt(m.dept),
+      linkedin: m.linkedin.trim() ? fixURL(m.linkedin) : undefined, email:opt(m.email), photo:opt(m.photo)
+    }))
   }))};
 }
 
@@ -420,6 +499,7 @@ function loadSaved(){
   $('fRepo').value   = cfg.owner && cfg.repo ? `${cfg.owner}/${cfg.repo}` : '';
   $('fBranch').value = cfg.branch || '';
   $('fRoot').value   = cfg.root || '';
+  if(/^#?committee$/i.test(location.hash)) view = 'committee';
 }
 
 async function signIn(){
@@ -440,7 +520,7 @@ async function signIn(){
       localStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(TOKEN_KEY);
       ($('fRemember').checked ? localStorage : sessionStorage).setItem(TOKEN_KEY, token);
     }catch(e){}
-    await loadFromRepo();
+    await loadAll();
     showApp();
   }catch(err){
     showLoginErr(friendly(err));
@@ -453,34 +533,42 @@ function showLoginErr(msg){ $('loginErr').textContent = msg; $('loginErr').class
 function showApp(){
   $('loginView').classList.add('hidden');
   $('appView').classList.remove('hidden');
-  ['who','signOut','status'].forEach(id => $(id).classList.remove('hidden'));
+  ['who','signOut','status','views'].forEach(id => $(id).classList.remove('hidden'));
   $('whoImg').src = me.avatar_url || '';
   $('whoName').textContent = me.login;
   render();
 }
 function signOut(){
-  if(dirty && !confirm('You have unpublished changes. Sign out and lose them?')) return;
+  if(anyDirty() && !confirm('You have unpublished changes. Sign out and lose them?')) return;
   try{ localStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(TOKEN_KEY); }catch(e){}
   location.reload();
 }
 
 /* ---------------- load ---------------- */
-async function loadFromRepo(){
-  busy('Loading the gallery from GitHub…', .3);
+async function loadFile(rec, normalize){
   try{
-    const f = await gh(contentsAPI('gallery.json'));
-    fileSha = f.sha;
-    data = normalize(JSON.parse(b64ToText(f.content)));
-    needsImport = false;
+    const f = await gh(contentsAPI(rec.file));
+    rec.sha = f.sha;
+    rec.data = normalize(JSON.parse(b64ToText(f.content)));
+    rec.needsImport = false;
   }catch(err){
     if(err.status !== 404) throw err;
-    data = { version:1, albums:[] }; fileSha = null; needsImport = true;
+    rec.data = normalize({}); rec.sha = null; rec.needsImport = true;
+  }
+  rec.sel = 0; rec.dirty = false;
+}
+async function loadAll(){
+  busy('Loading the gallery and committee from GitHub…', .3);
+  try{
+    await loadFile(G, normalizeGallery);
+    busy('Loading the gallery and committee from GitHub…', .7);
+    await loadFile(C, normalizeCommittee);
   }finally{ busy(false); }
-  deleted = new Set(); sel = 0; setDirty(false);
+  deleted = new Set(); updateStatus();
 }
 
 /* copy the numbered-folder albums that are already on the site into the editor */
-async function importExisting(){
+async function importAlbums(){
   busy('Looking for albums already on the site…', .1);
   try{
     let folders = [];
@@ -490,7 +578,7 @@ async function importExisting(){
     }catch(e){ if(e.status !== 404) throw e; }
     /* the site's known albums first, in their original order, then anything else found */
     folders = KNOWN_ALBUMS.map(k => k.folder).concat(folders.filter(f => !KNOWN_ALBUMS.some(k => k.folder === f)));
-    const have = new Set(data.albums.map(a => a.id));
+    const have = new Set(G.data.albums.map(a => a.id));
     let added = 0, i = 0;
     for(const folder of folders){
       busy('Looking in ' + folder + '…', ++i / folders.length);
@@ -501,7 +589,7 @@ async function importExisting(){
                         .sort((a, b) => parseInt(a.name) - parseInt(b.name));
       const known = KNOWN_ALBUMS.find(k => k.folder === folder);
       if(!known && !imgs.length) continue;           // not a photo album
-      data.albums.push({
+      G.data.albums.push({
         id: folder, folder: 'assets/' + folder,
         title: known ? known.title : folder.replace(/[_-]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
         season: known ? known.season : '', blurb: known ? known.blurb : '', hidden:false, cover:0,
@@ -509,72 +597,97 @@ async function importExisting(){
       });
       added++;
     }
-    needsImport = false;
-    if(added){ setDirty(true); toast(`Imported ${added} album${added > 1 ? 's' : ''}. Check them over, then press Publish.`); }
+    G.needsImport = false;
+    if(added){ markDirty(G); toast(`Imported ${added} album${added > 1 ? 's' : ''}. Check them over, then press Publish.`); }
     else toast('No numbered photo folders were found to import.');
   }catch(err){ toast(friendly(err), true); }
   finally{ busy(false); render(); }
 }
 
-/* ---------------- editing ---------------- */
-function setDirty(v){
-  dirty = v;
-  $('bar').classList.toggle('show', v);
-  $('status').classList.toggle('dirty', v);
-  $('status').textContent = v ? 'Unpublished changes' : 'All changes published';
-  const n = data.albums.reduce((s, a) => s + a.photos.filter(p => p._new).length, 0);
-  $('barText').textContent = v ? (n ? `Unsaved changes, including ${n} new photo${n > 1 ? 's' : ''}` : 'You have unsaved changes') : '';
+/* read the committee that is written into the website's index.html */
+async function importCommittee(){
+  busy('Reading the committee from the website…', .4);
+  try{
+    const f = await gh(contentsAPI('index.html'));
+    const doc = new DOMParser().parseFromString(b64ToText(f.content), 'text/html');
+    const labels = {};
+    doc.querySelectorAll('#committee .tab').forEach(b => labels[b.dataset.tab] = b.textContent.trim());
+    let added = 0;
+    doc.querySelectorAll('#committee .com-panel').forEach(p => {
+      const label = labels[p.dataset.panel] || p.dataset.panel || 'Committee';
+      if(C.data.terms.some(t => t.label === label)) return;
+      const cards = p.querySelectorAll('.member');
+      const term = { id:'term-' + (slug(label) || rand(5)), label, intro:'', layout: cards.length ? 'cards' : 'list', hidden:false, members:[] };
+      if(cards.length){
+        const intro = p.querySelector(':scope > p'); if(intro) term.intro = intro.textContent.trim();
+        cards.forEach(m => {
+          const li = m.querySelector('a[aria-label*="LinkedIn"]');
+          const mail = m.querySelector('a[href^="mailto:"]');
+          const img = m.querySelector('img');
+          term.members.push({
+            name: (m.querySelector('h4') || {}).textContent?.trim() || '',
+            role: (m.querySelector('.role') || {}).textContent?.trim() || '',
+            dept: (m.querySelector('.dept') || {}).textContent?.trim() || '',
+            linkedin: li && !/^#?$/.test(li.getAttribute('href')) ? li.getAttribute('href') : '',
+            email: mail ? decodeURIComponent(mail.getAttribute('href').replace(/^mailto:/i, '')) : '',
+            photo: img ? img.getAttribute('src') : ''
+          });
+        });
+      }else{
+        const intro = p.querySelector('.roster-wrap > p'); if(intro) term.intro = intro.textContent.trim();
+        p.querySelectorAll('tr').forEach(tr => term.members.push({
+          name: (tr.querySelector('td') || {}).textContent?.trim() || '', role: (tr.querySelector('th') || {}).textContent?.trim() || '',
+          dept:'', linkedin:'', email:'', photo:''
+        }));
+      }
+      term.members = term.members.filter(m => m.name);
+      C.data.terms.push(term); added++;
+    });
+    C.needsImport = false;
+    if(added){ markDirty(C); toast(`Imported ${added} committee${added > 1 ? 's' : ''}. Check them over, then press Publish.`); }
+    else toast('No committee was found in index.html to import.');
+  }catch(err){ toast(friendly(err), true); }
+  finally{ busy(false); render(); }
 }
-const changed = () => setDirty(true);
 
-function addAlbum(){
-  data.albums.unshift({ id:'album-' + rand(6), title:'', season:'', blurb:'', hidden:false, folder:'', cover:0, photos:[] });
-  sel = 0; changed(); render();
-  setTimeout(() => { const t = $('aTitle'); if(t) t.focus(); }, 50);
+/* ---------------- dirty tracking ---------------- */
+const anyDirty = () => G.dirty || C.dirty;
+function newPhotoCount(){
+  let n = 0;
+  G.data.albums.forEach(a => a.photos.forEach(p => { if(p._new) n++; }));
+  C.data.terms.forEach(t => t.members.forEach(m => { if(m._new) n++; }));
+  return n;
 }
-function moveAlbum(i, d){
-  const j = i + d; if(j < 0 || j >= data.albums.length) return;
-  const A = data.albums; [A[i], A[j]] = [A[j], A[i]];
-  if(sel === i) sel = j; else if(sel === j) sel = i;
-  changed(); render();
+function updateStatus(){
+  const d = anyDirty();
+  $('bar').classList.toggle('show', d);
+  $('status').classList.toggle('dirty', d);
+  $('status').textContent = d ? 'Unpublished changes' : 'All changes published';
+  const n = newPhotoCount();
+  const what = [G.dirty ? 'gallery' : '', C.dirty ? 'committee' : ''].filter(Boolean).join(' and ');
+  $('barText').textContent = d ? `Unsaved ${what} changes` + (n ? `, including ${n} new photo${n > 1 ? 's' : ''}` : '') : '';
+  document.querySelectorAll('#views button').forEach(b => {
+    const rec = b.dataset.view === 'gallery' ? G : C;
+    b.classList.toggle('has-changes', rec.dirty);
+  });
 }
-function deleteAlbum(i){
-  const a = data.albums[i];
-  if(!confirm(`Delete the album "${a.title || 'Untitled'}" and its ${a.photos.length} photo${a.photos.length === 1 ? '' : 's'}? This happens when you press Publish.`)) return;
-  a.photos.forEach(forgetPhoto);
-  data.albums.splice(i, 1);
-  sel = Math.max(0, Math.min(sel, data.albums.length - 1));
-  changed(); render();
-}
-function forgetPhoto(p){
-  if(p._new){ URL.revokeObjectURL(p._preview); }
-  else deleted.add(p.src);
-}
-function movePhoto(a, i, d){
-  const j = i + d; if(j < 0 || j >= a.photos.length) return;
-  [a.photos[i], a.photos[j]] = [a.photos[j], a.photos[i]];
-  if(a.cover === i) a.cover = j; else if(a.cover === j) a.cover = i;
-  changed(); renderEditor(); renderList();
-}
-function deletePhoto(a, i){
-  forgetPhoto(a.photos[i]);
-  a.photos.splice(i, 1);
-  if(a.cover === i) a.cover = 0; else if(a.cover > i) a.cover--;
-  changed(); renderEditor(); renderList();
-}
+function markDirty(rec){ rec.dirty = true; updateStatus(); }
 
-/* resize in the browser so the repository stays small */
-function prepImage(file){
+/* ---------------- image preparation ---------------- */
+/* resize in the browser so the repository stays small; square = crop to a centred square */
+function prepImage(file, max, square){
   return new Promise((resolve, reject) => {
     const url = URL.createObjectURL(file);
     const img = new Image();
     img.onload = () => {
-      const s = Math.min(1, MAX_SIDE / Math.max(img.naturalWidth, img.naturalHeight));
+      let sx = 0, sy = 0, sw = img.naturalWidth, sh = img.naturalHeight;
+      if(square){ const s = Math.min(sw, sh); sx = (sw - s) / 2; sy = (sh - s) / 3; sw = sh = s; }   // a little above centre keeps faces in
+      const k = Math.min(1, max / Math.max(sw, sh));
       const c = document.createElement('canvas');
-      c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
+      c.width = Math.round(sw * k); c.height = Math.round(sh * k);
       const ctx = c.getContext('2d');
       ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
-      ctx.drawImage(img, 0, 0, c.width, c.height);
+      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, c.width, c.height);
       URL.revokeObjectURL(url);
       c.toBlob(b => b ? resolve(b) : reject(new Error('Could not convert ' + file.name)), 'image/jpeg', JPEG_Q);
     };
@@ -582,8 +695,41 @@ function prepImage(file){
     img.src = url;
   });
 }
+function forgetFile(obj, key){
+  if(obj._new){ URL.revokeObjectURL(obj._preview); delete obj._new; delete obj._preview; }
+  else if(obj[key]) deleted.add(obj[key]);
+}
+
+/* ================================================================
+   GALLERY editing
+   ================================================================ */
+function addAlbum(){
+  G.data.albums.unshift({ id:'album-' + rand(6), title:'', season:'', blurb:'', hidden:false, folder:'', cover:0, photos:[] });
+  G.sel = 0; markDirty(G); render();
+  setTimeout(() => { const t = $('aTitle'); if(t) t.focus(); }, 50);
+}
+function deleteAlbum(i){
+  const a = G.data.albums[i];
+  if(!confirm(`Delete the album "${a.title || 'Untitled'}" and its ${a.photos.length} photo${a.photos.length === 1 ? '' : 's'}? This happens when you press Publish.`)) return;
+  a.photos.forEach(p => forgetFile(p, 'src'));
+  G.data.albums.splice(i, 1);
+  G.sel = Math.max(0, Math.min(G.sel, G.data.albums.length - 1));
+  markDirty(G); render();
+}
+function movePhoto(a, i, d){
+  const j = i + d; if(j < 0 || j >= a.photos.length) return;
+  [a.photos[i], a.photos[j]] = [a.photos[j], a.photos[i]];
+  if(a.cover === i) a.cover = j; else if(a.cover === j) a.cover = i;
+  markDirty(G); render();
+}
+function deletePhoto(a, i){
+  forgetFile(a.photos[i], 'src');
+  a.photos.splice(i, 1);
+  if(a.cover === i) a.cover = 0; else if(a.cover > i) a.cover--;
+  markDirty(G); render();
+}
 async function addFiles(files){
-  const a = data.albums[sel]; if(!a) return;
+  const a = G.data.albums[G.sel]; if(!a) return;
   const list = Array.from(files).filter(f => f.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name));
   if(!list.length) return;
   if(!a.folder) a.folder = 'assets/gallery/' + (slug(a.title) || 'album') + '-' + rand(4);
@@ -591,73 +737,155 @@ async function addFiles(files){
   for(let i = 0; i < list.length; i++){
     busy(`Preparing photo ${i + 1} of ${list.length}…`, i / list.length);
     try{
-      const blob = await prepImage(list[i]);
+      const blob = await prepImage(list[i], MAX_SIDE, false);
       a.photos.push({ src:`${a.folder}/${Date.now().toString(36)}${rand(3)}.jpg`, caption:'', _new:blob, _preview:URL.createObjectURL(blob) });
       ok++;
     }catch(err){ toast(err.message, true); }
   }
   busy(false);
-  if(ok){ changed(); toast(`Added ${ok} photo${ok > 1 ? 's' : ''}. Press Publish to put ${ok > 1 ? 'them' : 'it'} on the website.`); }
-  renderEditor(); renderList();
+  if(ok){ markDirty(G); toast(`Added ${ok} photo${ok > 1 ? 's' : ''}. Press Publish to put ${ok > 1 ? 'them' : 'it'} on the website.`); }
+  render();
 }
 
-/* ---------------- publish: one commit with everything ---------------- */
+/* ================================================================
+   COMMITTEE editing
+   ================================================================ */
+function addTerm(){
+  const prev = C.data.terms[0];
+  let members = [];
+  if(prev && prev.members.length && confirm(`Start the new committee with the same roles as "${prev.label}"?\n\nOK = copy the roles (you fill in the names)\nCancel = start empty`)){
+    members = prev.members.map(m => ({ name:'', role:m.role, dept:'', linkedin:'', email:'', photo:'' }));
+  }
+  /* guess the next label from "2026 – 2027" */
+  let label = '';
+  const y = prev && prev.label.match(/(\d{4})\D+(\d{4})/);
+  if(y) label = `${+y[1] + 1} – ${+y[2] + 1}`;
+  C.data.terms.unshift({ id:'term-' + rand(6), label, intro:'', layout:'cards', hidden:false, members });
+  C.sel = 0; markDirty(C); render();
+  setTimeout(() => { const t = $('tLabel'); if(t){ t.focus(); t.select(); } }, 50);
+}
+function deleteTerm(i){
+  const t = C.data.terms[i];
+  if(!confirm(`Delete the committee "${t.label || 'Untitled'}" and its ${t.members.length} member${t.members.length === 1 ? '' : 's'}? This happens when you press Publish.`)) return;
+  t.members.forEach(m => forgetFile(m, 'photo'));
+  C.data.terms.splice(i, 1);
+  C.sel = Math.max(0, Math.min(C.sel, C.data.terms.length - 1));
+  markDirty(C); render();
+}
+function addMember(t){
+  t.members.push({ name:'', role:'', dept:'', linkedin:'', email:'', photo:'' });
+  markDirty(C); render();
+  setTimeout(() => { const all = document.querySelectorAll('.mname'); if(all.length) all[all.length - 1].focus(); }, 50);
+}
+function moveMember(t, i, d){
+  const j = i + d; if(j < 0 || j >= t.members.length) return;
+  [t.members[i], t.members[j]] = [t.members[j], t.members[i]];
+  markDirty(C); render();
+}
+function deleteMember(t, i){
+  const m = t.members[i];
+  if(!confirm(`Remove ${m.name || 'this member'} from ${t.label || 'this committee'}?`)) return;
+  forgetFile(m, 'photo');
+  t.members.splice(i, 1);
+  markDirty(C); render();
+}
+async function setPortrait(t, m, file){
+  if(!file) return;
+  busy('Preparing photo…', .5);
+  try{
+    const blob = await prepImage(file, PORTRAIT, true);
+    forgetFile(m, 'photo');
+    m.photo = `assets/committee/${slug(t.label) || 'committee'}/${slug(m.name) || 'member'}-${rand(4)}.jpg`;
+    m._new = blob; m._preview = URL.createObjectURL(blob);
+    markDirty(C);
+  }catch(err){ toast(err.message, true); }
+  busy(false); render();
+}
+function removePortrait(m){
+  forgetFile(m, 'photo');
+  m.photo = '';
+  markDirty(C); render();
+}
+
+/* ================================================================
+   PUBLISH — everything in one commit
+   ================================================================ */
 async function publish(){
-  const missing = data.albums.findIndex(a => !a.title.trim());
-  if(missing >= 0){ sel = missing; render(); toast('Every album needs a title before publishing.', true); return; }
-  const newPhotos = [];
-  data.albums.forEach(a => a.photos.forEach(p => { if(p._new) newPhotos.push(p); }));
-  const steps = newPhotos.length + 4;
+  /* checks */
+  const badAlbum = G.data.albums.findIndex(a => !a.title.trim());
+  if(G.dirty && badAlbum >= 0){ view = 'gallery'; G.sel = badAlbum; render(); toast('Every album needs a title before publishing.', true); return; }
+  if(C.dirty){
+    const badTerm = C.data.terms.findIndex(t => !t.label.trim() || t.members.some(m => !m.name.trim()));
+    if(badTerm >= 0){ view = 'committee'; C.sel = badTerm; render(); toast('Every committee needs a label (e.g. 2027 – 2028), and every member needs a name.', true); return; }
+    const badLink = C.data.terms.findIndex(t => t.members.some(m => !okURL(m.linkedin) || !okMail(m.email)));
+    if(badLink >= 0){ view = 'committee'; C.sel = badLink; render(); toast('A LinkedIn link or email address doesn’t look right — it is marked in red.', true); return; }
+  }
+
+  const uploads = [];
+  if(G.dirty) G.data.albums.forEach(a => a.photos.forEach(p => { if(p._new) uploads.push({ obj:p, path:p.src }); }));
+  if(C.dirty) C.data.terms.forEach(t => t.members.forEach(m => { if(m._new) uploads.push({ obj:m, path:m.photo }); }));
+  const jobs = [G.dirty && [G, cleanGallery], C.dirty && [C, cleanCommittee]].filter(Boolean);
+
+  const steps = uploads.length + 4;
   let step = 0;
   const tick = t => busy(t, ++step / steps);
   try{
     tick('Checking the repository…');
-    const branchRef = `/git/ref/heads/${encPath(cfg.branch)}`;
-    const ref = await gh(repoAPI(branchRef));
+    const ref = await gh(repoAPI(`/git/ref/heads/${encPath(cfg.branch)}`));
     const head = ref.object.sha;
 
     /* has someone else published since this page loaded? */
-    let current = null;
-    try{ current = (await gh(contentsAPI('gallery.json'))).sha; }catch(e){ if(e.status !== 404) throw e; }
-    if(current !== fileSha){
-      busy(false);
-      if(!confirm('Someone else published gallery changes since you opened the editor. Publish anyway and replace their version with yours?\n\n(Cancel, then Discard, to load their version instead.)')) return;
+    for(const [rec] of jobs){
+      let current = null;
+      try{ current = (await gh(contentsAPI(rec.file))).sha; }catch(e){ if(e.status !== 404) throw e; }
+      if(current !== rec.sha){
+        busy(false);
+        if(!confirm(`Someone else published changes to ${rec.file} since you opened the editor. Publish anyway and replace their version with yours?\n\n(Cancel, then Discard, to load their version instead.)`)) return;
+      }
     }
     const baseTree = (await gh(repoAPI(`/git/commits/${head}`))).tree.sha;
 
     const tree = [];
-    for(let i = 0; i < newPhotos.length; i++){
-      tick(`Uploading photo ${i + 1} of ${newPhotos.length}…`);
-      const blob = await gh(repoAPI('/git/blobs'), { method:'POST', body:{ content: await blobToB64(newPhotos[i]._new), encoding:'base64' } });
-      tree.push({ path: repoPath(newPhotos[i].src), mode:'100644', type:'blob', sha: blob.sha });
+    for(let i = 0; i < uploads.length; i++){
+      tick(`Uploading photo ${i + 1} of ${uploads.length}…`);
+      const blob = await gh(repoAPI('/git/blobs'), { method:'POST', body:{ content: await blobToB64(uploads[i].obj._new), encoding:'base64' } });
+      tree.push({ path: repoPath(uploads[i].path), mode:'100644', type:'blob', sha: blob.sha });
     }
 
     /* delete removed photos — only files that still exist and nothing else uses */
-    const inUse = new Set(); data.albums.forEach(a => a.photos.forEach(p => inUse.add(p.src)));
+    const inUse = new Set();
+    G.data.albums.forEach(a => a.photos.forEach(p => inUse.add(p.src)));
+    C.data.terms.forEach(t => t.members.forEach(m => m.photo && inUse.add(m.photo)));
+    let removed = 0;
     for(const p of deleted){
       if(inUse.has(p)) continue;
-      try{ await gh(contentsAPI(p)); tree.push({ path: repoPath(p), mode:'100644', type:'blob', sha:null }); }
+      try{ await gh(contentsAPI(p)); tree.push({ path: repoPath(p), mode:'100644', type:'blob', sha:null }); removed++; }
       catch(e){ if(e.status !== 404) throw e; }
     }
 
-    tick('Saving the album list…');
-    const json = JSON.stringify(cleanData(), null, 2) + '\n';
-    tree.push({ path: repoPath('gallery.json'), mode:'100644', type:'blob', content: json });
+    tick('Saving…');
+    const written = [];
+    for(const [rec, clean] of jobs){
+      const json = JSON.stringify(clean(), null, 2) + '\n';
+      tree.push({ path: repoPath(rec.file), mode:'100644', type:'blob', content: json });
+      written.push([rec, json]);
+    }
     const t = await gh(repoAPI('/git/trees'), { method:'POST', body:{ base_tree: baseTree, tree } });
 
     tick('Publishing…');
+    const what = jobs.map(([rec]) => rec === G ? 'gallery' : 'committee').join(' and ');
     const parts = [];
-    if(newPhotos.length) parts.push(`${newPhotos.length} new photo${newPhotos.length > 1 ? 's' : ''}`);
-    if(deleted.size) parts.push(`${deleted.size} removed`);
-    const message = 'Gallery: update from the editor' + (parts.length ? ' (' + parts.join(', ') + ')' : '') + ` — ${me.login}`;
+    if(uploads.length) parts.push(`${uploads.length} new photo${uploads.length > 1 ? 's' : ''}`);
+    if(removed) parts.push(`${removed} removed`);
+    const message = `Update ${what} from the editor` + (parts.length ? ' (' + parts.join(', ') + ')' : '') + ` — ${me.login}`;
     const commit = await gh(repoAPI('/git/commits'), { method:'POST', body:{ message, tree: t.sha, parents:[head] } });
     await gh(repoAPI(`/git/refs/heads/${encPath(cfg.branch)}`), { method:'PATCH', body:{ sha: commit.sha } });
 
     /* done: the new photos are now normal repository files */
-    newPhotos.forEach(p => { delete p._new; });
-    fileSha = await gitBlobSha(json);
+    uploads.forEach(u => { delete u.obj._new; });
+    for(const [rec, json] of written){ rec.sha = await gitBlobSha(json); rec.dirty = false; rec.needsImport = false; }
     deleted = new Set();
-    busy(false); setDirty(false); render();
+    busy(false); updateStatus(); render();
     toast('Published! GitHub Pages usually updates the website within a minute or two.');
   }catch(err){
     busy(false);
@@ -666,80 +894,126 @@ async function publish(){
 }
 
 async function discard(){
-  if(!confirm('Throw away all unpublished changes and reload the gallery from GitHub?')) return;
-  data.albums.forEach(a => a.photos.forEach(p => p._preview && URL.revokeObjectURL(p._preview)));
-  try{ await loadFromRepo(); render(); toast('Reloaded from GitHub.'); }
+  if(!confirm('Throw away all unpublished changes (gallery and committee) and reload from GitHub?')) return;
+  G.data.albums.forEach(a => a.photos.forEach(p => p._preview && URL.revokeObjectURL(p._preview)));
+  C.data.terms.forEach(t => t.members.forEach(m => m._preview && URL.revokeObjectURL(m._preview)));
+  try{ await loadAll(); render(); toast('Reloaded from GitHub.'); }
   catch(err){ toast(friendly(err), true); }
 }
 
-/* ---------------- drawing the editor ---------------- */
-function photoSrc(p){ return p._preview || rawURL(p.src); }
-function photoImg(p, cls){
-  const img = el('img', { src: photoSrc(p), alt:'', loading:'lazy', class: cls || null });
-  img.addEventListener('error', () => { if(!img.dataset.retry){ img.dataset.retry = 1; img.src = p.src; } }, { once:false });
+/* ================================================================
+   DRAWING
+   ================================================================ */
+function repoImg(src, preview, cls){
+  const img = el('img', { src: preview || rawURL(src), alt:'', loading:'lazy', class: cls || null });
+  img.addEventListener('error', () => {
+    if(!img.dataset.retry){ img.dataset.retry = 1; img.src = src; }     // fall back to the live site's copy
+    else img.dispatchEvent(new CustomEvent('gone'));
+  });
   return img;
 }
-
-function renderList(){
-  const ul = $('albumList'); ul.innerHTML = '';
-  data.albums.forEach((a, i) => {
-    const cover = a.photos[Math.min(a.cover, a.photos.length - 1)];
-    const li = el('li', { class:'aitem' + (i === sel ? ' on' : ''), onclick: () => { sel = i; render(); } }, [
-      el('span', { class:'athumb' }, cover ? photoImg(cover) : icon('far fa-images')),
-      el('span', { class:'ainfo' }, [
-        el('b', { text: a.title || 'Untitled album' }),
-        el('span', {}, [
-          document.createTextNode([a.season, `${a.photos.length} photo${a.photos.length === 1 ? '' : 's'}`].filter(Boolean).join(' · ')),
-          a.hidden ? el('span', { class:'tag', text:'Hidden' }) : null,
-          a.photos.some(p => p._new) ? el('span', { class:'tag red', text:'New photos' }) : null
-        ])
-      ]),
-      el('span', { class:'amove' }, [
-        el('button', { title:'Move up', 'aria-label':'Move album up', disabled: i === 0, onclick: e => { e.stopPropagation(); moveAlbum(i, -1); } }, icon('fas fa-chevron-up')),
-        el('button', { title:'Move down', 'aria-label':'Move album down', disabled: i === data.albums.length - 1, onclick: e => { e.stopPropagation(); moveAlbum(i, 1); } }, icon('fas fa-chevron-down'))
-      ])
-    ]);
-    ul.append(li);
-  });
-  if(!data.albums.length) ul.append(el('li', { class:'hint', style:'padding:10px 8px', text:'No albums yet.' }));
+function avatar(m, big){
+  const box = el('span', { class:'avatar' + (big ? ' big' : '') }, el('span', { class:'ini', text: initials(m.name) }));
+  if(m.photo){
+    const img = repoImg(m.photo, m._preview);
+    img.addEventListener('gone', () => img.remove());
+    box.append(img);
+  }
+  return box;
+}
+function moveBtns(i, len, fn, labels){
+  return el('span', { class:'amove' }, [
+    el('button', { title:labels[0], 'aria-label':labels[0], disabled: i === 0, onclick: e => { e.stopPropagation(); fn(i, -1); } }, icon('fas fa-chevron-up')),
+    el('button', { title:labels[1], 'aria-label':labels[1], disabled: i === len - 1, onclick: e => { e.stopPropagation(); fn(i, 1); } }, icon('fas fa-chevron-down'))
+  ]);
+}
+function swapIn(list, rec){
+  return (i, d) => {
+    const j = i + d; if(j < 0 || j >= list.length) return;
+    [list[i], list[j]] = [list[j], list[i]];
+    if(rec.sel === i) rec.sel = j; else if(rec.sel === j) rec.sel = i;
+    markDirty(rec); render();
+  };
 }
 
-function renderEditor(){
-  const box = $('editor'); box.innerHTML = '';
-  const a = data.albums[sel];
+function renderSide(){
+  const isG = view === 'gallery';
+  $('sideTitle').textContent = isG ? 'Albums' : 'Committees';
+  $('addBtnText').textContent = isG ? 'New album' : 'New committee';
+  $('sideHint').textContent = isG
+    ? 'The order here is the order of the slideshow. Use ↑ ↓ to move an album.'
+    : 'The committee at the top is the one the website shows first. Older ones become tabs.';
+  const ul = $('albumList'); ul.innerHTML = '';
+  if(isG){
+    G.data.albums.forEach((a, i) => {
+      const cover = a.photos[Math.min(a.cover, a.photos.length - 1)];
+      ul.append(el('li', { class:'aitem' + (i === G.sel ? ' on' : ''), onclick: () => { G.sel = i; render(); } }, [
+        el('span', { class:'athumb' }, cover ? repoImg(cover.src, cover._preview) : icon('far fa-images')),
+        el('span', { class:'ainfo' }, [
+          el('b', { text: a.title || 'Untitled album' }),
+          el('span', {}, [
+            document.createTextNode([a.season, `${a.photos.length} photo${a.photos.length === 1 ? '' : 's'}`].filter(Boolean).join(' · ')),
+            a.hidden ? el('span', { class:'tag', text:'Hidden' }) : null,
+            a.photos.some(p => p._new) ? el('span', { class:'tag red', text:'New photos' }) : null
+          ])
+        ]),
+        moveBtns(i, G.data.albums.length, swapIn(G.data.albums, G), ['Move album up', 'Move album down'])
+      ]));
+    });
+    if(!G.data.albums.length) ul.append(el('li', { class:'hint', style:'padding:10px 8px', text:'No albums yet.' }));
+  }else{
+    const firstShown = C.data.terms.findIndex(t => !t.hidden);
+    C.data.terms.forEach((t, i) => {
+      ul.append(el('li', { class:'aitem' + (i === C.sel ? ' on' : ''), onclick: () => { C.sel = i; render(); } }, [
+        el('span', { class:'athumb stack' }, t.members.slice(0, 3).map(m => avatar(m))),
+        el('span', { class:'ainfo' }, [
+          el('b', { text: t.label || 'Untitled committee' }),
+          el('span', {}, [
+            document.createTextNode(`${t.members.length} member${t.members.length === 1 ? '' : 's'}`),
+            i === firstShown ? el('span', { class:'tag green', text:'Shown first' }) : null,
+            t.hidden ? el('span', { class:'tag', text:'Hidden' }) : null
+          ])
+        ]),
+        moveBtns(i, C.data.terms.length, swapIn(C.data.terms, C), ['Move committee up', 'Move committee down'])
+      ]));
+    });
+    if(!C.data.terms.length) ul.append(el('li', { class:'hint', style:'padding:10px 8px', text:'No committees yet.' }));
+  }
+}
 
+function emptyPanel(kicker, title, text, actions){
+  return el('div', { class:'panel empty' }, [
+    el('p', { class:'kicker', text:kicker }), el('h2', { text:title }), el('p', { text:text }),
+    el('div', { class:'acts' }, actions)
+  ]);
+}
+
+function renderGalleryEditor(box){
+  const a = G.data.albums[G.sel];
   if(!a){
-    box.append(el('div', { class:'panel empty' }, [
-      el('p', { class:'kicker', text: needsImport ? 'First time here' : 'Empty gallery' }),
-      el('h2', { text: needsImport ? 'Set up the gallery' : 'No albums yet' }),
-      el('p', { text: needsImport
-        ? 'The website has no gallery.json yet, so it is still showing the photo folders in assets/. Import those albums to edit them here, or start a new album.'
-        : 'Create the first album, add photos, then press Publish.' }),
-      el('div', { class:'acts' }, [
-        needsImport ? el('button', { class:'btn btn-red', onclick: importExisting }, [icon('fas fa-file-import'), ' Import albums from the site']) : null,
-        el('button', { class:'btn btn-ghost', onclick: addAlbum }, [icon('fas fa-plus'), ' New album'])
-      ])
-    ]));
+    box.append(emptyPanel(G.needsImport ? 'First time here' : 'Empty gallery', G.needsImport ? 'Set up the gallery' : 'No albums yet',
+      G.needsImport ? 'The website has no gallery.json yet, so it is still showing the photo folders in assets/. Import those albums to edit them here, or start a new album.'
+                    : 'Create the first album, add photos, then press Publish.',
+      [G.needsImport ? el('button', { class:'btn btn-red', onclick: importAlbums }, [icon('fas fa-file-import'), ' Import albums from the site']) : null,
+       el('button', { class:'btn btn-ghost', onclick: addAlbum }, [icon('fas fa-plus'), ' New album'])]));
     return;
   }
-
-  /* album details */
   const title = el('input', { class:'in', id:'aTitle', value:a.title, placeholder:'e.g. Pohela Boishakh 1434', maxlength:90 });
-  title.addEventListener('input', () => { a.title = title.value; changed(); renderList(); });
+  title.addEventListener('input', () => { a.title = title.value; markDirty(G); renderSide(); });
   const season = el('input', { class:'in', value:a.season, placeholder:'e.g. Spring 2027', maxlength:40 });
-  season.addEventListener('input', () => { a.season = season.value; changed(); renderList(); });
+  season.addEventListener('input', () => { a.season = season.value; markDirty(G); renderSide(); });
   const blurb = el('textarea', { class:'in', placeholder:'A sentence or two about the event.', maxlength:400 });
   blurb.value = a.blurb;
   const cnt = el('div', { class:'count', text:`${a.blurb.length} / 400` });
-  blurb.addEventListener('input', () => { a.blurb = blurb.value; cnt.textContent = `${a.blurb.length} / 400`; changed(); });
+  blurb.addEventListener('input', () => { a.blurb = blurb.value; cnt.textContent = `${a.blurb.length} / 400`; markDirty(G); });
   const show = el('input', { type:'checkbox', checked: !a.hidden });
-  show.addEventListener('change', () => { a.hidden = !show.checked; changed(); renderList(); });
+  show.addEventListener('change', () => { a.hidden = !show.checked; markDirty(G); renderSide(); });
 
   box.append(el('section', { class:'panel' }, [
     el('div', { class:'panel-head' }, [
-      el('div', {}, [ el('p', { class:'kicker', text:`Album ${sel + 1} of ${data.albums.length}` }), el('h2', { text:'Album details' }) ]),
+      el('div', {}, [ el('p', { class:'kicker', text:`Album ${G.sel + 1} of ${G.data.albums.length}` }), el('h2', { text:'Album details' }) ]),
       el('label', { class:'check' }, [show, ' Show on website']),
-      el('button', { class:'btn btn-danger btn-sm', onclick: () => deleteAlbum(sel) }, [icon('far fa-trash-can'), ' Delete album'])
+      el('button', { class:'btn btn-danger btn-sm', onclick: () => deleteAlbum(G.sel) }, [icon('far fa-trash-can'), ' Delete album'])
     ]),
     el('div', { class:'row2' }, [
       el('label', { class:'f' }, [el('span', { text:'Title' }), title]),
@@ -748,22 +1022,20 @@ function renderEditor(){
     el('label', { class:'f', style:'margin-bottom:0' }, [el('span', { text:'Description' }), blurb, cnt])
   ]));
 
-  /* photos */
   const grid = el('div', { class:'grid' });
   a.photos.forEach((p, i) => {
     const cap = el('input', { value:p.caption, placeholder:'Caption (optional)', maxlength:160 });
-    cap.addEventListener('input', () => { p.caption = cap.value; changed(); });
+    cap.addEventListener('input', () => { p.caption = cap.value; markDirty(G); });
     const isCover = i === Math.min(a.cover, a.photos.length - 1);
-    const pic = el('div', { class:'ph-img', title:'Click to see it larger', onclick: () => peek(p) }, [
-      photoImg(p),
-      isCover ? el('span', { class:'badge', text:'Cover' }) : null,
-      p._new ? el('span', { class:'badge new', text:'New' }) : null
-    ]);
     grid.append(el('div', { class:'ph' + (isCover ? ' cover' : '') }, [
-      pic,
+      el('div', { class:'ph-img', title:'Click to see it larger', onclick: () => peek(p.src, p._preview) }, [
+        repoImg(p.src, p._preview),
+        isCover ? el('span', { class:'badge', text:'Cover' }) : null,
+        p._new ? el('span', { class:'badge new', text:'New' }) : null
+      ]),
       el('div', { class:'ph-tools' }, [
         el('button', { class:'star' + (isCover ? ' on' : ''), title:'Use as album cover', 'aria-label':'Use as album cover',
-          onclick: () => { a.cover = i; changed(); renderEditor(); renderList(); } }, icon(isCover ? 'fas fa-star' : 'far fa-star')),
+          onclick: () => { a.cover = i; markDirty(G); render(); } }, icon(isCover ? 'fas fa-star' : 'far fa-star')),
         el('button', { title:'Move left', 'aria-label':'Move left', disabled: i === 0, onclick: () => movePhoto(a, i, -1) }, icon('fas fa-arrow-left')),
         el('button', { title:'Move right', 'aria-label':'Move right', disabled: i === a.photos.length - 1, onclick: () => movePhoto(a, i, 1) }, icon('fas fa-arrow-right')),
         el('button', { class:'del', title:'Remove photo', 'aria-label':'Remove photo', onclick: () => deletePhoto(a, i) }, icon('far fa-trash-can'))
@@ -771,7 +1043,6 @@ function renderEditor(){
       cap
     ]));
   });
-
   const drop = el('div', { class:'drop', tabindex:0, role:'button', onclick: () => $('filePick').click(),
     onkeydown: e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); $('filePick').click(); } } }, [
     icon('fas fa-cloud-arrow-up'), el('b', { text:'Add photos' }),
@@ -789,21 +1060,123 @@ function renderEditor(){
   ]));
 }
 
-function render(){ renderList(); renderEditor(); }
+function renderCommitteeEditor(box){
+  const t = C.data.terms[C.sel];
+  if(!t){
+    box.append(emptyPanel(C.needsImport ? 'First time here' : 'No committee yet', C.needsImport ? 'Set up the committee' : 'No committees yet',
+      C.needsImport ? 'The website has no committee.json yet, so it is showing the committee written into index.html. Import it to edit it here, or start a new committee.'
+                    : 'Add the first committee, then press Publish.',
+      [C.needsImport ? el('button', { class:'btn btn-red', onclick: importCommittee }, [icon('fas fa-file-import'), ' Import committee from the site']) : null,
+       el('button', { class:'btn btn-ghost', onclick: addTerm }, [icon('fas fa-plus'), ' New committee'])]));
+    return;
+  }
 
-function peek(p){
-  const d = el('div', { class:'peek', onclick: () => d.remove() }, photoImg(p));
+  const label = el('input', { class:'in', id:'tLabel', value:t.label, placeholder:'e.g. 2027 – 2028', maxlength:40 });
+  label.addEventListener('input', () => { t.label = label.value; markDirty(C); renderSide(); });
+  const intro = el('input', { class:'in', value:t.intro, placeholder:'Optional, e.g. “Thank you to the outgoing committee…”', maxlength:240 });
+  intro.addEventListener('input', () => { t.intro = intro.value; markDirty(C); });
+  const layout = el('select', { class:'in' }, [
+    el('option', { value:'cards', text:'Photo cards (circles with photo or initials)' }),
+    el('option', { value:'list',  text:'Simple list (role and name only)' })
+  ]);
+  layout.value = t.layout;
+  layout.addEventListener('change', () => { t.layout = layout.value; markDirty(C); });
+  const show = el('input', { type:'checkbox', checked: !t.hidden });
+  show.addEventListener('change', () => { t.hidden = !show.checked; markDirty(C); renderSide(); });
+
+  box.append(el('section', { class:'panel' }, [
+    el('div', { class:'panel-head' }, [
+      el('div', {}, [ el('p', { class:'kicker', text:`Committee ${C.sel + 1} of ${C.data.terms.length}` }), el('h2', { text:'Committee details' }) ]),
+      el('label', { class:'check' }, [show, ' Show on website']),
+      el('button', { class:'btn btn-danger btn-sm', onclick: () => deleteTerm(C.sel) }, [icon('far fa-trash-can'), ' Delete committee'])
+    ]),
+    el('div', { class:'row2' }, [
+      el('label', { class:'f' }, [el('span', { text:'Term (tab label)' }), label, el('small', { text:'Shown as the tab above the committee.' })]),
+      el('label', { class:'f' }, [el('span', { text:'Layout' }), layout])
+    ]),
+    el('label', { class:'f', style:'margin-bottom:0' }, [el('span', { text:'Intro line' }), intro])
+  ]));
+
+  /* members */
+  const list = el('div', { class:'mlist' });
+  t.members.forEach((m, i) => {
+    const field = (key, lbl, ph, extra = {}) => {
+      const inp = el('input', Object.assign({ class:'in' + (key === 'name' ? ' mname' : ''), value:m[key], placeholder:ph, maxlength:160 }, extra));
+      const note = el('small', { class:'bad-note' });
+      const check = () => {
+        const bad = (key === 'linkedin' && !okURL(m.linkedin)) || (key === 'email' && !okMail(m.email));
+        inp.classList.toggle('bad', bad);
+        note.textContent = bad ? (key === 'email' ? 'This doesn’t look like an email address.' : 'Paste the full LinkedIn profile link.') : '';
+      };
+      inp.addEventListener('input', () => {
+        m[key] = inp.value; markDirty(C); check();
+        if(key === 'name'){ ini.textContent = initials(m.name); renderSide(); }
+      });
+      inp.addEventListener('blur', () => { if(key === 'linkedin' && m.linkedin.trim() && okURL(m.linkedin)){ m.linkedin = fixURL(m.linkedin); inp.value = m.linkedin; } });
+      check();
+      return el('label', { class:'f' }, [el('span', { text:lbl }), inp, note]);
+    };
+    const av = avatar(m, true);
+    const ini = av.querySelector('.ini');
+    const pick = el('input', { type:'file', accept:'image/*', hidden:true });
+    pick.addEventListener('change', () => setPortrait(t, m, pick.files[0]));
+
+    list.append(el('div', { class:'mrow' }, [
+      el('div', { class:'mphoto' }, [
+        av,
+        el('button', { class:'btn btn-ghost btn-xs', onclick: () => pick.click() }, [icon('fas fa-camera'), m.photo ? ' Change' : ' Add photo']),
+        m.photo ? el('button', { class:'linkbtn', onclick: () => removePortrait(m) }, 'Use initials instead') : el('small', { class:'muted', text:'No photo: initials are shown' }),
+        m._new ? el('span', { class:'tag green', text:'New photo' }) : null,
+        pick
+      ]),
+      el('div', { class:'mfields' }, [
+        el('div', { class:'row2' }, [ field('name', 'Name', 'Full name'), field('role', 'Role', 'e.g. Treasurer') ]),
+        field('dept', 'Department / program', 'e.g. PhD, Chemistry'),
+        el('div', { class:'row2' }, [
+          field('linkedin', 'LinkedIn', 'linkedin.com/in/…', { type:'url', inputmode:'url' }),
+          field('email', 'Email', 'name@example.com', { type:'email', inputmode:'email' })
+        ])
+      ]),
+      el('div', { class:'mtools' }, [
+        el('button', { title:'Move up', 'aria-label':'Move up', disabled: i === 0, onclick: () => moveMember(t, i, -1) }, icon('fas fa-chevron-up')),
+        el('button', { title:'Move down', 'aria-label':'Move down', disabled: i === t.members.length - 1, onclick: () => moveMember(t, i, 1) }, icon('fas fa-chevron-down')),
+        el('button', { class:'del', title:'Remove member', 'aria-label':'Remove member', onclick: () => deleteMember(t, i) }, icon('far fa-trash-can'))
+      ])
+    ]));
+  });
+
+  box.append(el('section', { class:'panel' }, [
+    el('div', { class:'ph-head' }, [ el('h3', { text:`Members (${t.members.length})` }) ]),
+    el('p', { class:'hint', text:'The order here is the order on the website. LinkedIn and email are optional — their buttons only appear when filled in. Photos are cropped to a square automatically.' }),
+    list,
+    el('button', { class:'btn btn-green', style:'margin-top:18px', onclick: () => addMember(t) }, [icon('fas fa-user-plus'), ' Add member'])
+  ]));
+}
+
+function render(){
+  document.querySelectorAll('#views button').forEach(b => b.classList.toggle('on', b.dataset.view === view));
+  renderSide();
+  const box = $('editor'); box.innerHTML = '';
+  (view === 'gallery' ? renderGalleryEditor : renderCommitteeEditor)(box);
+  updateStatus();
+}
+
+function peek(src, preview){
+  const d = el('div', { class:'peek', onclick: () => d.remove() }, repoImg(src, preview));
   document.body.append(d);
 }
 
 /* ---------------- wiring ---------------- */
 $('loginForm').addEventListener('submit', e => { e.preventDefault(); signIn(); });
 $('signOut').addEventListener('click', signOut);
-$('addAlbum').addEventListener('click', addAlbum);
+$('addAlbum').addEventListener('click', () => view === 'gallery' ? addAlbum() : addTerm());
 $('publish').addEventListener('click', publish);
 $('discard').addEventListener('click', discard);
 $('filePick').addEventListener('change', e => { addFiles(e.target.files); e.target.value = ''; });
-window.addEventListener('beforeunload', e => { if(dirty){ e.preventDefault(); e.returnValue = ''; } });
+document.querySelectorAll('#views button').forEach(b => b.addEventListener('click', () => {
+  view = b.dataset.view; history.replaceState(null, '', '#' + view); render(); window.scrollTo(0, 0);
+}));
+window.addEventListener('beforeunload', e => { if(anyDirty()){ e.preventDefault(); e.returnValue = ''; } });
 document.addEventListener('keydown', e => { if(e.key === 'Escape') document.querySelectorAll('.peek').forEach(n => n.remove()); });
 
 loadSaved();
