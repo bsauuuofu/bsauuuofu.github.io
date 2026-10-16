@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+========================================================================
+  BSAUU GALLERY EDITOR
+========================================================================
+  Put this file next to index.html in the website's GitHub repository.
+  Open it on the live site (…/gallery-admin.html), sign in with a
+  GitHub token, and edit albums, photos and captions.
+
+  "Publish" saves everything in ONE commit to the repository:
+     gallery.json              the album list, titles, text, captions
+     assets/gallery/<album>/   the photos you uploaded (resized)
+  GitHub Pages then rebuilds the site, usually within a minute.
+
+  Your token is only ever sent to api.github.com. It is kept in this
+  browser only (and only after you tick "Remember me").
+========================================================================
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Gallery editor | BSAUU</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fffdf8; --paper-2:#f7f2e8; --ink:#16211c; --muted:#5d6a63;
+  --green:#004b37; --green-700:#00382a; --green-900:#021c14;
+  --red:#e0283c; --red-700:#b5172b; --flag-red:#f42a41;
+  --line:rgba(0,75,55,.18);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --shadow:0 24px 60px -30px rgba(2,28,20,.4);
+  --jaali:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='72' viewBox='0 0 48 72'%3E%3Cpath d='M24 0C24 18 48 18 48 36C48 54 24 54 24 72M24 0C24 18 0 18 0 36C0 54 24 54 24 72' fill='none' stroke='%23004b37' stroke-opacity='.075'/%3E%3C/svg%3E");
+  --kantha:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='18' viewBox='0 0 44 18'%3E%3Cg stroke='%23fffdf8' stroke-opacity='.55' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M3 3h9M32 3h9M3 15h9M32 15h9'/%3E%3C/g%3E%3Cpath d='M22 3l6 6-6 6-6-6z' fill='none' stroke='%23f42a41' stroke-width='1.4'/%3E%3Ccircle cx='22' cy='9' r='1.6' fill='%23f42a41'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper-2) var(--jaali);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;min-height:100vh}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;line-height:1.1;color:var(--green-900)}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+a{color:var(--green)}
+.hidden{display:none!important}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px;border-radius:6px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;border-radius:999px;padding:11px 22px;font-weight:500;letter-spacing:.02em;transition:background .25s,color .25s,transform .25s var(--ease),box-shadow .25s;white-space:nowrap;text-decoration:none}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-red{background:var(--red);color:#fff;box-shadow:0 12px 24px -14px rgba(224,40,60,.9)}
+.btn-red:hover{background:var(--red-700)}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:var(--green-700)}
+.btn-ghost{border:1.5px solid var(--line);color:var(--green-900);background:#fff}
+.btn-ghost:hover{border-color:var(--green)}
+.btn-danger{color:var(--red-700);border:1.5px solid rgba(224,40,60,.35);background:#fff}
+.btn-danger:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-sm{padding:8px 16px;font-size:14px}
+.btn-light{border:1.5px solid rgba(255,253,248,.4);color:#fff}
+.btn-light:hover{background:rgba(255,253,248,.12)}
+
+/* form fields */
+label.f{display:block;margin-bottom:18px}
+label.f > span{display:block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--red);margin-bottom:7px}
+label.f small{display:block;color:var(--muted);font-size:13px;margin-top:6px}
+.in{width:100%;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;font-size:16px;transition:border-color .2s,box-shadow .2s}
+.in:focus{outline:0;border-color:var(--green);box-shadow:0 0 0 4px rgba(0,75,55,.1)}
+textarea.in{resize:vertical;min-height:110px;line-height:1.5}
+.row2{display:grid;gap:14px}
+@media (min-width:640px){.row2{grid-template-columns:1fr 1fr}}
+.check{display:flex;align-items:center;gap:10px;font-size:15px;cursor:pointer;user-select:none}
+.check input{width:18px;height:18px;accent-color:var(--green)}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:30;background:var(--green-900);color:var(--paper)}
+.top::after{content:'';position:absolute;left:0;right:0;bottom:-9px;height:9px;background:var(--kantha) repeat-x center/26px 11px;background-color:var(--green-900)}
+.top-in{max-width:1320px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto;text-decoration:none;color:inherit}
+.brand-mark{width:42px;height:42px;border-radius:50%;background:var(--paper);display:grid;place-items:center;box-shadow:0 0 0 1.5px var(--flag-red),0 0 0 4px var(--green-900),0 0 0 5px rgba(255,253,248,.35)}
+.brand-mark img{width:26px;height:26px;object-fit:contain}
+.brand b{font-family:var(--serif);font-size:1.45rem;letter-spacing:.03em;display:block;line-height:1}
+.brand small{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#ffb3bd}
+.who{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,253,248,.8)}
+.who img{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,253,248,.4)}
+.status{font-size:13px;padding:6px 14px;border-radius:999px;background:rgba(255,253,248,.1);color:rgba(255,253,248,.85);white-space:nowrap}
+.status.dirty{background:var(--flag-red);color:#fff}
+
+/* ---------- login ---------- */
+.login{max-width:980px;margin:60px auto;padding:0 20px;display:grid;gap:26px}
+@media (min-width:900px){.login{grid-template-columns:1.05fr .95fr;align-items:start}}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:34px;box-shadow:var(--shadow)}
+.card h1{font-size:2.4rem;margin-bottom:6px}
+.card h1 em{color:var(--red)}
+.lede{color:var(--muted);margin:0 0 26px}
+.err{background:#fff1f2;border:1px solid rgba(224,40,60,.35);color:var(--red-700);padding:12px 14px;border-radius:12px;font-size:14.5px;margin-bottom:18px}
+.help{background:var(--green-900);color:rgba(255,253,248,.85);border:0}
+.help h2{color:var(--paper);font-size:1.7rem;margin-bottom:12px}
+.help ol{padding-left:20px;margin:0 0 16px}
+.help li{margin-bottom:9px}
+.help b{color:#fff}
+.help a{color:#ff9aa6}
+.help .note{font-size:13.5px;color:rgba(255,253,248,.65);border-top:1px solid rgba(255,253,248,.15);padding-top:14px;margin:0}
+.adv summary{cursor:pointer;color:var(--muted);font-size:14px;margin-bottom:12px}
+
+/* ---------- editor layout ---------- */
+.app{max-width:1320px;margin:0 auto;padding:34px 20px 120px;display:grid;gap:26px}
+@media (min-width:960px){.app{grid-template-columns:330px minmax(0,1fr);align-items:start}}
+.side{background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--shadow)}
+@media (min-width:960px){.side{position:sticky;top:92px;max-height:calc(100vh - 116px);overflow:auto}}
+.side-head{display:flex;align-items:center;justify-content:space-between;padding:6px 6px 14px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.side-head h2{font-size:1.5rem}
+.alist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.aitem{display:flex;align-items:center;gap:12px;padding:9px;border-radius:14px;cursor:pointer;border:1.5px solid transparent;transition:background .2s,border-color .2s}
+.aitem:hover{background:var(--paper)}
+.aitem.on{background:var(--paper);border-color:var(--green)}
+.athumb{width:54px;height:54px;border-radius:12px;flex:none;background:var(--paper-2) center/cover;display:grid;place-items:center;color:var(--line);font-size:20px;overflow:hidden}
+.athumb img{width:100%;height:100%;object-fit:cover}
+.ainfo{min-width:0;flex:1}
+.ainfo b{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.2;color:var(--green-900);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ainfo span{display:block;font-size:12.5px;color:var(--muted)}
+.tag{display:inline-block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--paper-2);color:var(--muted);margin-left:4px}
+.tag.red{background:#ffe4e7;color:var(--red-700)}
+.amove{display:flex;flex-direction:column;gap:2px}
+.amove button{width:28px;height:24px;border-radius:8px;color:var(--muted);font-size:12px}
+.amove button:hover{background:var(--paper-2);color:var(--green)}
+.amove button:disabled{opacity:.25;cursor:default;background:none}
+
+.main{min-width:0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;box-shadow:var(--shadow);margin-bottom:24px}
+.panel-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.panel-head h2{font-size:2rem;margin-right:auto}
+.kicker{font-family:var(--serif);font-style:italic;color:var(--red);font-size:1.1rem;margin-bottom:2px}
+.count{font-size:12.5px;color:var(--muted);text-align:right;margin-top:4px}
+
+/* photos */
+.ph-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.ph-head h3{font-size:1.6rem}
+.hint{color:var(--muted);font-size:14px;margin:0 0 20px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.ph{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--paper);display:flex;flex-direction:column}
+.ph.cover{border-color:var(--red);box-shadow:0 0 0 2px rgba(224,40,60,.25)}
+.ph-img{position:relative;aspect-ratio:4/3;background:var(--paper-2);cursor:zoom-in}
+.ph-img img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;top:8px;left:8px;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:99px;color:#fff;background:var(--red)}
+.badge.new{left:auto;right:8px;background:var(--green)}
+.ph-tools{display:flex;justify-content:space-between;padding:6px 6px 0}
+.ph-tools button{width:34px;height:32px;border-radius:9px;color:var(--muted);font-size:14px;transition:background .2s,color .2s}
+.ph-tools button:hover{background:var(--paper-2);color:var(--green)}
+.ph-tools button.star.on{color:var(--red)}
+.ph-tools button.del:hover{background:#ffe4e7;color:var(--red-700)}
+.ph-tools button:disabled{opacity:.25;cursor:default;background:none}
+.ph input{border:0;border-top:1px solid var(--line);background:#fff;padding:10px 12px;font-size:14px;width:100%;margin-top:6px}
+.ph input:focus{outline:0;background:var(--paper)}
+
+.drop{border:2px dashed rgba(0,75,55,.35);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;min-height:200px;padding:20px;cursor:pointer;color:var(--green);background:rgba(0,75,55,.03);transition:background .2s,border-color .2s}
+.drop:hover,.drop.over{background:rgba(0,75,55,.08);border-color:var(--green)}
+.drop i{font-size:28px;color:var(--red)}
+.drop b{font-family:var(--serif);font-size:1.25rem}
+.drop small{color:var(--muted);font-size:12.5px}
+
+.empty{text-align:center;padding:60px 24px}
+.empty h2{font-size:2.2rem;margin-bottom:8px}
+.empty p{color:var(--muted);max-width:52ch;margin:0 auto 24px}
+.empty .acts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* bottom publish bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;transform:translateY(110%);transition:transform .45s var(--ease)}
+.bar.show{transform:none}
+.bar-in{max-width:900px;margin:0 auto 18px;background:var(--green-900);color:var(--paper);border-radius:999px;padding:10px 10px 10px 26px;display:flex;align-items:center;gap:12px;box-shadow:0 24px 50px -20px rgba(2,28,20,.8)}
+.bar-in p{margin:0 auto 0 0;font-size:15px}
+.bar-in p b{color:#ff9aa6}
+@media (max-width:640px){.bar-in{border-radius:22px;flex-wrap:wrap;margin:0 10px 10px;padding:14px}.bar-in p{width:100%}}
+
+/* busy overlay + toasts */
+.busy{position:fixed;inset:0;z-index:60;background:rgba(2,28,20,.7);backdrop-filter:blur(4px);display:grid;place-items:center;padding:20px}
+.busy-box{background:#fff;border-radius:22px;padding:30px 34px;width:min(440px,100%);text-align:center}
+.busy-box i{font-size:30px;color:var(--red);margin-bottom:12px}
+.busy-box p{margin:0 0 14px;font-size:16px}
+.prog{height:8px;border-radius:99px;background:var(--paper-2);overflow:hidden}
+.prog span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--red));transition:width .3s}
+.toasts{position:fixed;top:84px;right:18px;z-index:70;display:flex;flex-direction:column;gap:10px;max-width:min(380px,calc(100vw - 36px))}
+.toast{background:#fff;border-left:4px solid var(--green);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);font-size:14.5px;animation:tin .4s var(--ease)}
+.toast.bad{border-left-color:var(--red)}
+@keyframes tin{from{opacity:0;transform:translateX(20px)}}
+
+/* big photo preview */
+.peek{position:fixed;inset:0;z-index:80;background:rgba(2,20,14,.92);display:grid;place-items:center;padding:30px;cursor:zoom-out}
+.peek img{max-width:100%;max-height:100%;border-radius:12px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html#gallery" title="Back to the website">
+      <span class="brand-mark"><img src="assets/logo.png" alt=""></span>
+      <span><b>BSAUU</b><small>Gallery editor</small></span>
+    </a>
+    <span class="status hidden" id="status">All changes published</span>
+    <span class="who hidden" id="who"><img id="whoImg" alt=""><span id="whoName"></span></span>
+    <a class="btn btn-light btn-sm" href="index.html#gallery" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> View site</a>
+    <button class="btn btn-light btn-sm hidden" id="signOut"><i class="fas fa-right-from-bracket"></i> Sign out</button>
+  </div>
+</header>
+
+<!-- ================= SIGN IN ================= -->
+<section class="login" id="loginView">
+  <div class="card">
+    <p class="kicker">Committee only</p>
+    <h1>Gallery <em>editor</em></h1>
+    <p class="lede">Sign in with a GitHub token to add albums, upload photos and edit the text on the website's gallery.</p>
+    <div class="err hidden" id="loginErr"></div>
+    <form id="loginForm" autocomplete="off">
+      <label class="f"><span>GitHub token</span>
+        <input class="in" id="fToken" type="password" placeholder="github_pat_…" required spellcheck="false">
+        <small>A fine-grained personal access token with Contents: read &amp; write on the website repository.</small>
+      </label>
+      <label class="f"><span>Website repository</span>
+        <input class="in" id="fRepo" placeholder="owner/repository" required spellcheck="false">
+        <small>The GitHub repository this site is published from, e.g. <code>bsauu/bsauu.github.io</code></small>
+      </label>
+      <details class="adv">
+        <summary>Advanced</summary>
+        <div class="row2">
+          <label class="f"><span>Branch</span><input class="in" id="fBranch" placeholder="(the repository's default)" spellcheck="false"></label>
+          <label class="f"><span>Site folder</span><input class="in" id="fRoot" placeholder="(top of the repository)" spellcheck="false">
+            <small>Only if the site lives in a sub-folder, e.g. <code>docs</code></small></label>
+        </div>
+      </details>
+      <label class="check" style="margin:4px 0 22px"><input type="checkbox" id="fRemember"> Remember me on this device</label>
+      <button class="btn btn-red" type="submit" id="loginBtn"><i class="fab fa-github"></i> Sign in &amp; load gallery</button>
+    </form>
+  </div>
+
+  <div class="card help">
+    <h2>Getting a token (2 minutes)</h2>
+    <ol>
+      <li>Sign in to GitHub and open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Settings → Fine-grained tokens → Generate new token</a>.</li>
+      <li>Give it a name like <b>BSAUU gallery</b> and an expiry date (e.g. the end of your term).</li>
+      <li><b>Resource owner:</b> the account or organisation that owns the website repository.</li>
+      <li><b>Repository access:</b> “Only select repositories” → pick the website repository.</li>
+      <li><b>Permissions → Repository → Contents:</b> set to <b>Read and write</b>. Nothing else is needed.</li>
+      <li>Generate, copy the token, and paste it here.</li>
+    </ol>
+    <p class="note">Each committee member can use their own GitHub account, as long as they've been added to the repository (or the organisation) with write access. The token only ever goes to GitHub. Don't tick “Remember me” on a shared computer.</p>
+  </div>
+</section>
+
+<!-- ================= EDITOR ================= -->
+<div class="app hidden" id="appView">
+  <aside class="side">
+    <div class="side-head">
+      <h2>Albums</h2>
+      <button class="btn btn-green btn-sm" id="addAlbum"><i class="fas fa-plus"></i> New album</button>
+    </div>
+    <ul class="alist" id="albumList"></ul>
+    <p class="hint" style="margin:14px 6px 4px;font-size:13px">The order here is the order of the slideshow. Use ↑ ↓ to move an album.</p>
+  </aside>
+
+  <main class="main" id="editor"></main>
+</div>
+
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <p><b>●</b> <span id="barText">You have unsaved changes</span></p>
+    <button class="btn btn-light btn-sm" id="discard">Discard</button>
+    <button class="btn btn-red" id="publish"><i class="fas fa-cloud-arrow-up"></i> Publish to website</button>
+  </div>
+</div>
+
+<div class="busy hidden" id="busy"><div class="busy-box"><i class="fas fa-circle-notch fa-spin"></i><p id="busyText">Working…</p><div class="prog"><span id="busyProg"></span></div></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<input type="file" id="filePick" accept="image/*" multiple hidden>
+
+<script>
+/* ==================================================================
+   Albums that already exist on the site as numbered folders. "Import"
+   copies them into gallery.json so they can be edited here.
+   ================================================================== */
+const KNOWN_ALBUMS = [
+  { folder:'2026_pohela_boishak',     title:'Pohela Boishakh 1433',         season:'Spring 2026', blurb:'The Bengali new year, welcomed the way it should be — panta bhat, red and white, and far too much singing.' },
+  { folder:'2026_committee_handover', title:'Committee handover ceremony',  season:'Summer 2026', blurb:'The outgoing committee passed the association on to the 2026–2027 team.' },
+  { folder:'2026_watch_party',        title:'World Cup final watch party',  season:'Summer 2026', blurb:'One screen, one room, and everyone shouting at it together.' },
+  { folder:'get_involved_fair_2026',  title:'Get Involved Fair 2026',       season:'Fall 2026',   blurb:'Our table on campus, meeting the students who joined us this year.' }
+];
+const SKIP_FOLDERS = ['2026_committee', 'gallery'];   // never imported as albums
+const MAX_SIDE  = 2000;    // photos are resized so the long side is at most this many pixels
+const JPEG_Q    = 0.86;    // JPEG quality for uploaded photos
+const API = 'https://api.github.com';
+const CFG_KEY = 'bsauu-gallery-cfg', TOKEN_KEY = 'bsauu-gallery-token';
+
+/* ---------------- state ---------------- */
+let cfg   = { owner:'', repo:'', branch:'', root:'' };
+let token = '';
+let me    = null;
+let data  = { version:1, albums:[] };
+let fileSha = null;           // git sha of gallery.json when loaded (null = file not created yet)
+let sel   = 0;                // selected album
+let dirty = false;
+let deleted = new Set();      // repo paths of photos to delete on publish
+let needsImport = false;
+
+const $ = id => document.getElementById(id);
+const el = (tag, props = {}, kids = []) => {
+  const n = document.createElement(tag);
+  for(const [k, v] of Object.entries(props)){
+    if(k === 'class') n.className = v;
+    else if(k === 'text') n.textContent = v;
+    else if(k.startsWith('on')) n.addEventListener(k.slice(2), v);
+    else if(v === true) n.setAttribute(k, '');
+    else if(v !== false && v != null) n.setAttribute(k, v);
+  }
+  (Array.isArray(kids) ? kids : [kids]).forEach(c => c != null && n.append(c));
+  return n;
+};
+const icon = cls => el('i', { class:cls });
+
+/* ---------------- small helpers ---------------- */
+function toast(msg, bad){
+  const t = el('div', { class:'toast' + (bad ? ' bad' : ''), text:msg });
+  $('toasts').append(t);
+  setTimeout(() => t.remove(), bad ? 9000 : 5000);
+}
+function busy(text, frac){
+  $('busy').classList.toggle('hidden', text === false);
+  if(text !== false){ $('busyText').textContent = text; $('busyProg').style.width = ((frac || 0) * 100) + '%'; }
+}
+const slug = s => (s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
+  .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+const rand = n => Math.random().toString(36).slice(2, 2 + n);
+const encPath = p => p.split('/').map(encodeURIComponent).join('/');
+const repoPath = p => (cfg.root ? cfg.root.replace(/^\/+|\/+$/g, '') + '/' : '') + p;
+const rawURL = p => `https://raw.githubusercontent.com/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}/${encPath(cfg.branch)}/${encPath(repoPath(p))}`;
+
+function b64ToText(b64){
+  const bin = atob(b64.replace(/\s/g, ''));
+  return new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
+}
+function blobToB64(blob){
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1]);
+    r.onerror = () => rej(r.error);
+    r.readAsDataURL(blob);
+  });
+}
+/* the same id git gives a file, so we know gallery.json's version after publishing */
+async function gitBlobSha(text){
+  const body = new TextEncoder().encode(text);
+  const head = new TextEncoder().encode(`blob ${body.length}\0`);
+  const all = new Uint8Array(head.length + body.length); all.set(head); all.set(body, head.length);
+  const h = await crypto.subtle.digest('SHA-1', all);
+  return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+/* ---------------- GitHub API ---------------- */
+async function gh(path, opts = {}){
+  const headers = { 'Accept':'application/vnd.github+json', 'Authorization':'Bearer ' + token, 'X-GitHub-Api-Version':'2022-11-28' };
+  if(opts.body) headers['Content-Type'] = 'application/json';
+  const r = await fetch(API + path, { method: opts.method || 'GET', headers, body: opts.body ? JSON.stringify(opts.body) : undefined, cache:'no-store' });
+  if(!r.ok){
+    let msg = r.statusText;
+    try{ msg = (await r.json()).message || msg; }catch(e){}
+    const err = new Error(msg); err.status = r.status; throw err;
+  }
+  return r.status === 204 ? null : r.json();
+}
+const repoAPI = p => `/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}${p}`;
+const contentsAPI = p => repoAPI(`/contents/${encPath(repoPath(p))}?ref=${encodeURIComponent(cfg.branch)}`);
+
+function friendly(err){
+  if(err.status === 401) return 'GitHub did not accept that token. Check it was copied in full and has not expired.';
+  if(err.status === 403) return 'This token is not allowed to change the repository. In the token settings, give it Contents: Read and write on this repository. (' + err.message + ')';
+  if(err.status === 404) return 'Repository not found. Check the owner/name, and that the token was given access to this repository.';
+  if(err.status === 409 || err.status === 422) return 'GitHub refused the update: ' + err.message + '. Reload and try again.';
+  if(err instanceof TypeError) return 'Could not reach GitHub. Check your internet connection.';
+  return err.message || String(err);
+}
+
+/* ---------------- data shape ---------------- */
+function normalize(d){
+  const albums = Array.isArray(d && d.albums) ? d.albums : [];
+  return { version:1, albums: albums.map(a => ({
+    id: a.id || 'album-' + rand(5),
+    title: a.title || '', season: a.season || '', blurb: a.blurb || '',
+    hidden: !!a.hidden, folder: a.folder || '',
+    cover: Number.isInteger(a.cover) ? a.cover : 0,
+    photos: (a.photos || []).filter(p => p && p.src).map(p => ({ src: p.src, caption: p.caption || '' }))
+  }))};
+}
+/* what gets written to gallery.json (no editor-only fields) */
+function cleanData(){
+  return { version:1, updated: new Date().toISOString(), albums: data.albums.map(a => ({
+    id:a.id, title:a.title.trim(), season:a.season.trim(), blurb:a.blurb.trim(), hidden:a.hidden || undefined,
+    folder:a.folder || undefined,
+    cover: Math.max(0, Math.min(a.cover, a.photos.length - 1)),
+    photos: a.photos.map(p => p.caption.trim() ? { src:p.src, caption:p.caption.trim() } : { src:p.src })
+  }))};
+}
+
+/* ---------------- sign in / out ---------------- */
+function loadSaved(){
+  try{ Object.assign(cfg, JSON.parse(localStorage.getItem(CFG_KEY) || '{}')); }catch(e){}
+  try{ token = localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY) || ''; }catch(e){}
+  if(!cfg.owner){                                  // guess the repo from the GitHub Pages address
+    const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
+    if(m){
+      const first = location.pathname.split('/').filter(Boolean)[0];
+      cfg.owner = m[1];
+      cfg.repo  = (!first || /\.html?$/i.test(first)) ? location.hostname : first;
+    }
+  }
+  $('fRepo').value   = cfg.owner && cfg.repo ? `${cfg.owner}/${cfg.repo}` : '';
+  $('fBranch').value = cfg.branch || '';
+  $('fRoot').value   = cfg.root || '';
+}
+
+async function signIn(){
+  $('loginErr').classList.add('hidden');
+  const parts = $('fRepo').value.trim().replace(/^https?:\/\/github\.com\//i, '').replace(/\.git$/, '').split('/');
+  if(parts.length < 2 || !parts[0] || !parts[1]) return showLoginErr('Enter the repository as owner/repository.');
+  cfg = { owner:parts[0], repo:parts[1], branch:$('fBranch').value.trim(), root:$('fRoot').value.trim().replace(/^\/+|\/+$/g, '') };
+  token = $('fToken').value.trim() || token;
+  if(!token) return showLoginErr('Paste your GitHub token.');
+  $('loginBtn').disabled = true;
+  try{
+    me = await gh('/user');
+    const repo = await gh(repoAPI(''));
+    if(repo.permissions && !repo.permissions.push) throw Object.assign(new Error('Your GitHub account can see this repository but cannot write to it. Ask the owner to add you with write access.'), { status:0 });
+    if(!cfg.branch) cfg.branch = repo.default_branch;
+    try{
+      localStorage.setItem(CFG_KEY, JSON.stringify(cfg));
+      localStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(TOKEN_KEY);
+      ($('fRemember').checked ? localStorage : sessionStorage).setItem(TOKEN_KEY, token);
+    }catch(e){}
+    await loadFromRepo();
+    showApp();
+  }catch(err){
+    showLoginErr(friendly(err));
+  }finally{
+    $('loginBtn').disabled = false;
+  }
+}
+function showLoginErr(msg){ $('loginErr').textContent = msg; $('loginErr').classList.remove('hidden'); }
+
+function showApp(){
+  $('loginView').classList.add('hidden');
+  $('appView').classList.remove('hidden');
+  ['who','signOut','status'].forEach(id => $(id).classList.remove('hidden'));
+  $('whoImg').src = me.avatar_url || '';
+  $('whoName').textContent = me.login;
+  render();
+}
+function signOut(){
+  if(dirty && !confirm('You have unpublished changes. Sign out and lose them?')) return;
+  try{ localStorage.removeItem(TOKEN_KEY); sessionStorage.removeItem(TOKEN_KEY); }catch(e){}
+  location.reload();
+}
+
+/* ---------------- load ---------------- */
+async function loadFromRepo(){
+  busy('Loading the gallery from GitHub…', .3);
+  try{
+    const f = await gh(contentsAPI('gallery.json'));
+    fileSha = f.sha;
+    data = normalize(JSON.parse(b64ToText(f.content)));
+    needsImport = false;
+  }catch(err){
+    if(err.status !== 404) throw err;
+    data = { version:1, albums:[] }; fileSha = null; needsImport = true;
+  }finally{ busy(false); }
+  deleted = new Set(); sel = 0; setDirty(false);
+}
+
+/* copy the numbered-folder albums that are already on the site into the editor */
+async function importExisting(){
+  busy('Looking for albums already on the site…', .1);
+  try{
+    let folders = [];
+    try{
+      const list = await gh(contentsAPI('assets'));
+      folders = list.filter(f => f.type === 'dir' && !SKIP_FOLDERS.includes(f.name)).map(f => f.name);
+    }catch(e){ if(e.status !== 404) throw e; }
+    /* the site's known albums first, in their original order, then anything else found */
+    folders = KNOWN_ALBUMS.map(k => k.folder).concat(folders.filter(f => !KNOWN_ALBUMS.some(k => k.folder === f)));
+    const have = new Set(data.albums.map(a => a.id));
+    let added = 0, i = 0;
+    for(const folder of folders){
+      busy('Looking in ' + folder + '…', ++i / folders.length);
+      if(have.has(folder)) continue;
+      let files = [];
+      try{ files = await gh(contentsAPI('assets/' + folder)); }catch(e){ if(e.status !== 404) throw e; }
+      const imgs = files.filter(f => f.type === 'file' && /^\d+\.(jpe?g|png|webp|gif)$/i.test(f.name))
+                        .sort((a, b) => parseInt(a.name) - parseInt(b.name));
+      const known = KNOWN_ALBUMS.find(k => k.folder === folder);
+      if(!known && !imgs.length) continue;           // not a photo album
+      data.albums.push({
+        id: folder, folder: 'assets/' + folder,
+        title: known ? known.title : folder.replace(/[_-]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+        season: known ? known.season : '', blurb: known ? known.blurb : '', hidden:false, cover:0,
+        photos: imgs.map(f => ({ src:'assets/' + folder + '/' + f.name, caption:'' }))
+      });
+      added++;
+    }
+    needsImport = false;
+    if(added){ setDirty(true); toast(`Imported ${added} album${added > 1 ? 's' : ''}. Check them over, then press Publish.`); }
+    else toast('No numbered photo folders were found to import.');
+  }catch(err){ toast(friendly(err), true); }
+  finally{ busy(false); render(); }
+}
+
+/* ---------------- editing ---------------- */
+function setDirty(v){
+  dirty = v;
+  $('bar').classList.toggle('show', v);
+  $('status').classList.toggle('dirty', v);
+  $('status').textContent = v ? 'Unpublished changes' : 'All changes published';
+  const n = data.albums.reduce((s, a) => s + a.photos.filter(p => p._new).length, 0);
+  $('barText').textContent = v ? (n ? `Unsaved changes, including ${n} new photo${n > 1 ? 's' : ''}` : 'You have unsaved changes') : '';
+}
+const changed = () => setDirty(true);
+
+function addAlbum(){
+  data.albums.unshift({ id:'album-' + rand(6), title:'', season:'', blurb:'', hidden:false, folder:'', cover:0, photos:[] });
+  sel = 0; changed(); render();
+  setTimeout(() => { const t = $('aTitle'); if(t) t.focus(); }, 50);
+}
+function moveAlbum(i, d){
+  const j = i + d; if(j < 0 || j >= data.albums.length) return;
+  const A = data.albums; [A[i], A[j]] = [A[j], A[i]];
+  if(sel === i) sel = j; else if(sel === j) sel = i;
+  changed(); render();
+}
+function deleteAlbum(i){
+  const a = data.albums[i];
+  if(!confirm(`Delete the album "${a.title || 'Untitled'}" and its ${a.photos.length} photo${a.photos.length === 1 ? '' : 's'}? This happens when you press Publish.`)) return;
+  a.photos.forEach(forgetPhoto);
+  data.albums.splice(i, 1);
+  sel = Math.max(0, Math.min(sel, data.albums.length - 1));
+  changed(); render();
+}
+function forgetPhoto(p){
+  if(p._new){ URL.revokeObjectURL(p._preview); }
+  else deleted.add(p.src);
+}
+function movePhoto(a, i, d){
+  const j = i + d; if(j < 0 || j >= a.photos.length) return;
+  [a.photos[i], a.photos[j]] = [a.photos[j], a.photos[i]];
+  if(a.cover === i) a.cover = j; else if(a.cover === j) a.cover = i;
+  changed(); renderEditor(); renderList();
+}
+function deletePhoto(a, i){
+  forgetPhoto(a.photos[i]);
+  a.photos.splice(i, 1);
+  if(a.cover === i) a.cover = 0; else if(a.cover > i) a.cover--;
+  changed(); renderEditor(); renderList();
+}
+
+/* resize in the browser so the repository stays small */
+function prepImage(file){
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const s = Math.min(1, MAX_SIDE / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * s); c.height = Math.round(img.naturalHeight * s);
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
+      ctx.drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      c.toBlob(b => b ? resolve(b) : reject(new Error('Could not convert ' + file.name)), 'image/jpeg', JPEG_Q);
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error(`"${file.name}" could not be opened. Use JPG or PNG (iPhone HEIC photos: export as JPG first).`)); };
+    img.src = url;
+  });
+}
+async function addFiles(files){
+  const a = data.albums[sel]; if(!a) return;
+  const list = Array.from(files).filter(f => f.type.startsWith('image/') || /\.(jpe?g|png|webp|gif|heic)$/i.test(f.name));
+  if(!list.length) return;
+  if(!a.folder) a.folder = 'assets/gallery/' + (slug(a.title) || 'album') + '-' + rand(4);
+  let ok = 0;
+  for(let i = 0; i < list.length; i++){
+    busy(`Preparing photo ${i + 1} of ${list.length}…`, i / list.length);
+    try{
+      const blob = await prepImage(list[i]);
+      a.photos.push({ src:`${a.folder}/${Date.now().toString(36)}${rand(3)}.jpg`, caption:'', _new:blob, _preview:URL.createObjectURL(blob) });
+      ok++;
+    }catch(err){ toast(err.message, true); }
+  }
+  busy(false);
+  if(ok){ changed(); toast(`Added ${ok} photo${ok > 1 ? 's' : ''}. Press Publish to put ${ok > 1 ? 'them' : 'it'} on the website.`); }
+  renderEditor(); renderList();
+}
+
+/* ---------------- publish: one commit with everything ---------------- */
+async function publish(){
+  const missing = data.albums.findIndex(a => !a.title.trim());
+  if(missing >= 0){ sel = missing; render(); toast('Every album needs a title before publishing.', true); return; }
+  const newPhotos = [];
+  data.albums.forEach(a => a.photos.forEach(p => { if(p._new) newPhotos.push(p); }));
+  const steps = newPhotos.length + 4;
+  let step = 0;
+  const tick = t => busy(t, ++step / steps);
+  try{
+    tick('Checking the repository…');
+    const branchRef = `/git/ref/heads/${encPath(cfg.branch)}`;
+    const ref = await gh(repoAPI(branchRef));
+    const head = ref.object.sha;
+
+    /* has someone else published since this page loaded? */
+    let current = null;
+    try{ current = (await gh(contentsAPI('gallery.json'))).sha; }catch(e){ if(e.status !== 404) throw e; }
+    if(current !== fileSha){
+      busy(false);
+      if(!confirm('Someone else published gallery changes since you opened the editor. Publish anyway and replace their version with yours?\n\n(Cancel, then Discard, to load their version instead.)')) return;
+    }
+    const baseTree = (await gh(repoAPI(`/git/commits/${head}`))).tree.sha;
+
+    const tree = [];
+    for(let i = 0; i < newPhotos.length; i++){
+      tick(`Uploading photo ${i + 1} of ${newPhotos.length}…`);
+      const blob = await gh(repoAPI('/git/blobs'), { method:'POST', body:{ content: await blobToB64(newPhotos[i]._new), encoding:'base64' } });
+      tree.push({ path: repoPath(newPhotos[i].src), mode:'100644', type:'blob', sha: blob.sha });
+    }
+
+    /* delete removed photos — only files that still exist and nothing else uses */
+    const inUse = new Set(); data.albums.forEach(a => a.photos.forEach(p => inUse.add(p.src)));
+    for(const p of deleted){
+      if(inUse.has(p)) continue;
+      try{ await gh(contentsAPI(p)); tree.push({ path: repoPath(p), mode:'100644', type:'blob', sha:null }); }
+      catch(e){ if(e.status !== 404) throw e; }
+    }
+
+    tick('Saving the album list…');
+    const json = JSON.stringify(cleanData(), null, 2) + '\n';
+    tree.push({ path: repoPath('gallery.json'), mode:'100644', type:'blob', content: json });
+    const t = await gh(repoAPI('/git/trees'), { method:'POST', body:{ base_tree: baseTree, tree } });
+
+    tick('Publishing…');
+    const parts = [];
+    if(newPhotos.length) parts.push(`${newPhotos.length} new photo${newPhotos.length > 1 ? 's' : ''}`);
+    if(deleted.size) parts.push(`${deleted.size} removed`);
+    const message = 'Gallery: update from the editor' + (parts.length ? ' (' + parts.join(', ') + ')' : '') + ` — ${me.login}`;
+    const commit = await gh(repoAPI('/git/commits'), { method:'POST', body:{ message, tree: t.sha, parents:[head] } });
+    await gh(repoAPI(`/git/refs/heads/${encPath(cfg.branch)}`), { method:'PATCH', body:{ sha: commit.sha } });
+
+    /* done: the new photos are now normal repository files */
+    newPhotos.forEach(p => { delete p._new; });
+    fileSha = await gitBlobSha(json);
+    deleted = new Set();
+    busy(false); setDirty(false); render();
+    toast('Published! GitHub Pages usually updates the website within a minute or two.');
+  }catch(err){
+    busy(false);
+    toast('Publishing failed — nothing was changed on the website. ' + friendly(err), true);
+  }
+}
+
+async function discard(){
+  if(!confirm('Throw away all unpublished changes and reload the gallery from GitHub?')) return;
+  data.albums.forEach(a => a.photos.forEach(p => p._preview && URL.revokeObjectURL(p._preview)));
+  try{ await loadFromRepo(); render(); toast('Reloaded from GitHub.'); }
+  catch(err){ toast(friendly(err), true); }
+}
+
+/* ---------------- drawing the editor ---------------- */
+function photoSrc(p){ return p._preview || rawURL(p.src); }
+function photoImg(p, cls){
+  const img = el('img', { src: photoSrc(p), alt:'', loading:'lazy', class: cls || null });
+  img.addEventListener('error', () => { if(!img.dataset.retry){ img.dataset.retry = 1; img.src = p.src; } }, { once:false });
+  return img;
+}
+
+function renderList(){
+  const ul = $('albumList'); ul.innerHTML = '';
+  data.albums.forEach((a, i) => {
+    const cover = a.photos[Math.min(a.cover, a.photos.length - 1)];
+    const li = el('li', { class:'aitem' + (i === sel ? ' on' : ''), onclick: () => { sel = i; render(); } }, [
+      el('span', { class:'athumb' }, cover ? photoImg(cover) : icon('far fa-images')),
+      el('span', { class:'ainfo' }, [
+        el('b', { text: a.title || 'Untitled album' }),
+        el('span', {}, [
+          document.createTextNode([a.season, `${a.photos.length} photo${a.photos.length === 1 ? '' : 's'}`].filter(Boolean).join(' · ')),
+          a.hidden ? el('span', { class:'tag', text:'Hidden' }) : null,
+          a.photos.some(p => p._new) ? el('span', { class:'tag red', text:'New photos' }) : null
+        ])
+      ]),
+      el('span', { class:'amove' }, [
+        el('button', { title:'Move up', 'aria-label':'Move album up', disabled: i === 0, onclick: e => { e.stopPropagation(); moveAlbum(i, -1); } }, icon('fas fa-chevron-up')),
+        el('button', { title:'Move down', 'aria-label':'Move album down', disabled: i === data.albums.length - 1, onclick: e => { e.stopPropagation(); moveAlbum(i, 1); } }, icon('fas fa-chevron-down'))
+      ])
+    ]);
+    ul.append(li);
+  });
+  if(!data.albums.length) ul.append(el('li', { class:'hint', style:'padding:10px 8px', text:'No albums yet.' }));
+}
+
+function renderEditor(){
+  const box = $('editor'); box.innerHTML = '';
+  const a = data.albums[sel];
+
+  if(!a){
+    box.append(el('div', { class:'panel empty' }, [
+      el('p', { class:'kicker', text: needsImport ? 'First time here' : 'Empty gallery' }),
+      el('h2', { text: needsImport ? 'Set up the gallery' : 'No albums yet' }),
+      el('p', { text: needsImport
+        ? 'The website has no gallery.json yet, so it is still showing the photo folders in assets/. Import those albums to edit them here, or start a new album.'
+        : 'Create the first album, add photos, then press Publish.' }),
+      el('div', { class:'acts' }, [
+        needsImport ? el('button', { class:'btn btn-red', onclick: importExisting }, [icon('fas fa-file-import'), ' Import albums from the site']) : null,
+        el('button', { class:'btn btn-ghost', onclick: addAlbum }, [icon('fas fa-plus'), ' New album'])
+      ])
+    ]));
+    return;
+  }
+
+  /* album details */
+  const title = el('input', { class:'in', id:'aTitle', value:a.title, placeholder:'e.g. Pohela Boishakh 1434', maxlength:90 });
+  title.addEventListener('input', () => { a.title = title.value; changed(); renderList(); });
+  const season = el('input', { class:'in', value:a.season, placeholder:'e.g. Spring 2027', maxlength:40 });
+  season.addEventListener('input', () => { a.season = season.value; changed(); renderList(); });
+  const blurb = el('textarea', { class:'in', placeholder:'A sentence or two about the event.', maxlength:400 });
+  blurb.value = a.blurb;
+  const cnt = el('div', { class:'count', text:`${a.blurb.length} / 400` });
+  blurb.addEventListener('input', () => { a.blurb = blurb.value; cnt.textContent = `${a.blurb.length} / 400`; changed(); });
+  const show = el('input', { type:'checkbox', checked: !a.hidden });
+  show.addEventListener('change', () => { a.hidden = !show.checked; changed(); renderList(); });
+
+  box.append(el('section', { class:'panel' }, [
+    el('div', { class:'panel-head' }, [
+      el('div', {}, [ el('p', { class:'kicker', text:`Album ${sel + 1} of ${data.albums.length}` }), el('h2', { text:'Album details' }) ]),
+      el('label', { class:'check' }, [show, ' Show on website']),
+      el('button', { class:'btn btn-danger btn-sm', onclick: () => deleteAlbum(sel) }, [icon('far fa-trash-can'), ' Delete album'])
+    ]),
+    el('div', { class:'row2' }, [
+      el('label', { class:'f' }, [el('span', { text:'Title' }), title]),
+      el('label', { class:'f' }, [el('span', { text:'Season / date label' }), season, el('small', { text:'Shown as the red tag on the photo.' })])
+    ]),
+    el('label', { class:'f', style:'margin-bottom:0' }, [el('span', { text:'Description' }), blurb, cnt])
+  ]));
+
+  /* photos */
+  const grid = el('div', { class:'grid' });
+  a.photos.forEach((p, i) => {
+    const cap = el('input', { value:p.caption, placeholder:'Caption (optional)', maxlength:160 });
+    cap.addEventListener('input', () => { p.caption = cap.value; changed(); });
+    const isCover = i === Math.min(a.cover, a.photos.length - 1);
+    const pic = el('div', { class:'ph-img', title:'Click to see it larger', onclick: () => peek(p) }, [
+      photoImg(p),
+      isCover ? el('span', { class:'badge', text:'Cover' }) : null,
+      p._new ? el('span', { class:'badge new', text:'New' }) : null
+    ]);
+    grid.append(el('div', { class:'ph' + (isCover ? ' cover' : '') }, [
+      pic,
+      el('div', { class:'ph-tools' }, [
+        el('button', { class:'star' + (isCover ? ' on' : ''), title:'Use as album cover', 'aria-label':'Use as album cover',
+          onclick: () => { a.cover = i; changed(); renderEditor(); renderList(); } }, icon(isCover ? 'fas fa-star' : 'far fa-star')),
+        el('button', { title:'Move left', 'aria-label':'Move left', disabled: i === 0, onclick: () => movePhoto(a, i, -1) }, icon('fas fa-arrow-left')),
+        el('button', { title:'Move right', 'aria-label':'Move right', disabled: i === a.photos.length - 1, onclick: () => movePhoto(a, i, 1) }, icon('fas fa-arrow-right')),
+        el('button', { class:'del', title:'Remove photo', 'aria-label':'Remove photo', onclick: () => deletePhoto(a, i) }, icon('far fa-trash-can'))
+      ]),
+      cap
+    ]));
+  });
+
+  const drop = el('div', { class:'drop', tabindex:0, role:'button', onclick: () => $('filePick').click(),
+    onkeydown: e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); $('filePick').click(); } } }, [
+    icon('fas fa-cloud-arrow-up'), el('b', { text:'Add photos' }),
+    el('small', { text:'Drop images here or click to choose. They are resized to 2000px automatically.' })
+  ]);
+  ['dragenter','dragover'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave','drop'].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => addFiles(e.dataTransfer.files));
+  grid.append(drop);
+
+  box.append(el('section', { class:'panel' }, [
+    el('div', { class:'ph-head' }, [ el('h3', { text:`Photos (${a.photos.length})` }) ]),
+    el('p', { class:'hint', text:'The starred photo is the album cover. Use the arrows to change the order — it is the order people see in the slideshow.' }),
+    grid
+  ]));
+}
+
+function render(){ renderList(); renderEditor(); }
+
+function peek(p){
+  const d = el('div', { class:'peek', onclick: () => d.remove() }, photoImg(p));
+  document.body.append(d);
+}
+
+/* ---------------- wiring ---------------- */
+$('loginForm').addEventListener('submit', e => { e.preventDefault(); signIn(); });
+$('signOut').addEventListener('click', signOut);
+$('addAlbum').addEventListener('click', addAlbum);
+$('publish').addEventListener('click', publish);
+$('discard').addEventListener('click', discard);
+$('filePick').addEventListener('change', e => { addFiles(e.target.files); e.target.value = ''; });
+window.addEventListener('beforeunload', e => { if(dirty){ e.preventDefault(); e.returnValue = ''; } });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') document.querySelectorAll('.peek').forEach(n => n.remove()); });
+
+loadSaved();
+if(token && cfg.owner && cfg.repo){        // remembered token: sign straight in
+  $('fToken').placeholder = '•••••••• (remembered)';
+  $('fRemember').checked = !!(function(){ try{ return localStorage.getItem(TOKEN_KEY); }catch(e){ return null; } })();
+  signIn();
+}
+</script>
+</body>
+</html>
