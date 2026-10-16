@@ -13,7 +13,11 @@
                        It now sits inside the arch frame in "About us".
   3. LOGO ............ <img> inside <nav>, search "LOGO".
   4. COLOURS ......... :root block at the top of <style>.
-  5. GALLERY ......... To add photos to an existing album, just drop the
+  5. GALLERY ......... Use the editor: open gallery-admin.html on the live
+                       site and sign in with a GitHub token (steps are on
+                       that page). It writes gallery.json for you.
+                       Old way, used only until gallery.json exists:
+                       To add photos to an existing album, just drop the
                        files into that album's folder in "assets" and keep
                        the numbering going (7.jpg, 8.jpg ...). No code edit.
                        To add a NEW album, add a short block to the ALBUMS
@@ -519,6 +523,8 @@ button{font:inherit;cursor:pointer;background:none;border:0;color:inherit;paddin
 .lb-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 26px}
 #lbTitle{color:var(--paper);font-size:clamp(1.6rem,3vw,2.2rem)}
 #lbCount{color:rgba(255,253,248,.55);font-size:14px;margin-top:4px;letter-spacing:.1em}
+#lbCaption{color:rgba(255,253,248,.85);font-family:var(--serif);font-style:italic;font-size:1.15rem;margin-top:4px;max-width:70ch}
+#lbCaption:empty{display:none}
 .lb-btn{flex:none;width:50px;height:50px;border-radius:50%;background:rgba(255,253,248,.1);color:var(--paper);display:grid;place-items:center;transition:background .3s,color .3s}
 .lb-btn:hover{background:var(--red);color:#fff}
 .lb-stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;padding:0 16px;min-height:0}
@@ -1046,6 +1052,7 @@ footer li a:hover{color:#ff8a98}
     <div>
       <h3 id="lbTitle" class="display"></h3>
       <p id="lbCount"></p>
+      <p id="lbCaption"></p>
     </div>
     <button onclick="closeLightbox()" class="lb-btn" aria-label="Close album"><i class="fas fa-times"></i></button>
   </div>
@@ -1359,6 +1366,7 @@ footer li a:hover{color:#ff8a98}
           <a href="mailto:bsauu.uofu@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
         </div>
         <p class="f-small">Recognized Student Organization<br>Student Leadership &amp; Involvement</p>
+        <p class="f-small" style="margin-top:14px"><a href="gallery-admin.html" style="opacity:.6"><i class="fas fa-lock" style="font-size:10px"></i> Committee: edit gallery</a></p>
       </div>
     </div>
 
@@ -1374,6 +1382,14 @@ footer li a:hover{color:#ff8a98}
 <script>
 /* ==================================================================
    THE GALLERY  —  HOW TO ADD PHOTOS
+   ------------------------------------------------------------------
+   EASIEST WAY: open  gallery-admin.html  on the live site, sign in
+   with a GitHub token, and add albums, photos and text there. It
+   saves everything to gallery.json and the assets/gallery folder.
+
+   Everything below is the OLD way. It is only used until the editor
+   has published gallery.json for the first time (its "Import" button
+   copies these albums in for you).
    ------------------------------------------------------------------
    Photos live in numbered files inside a folder per album:
 
@@ -1637,18 +1653,24 @@ const UPCOMING = [
 /* ==================================================================
    1. BUILD THE GALLERY SLIDESHOW
    ------------------------------------------------------------------
-   Nothing here needs editing to add photos — see the ALBUMS notes
-   above. This part draws a slide per album, then counts the photos
-   in each folder by asking the browser to load 1, 2, 3 ... until one
-   comes back missing. That is what makes "just drop the files in the
-   folder" work.
+   The albums come from gallery.json, which the gallery editor
+   (gallery-admin.html) writes for you. Until that file exists, the
+   ALBUMS list above is used instead and each folder's photos are
+   counted by asking the browser for 1, 2, 3 ... until one is missing.
    ================================================================== */
-const PHOTO_FOLDER = 'assets';                      // where album folders live
+const GALLERY_FILE = 'gallery.json';                // written by gallery-admin.html
+const PHOTO_FOLDER = 'assets';                      // where album folders live (fallback mode)
 const PHOTO_TYPES  = ['jpg','jpeg','png','webp'];   // tried in this order
 const PHOTO_LIMIT  = 60;                            // stop counting after this many
 
 const stack = document.getElementById('stack');
 const rail  = document.getElementById('rail');
+let GALLERY  = [];          // the albums on show
+let panels   = [];
+let railDots = [];
+let slideNow = 0;
+
+const escHTML = t => String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 /* true if that file is really there */
 function fileExists(src){
@@ -1660,7 +1682,7 @@ function fileExists(src){
   });
 }
 
-/* walks 1, 2, 3 ... through an album folder and returns the paths found */
+/* fallback mode: walks 1, 2, 3 ... through an album folder and returns the paths found */
 async function findPhotos(album){
   const base  = `${PHOTO_FOLDER}/${album.folder}/`;
   const limit = album.count || PHOTO_LIMIT;
@@ -1673,59 +1695,13 @@ async function findPhotos(album){
     }
     if(!hit) break;              // gap in the numbering = end of the album
     found.push(hit);
-    /* Note: finding the end of an album means asking for a file that
-       isn't there, so a few "404 / file not found" lines in the browser
-       console are normal and harmless — one set per album. */
   }
   return found;
 }
 
-/* --- draw one panel per album --- */
-ALBUMS.forEach((album, i) => {
-  const coverGuess = `${PHOTO_FOLDER}/${album.folder}/${album.cover || 1}.${PHOTO_TYPES[0]}`;
-
-  const panel = document.createElement('div');
-  panel.className = 'slide' + (i === 0 ? ' on' : '');
-  panel.setAttribute('aria-roledescription', 'slide');
-  panel.setAttribute('aria-label', `${i + 1} of ${ALBUMS.length}: ${album.title}`);
-  panel.dataset.index = i;
-  panel.innerHTML = `
-    <article class="stack-card">
-      <div class="sc-grid">
-        <div class="stack-media" onclick="openLightbox(${i},0)">
-          <img class="js-cover" src="${coverGuess}" alt="${album.title}" loading="lazy">
-          <span class="shade"></span>
-          <span class="sc-season">${album.season}</span>
-          <span class="sc-expand"><i class="fas fa-expand"></i></span>
-        </div>
-        <div class="sc-body">
-          <div class="orn" aria-hidden="true"><svg><use href="#o-mandala"/></svg></div>
-          <p class="sc-no">Album ${String(i + 1).padStart(2, '0')}</p>
-          <h3 class="display">${album.title}</h3>
-          <p>${album.blurb}</p>
-          <div class="js-thumbs sc-thumbs"></div>
-          <button onclick="openLightbox(${i},0)" class="btn btn-red btn-sm">
-            <i class="far fa-images"></i> <span class="js-count">View photos</span>
-          </button>
-        </div>
-      </div>
-    </article>`;
-  stack.appendChild(panel);
-
-  const dot = document.createElement('button');
-  dot.className = 'rail-dot';
-  dot.dataset.on = i === 0 ? 'true' : 'false';
-  dot.setAttribute('aria-label', album.title);
-  dot.addEventListener('click', () => goTo(i));
-  rail.appendChild(dot);
-});
-
-const panels   = Array.from(stack.children);
-const railDots = Array.from(rail.children);
-
 /* --- slideshow: arrows, dots, swipe and the keyboard change slides; scrolling never does --- */
-let slideNow = 0;
 function goTo(n){
+  if(!panels.length) return;
   slideNow = (n + panels.length) % panels.length;               // wraps round at either end
   stack.style.transform = `translateX(-${slideNow * 100}%)`;
   panels.forEach((p, k) => {
@@ -1760,34 +1736,112 @@ document.addEventListener('keydown', e => {
   if(e.key === 'ArrowRight') goTo(slideNow + 1);
   if(e.key === 'ArrowLeft')  goTo(slideNow - 1);
 });
-goTo(0);
 
-/* --- count each album's photos, then fill in the numbers and thumbnails --- */
-ALBUMS.forEach((album, i) => {
-  album.ready = findPhotos(album).then(list => {
-    album.images = list;
+/* --- draw one slide per album --- */
+function buildGallery(list){
+  GALLERY = list;
+  stack.innerHTML = '';
+  rail.innerHTML  = '';
+  const showArrows = list.length > 1;
+  document.getElementById('slPrev').style.display = showArrows ? '' : 'none';
+  document.getElementById('slNext').style.display = showArrows ? '' : 'none';
+
+  if(!list.length){
+    stack.innerHTML = `<div class="slide on"><article class="stack-card" style="padding:70px 30px;text-align:center">
+        <p class="sc-no">Coming soon</p><h3 class="display" style="font-size:2.2rem;color:var(--green-900)">The first albums are on their way</h3></article></div>`;
+    panels = []; railDots = [];
+    document.getElementById('slCount').textContent = '';
+    return;
+  }
+
+  list.forEach((album, i) => {
+    const panel = document.createElement('div');
+    panel.className = 'slide' + (i === 0 ? ' on' : '');
+    panel.setAttribute('aria-roledescription', 'slide');
+    panel.setAttribute('aria-label', `${i + 1} of ${list.length}: ${album.title}`);
+    panel.innerHTML = `
+      <article class="stack-card">
+        <div class="sc-grid">
+          <div class="stack-media" onclick="openLightbox(${i},${album.coverIndex || 0})">
+            <img class="js-cover" src="${escHTML(album.coverGuess || '')}" alt="${escHTML(album.title)}" loading="lazy">
+            <span class="shade"></span>
+            ${album.season ? `<span class="sc-season">${escHTML(album.season)}</span>` : ''}
+            <span class="sc-expand"><i class="fas fa-expand"></i></span>
+          </div>
+          <div class="sc-body">
+            <div class="orn" aria-hidden="true"><svg><use href="#o-mandala"/></svg></div>
+            <p class="sc-no">Album ${String(i + 1).padStart(2, '0')}</p>
+            <h3 class="display">${escHTML(album.title)}</h3>
+            <p>${escHTML(album.blurb)}</p>
+            <div class="js-thumbs sc-thumbs"></div>
+            <button onclick="openLightbox(${i},0)" class="btn btn-red btn-sm">
+              <i class="far fa-images"></i> <span class="js-count">View photos</span>
+            </button>
+          </div>
+        </div>
+      </article>`;
+    stack.appendChild(panel);
+
+    const dot = document.createElement('button');
+    dot.className = 'rail-dot';
+    dot.setAttribute('aria-label', album.title);
+    dot.addEventListener('click', () => goTo(i));
+    rail.appendChild(dot);
+  });
+
+  panels   = Array.from(stack.children);
+  railDots = Array.from(rail.children);
+  goTo(0);
+
+  /* once each album's photo list is known, fill in the count, cover and thumbnails */
+  list.forEach((album, i) => album.ready.then(() => {
     const panel = panels[i];
-
-    if(!list.length){
-      console.warn(`No photos found in ${PHOTO_FOLDER}/${album.folder}/ — check the folder name and that the files start at 1.jpg`);
+    const imgs  = album.images || [];
+    if(!imgs.length){
       panel.querySelector('.js-count').textContent = 'Photos coming soon';
       return;
     }
-
-    panel.querySelector('.js-count').textContent =
-      list.length === 1 ? 'View the photo' : `View all ${list.length} photos`;
-
-    /* if the cover guess was the wrong file type, use the first real photo */
+    panel.querySelector('.js-count').textContent = imgs.length === 1 ? 'View the photo' : `View all ${imgs.length} photos`;
+    const ci = Math.min(album.coverIndex || 0, imgs.length - 1);
     const cover = panel.querySelector('.js-cover');
-    if(!cover.naturalWidth) cover.src = list[album.cover ? album.cover - 1 : 0] || list[0];
-
-    /* small preview row: photos 2, 3 and 4 */
-    panel.querySelector('.js-thumbs').innerHTML = list.slice(1, 4).map((src, k) => `
-      <button class="album-thumb" onclick="openLightbox(${i}, ${k + 1})" aria-label="Open photo ${k + 2}">
-        <img src="${src}" alt="" loading="lazy">
+    if(cover.getAttribute('src') !== imgs[ci]) cover.src = imgs[ci];
+    /* small preview row: the next three photos after the cover */
+    const others = imgs.map((src, k) => [src, k]).filter(([, k]) => k !== ci).slice(0, 3);
+    panel.querySelector('.js-thumbs').innerHTML = others.map(([src, k]) => `
+      <button class="album-thumb" onclick="openLightbox(${i}, ${k})" aria-label="Open photo ${k + 1}">
+        <img src="${escHTML(src)}" alt="" loading="lazy">
       </button>`).join('');
-  });
-});
+  }));
+}
+
+/* --- load gallery.json, or fall back to the ALBUMS folders --- */
+(async function loadGallery(){
+  try{
+    const r = await fetch(GALLERY_FILE + '?v=' + Date.now(), { cache:'no-store' });
+    if(!r.ok) throw new Error('no ' + GALLERY_FILE);
+    const data = await r.json();
+    const list = (data.albums || []).filter(a => !a.hidden).map(a => {
+      const photos = (a.photos || []).filter(p => p && p.src);
+      const ci = Math.max(0, Math.min(a.cover || 0, photos.length - 1));
+      return {
+        title: a.title || '', season: a.season || '', blurb: a.blurb || '',
+        images: photos.map(p => p.src),
+        captions: photos.map(p => p.caption || ''),
+        coverIndex: ci, coverGuess: photos[ci] ? photos[ci].src : '',
+        ready: Promise.resolve()
+      };
+    });
+    buildGallery(list);
+  }catch(err){
+    buildGallery(ALBUMS.map(a => {
+      const al = Object.assign({}, a);
+      al.coverIndex = a.cover ? a.cover - 1 : 0;
+      al.coverGuess = `${PHOTO_FOLDER}/${a.folder}/${a.cover || 1}.${PHOTO_TYPES[0]}`;
+      al.ready = findPhotos(a).then(l => { al.images = l; al.captions = []; });
+      return al;
+    }));
+  }
+})();
 
 /* ==================================================================
    2. MAP DRAWING — outlines trace themselves in
@@ -1939,7 +1993,7 @@ const lbThumbs  = document.getElementById('lbThumbs');
 let album = null, idx = 0;
 
 async function openLightbox(index, start){
-  album = ALBUMS[index];
+  album = GALLERY[index];
   if(!album) return;
   if(!album.images) await album.ready;          // photo count may still be running
   if(!album.images || !album.images.length) return;
@@ -1976,6 +2030,7 @@ function showImage(i){
   if(!album) return;
   idx = (i + album.images.length) % album.images.length;
   document.getElementById('lbCount').textContent = (idx + 1) + ' of ' + album.images.length;
+  document.getElementById('lbCaption').textContent = (album.captions && album.captions[idx]) || '';
 
   lbLoader.classList.add('on');
   lbImg.classList.add('dim');
