@@ -1,7 +1,23 @@
 {
   "version": 1,
-  "updated": "2026-10-16T18:40:39.411Z",
+  "updated": "2026-10-20T03:35:38.458Z",
   "albums": [
+    {
+      "id": "album-a8857j",
+      "title": "Bangladeshi Football Competition 2026",
+      "season": "Fall 2026",
+      "blurb": "",
+      "folder": "assets/gallery/bangladeshi-football-competition-2026-pumd",
+      "cover": 0,
+      "photos": [
+        {
+          "src": "assets/gallery/bangladeshi-football-competition-2026-pumd/mvg4rjbm8pm.jpg"
+        },
+        {
+          "src": "assets/gallery/bangladeshi-football-competition-2026-pumd/mvg4rljuqyo.jpg"
+        }
+      ]
+    },
     {
       "id": "album-6pphdk",
       "title": "Picnic and New Student Orientation",
