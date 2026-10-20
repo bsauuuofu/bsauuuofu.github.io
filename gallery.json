@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-20T03:35:38.458Z",
+  "updated": "2026-10-20T03:46:49.034Z",
   "albums": [
     {
       "id": "album-a8857j",
@@ -15,6 +15,19 @@
         },
         {
           "src": "assets/gallery/bangladeshi-football-competition-2026-pumd/mvg4rljuqyo.jpg"
+        }
+      ]
+    },
+    {
+      "id": "album-p8nn2a",
+      "title": "Performance at the Festivals of Culture 2026",
+      "season": "Fall 2026",
+      "blurb": "",
+      "folder": "assets/gallery/performance-at-the-festivals-of-culture--of9l",
+      "cover": 0,
+      "photos": [
+        {
+          "src": "assets/gallery/performance-at-the-festivals-of-culture--of9l/mvg564b5919.jpg"
         }
       ]
     },
