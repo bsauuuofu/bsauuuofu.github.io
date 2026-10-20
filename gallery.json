@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-20T03:46:49.034Z",
+  "updated": "2026-10-20T03:50:10.303Z",
   "albums": [
     {
       "id": "album-a8857j",
@@ -41,6 +41,21 @@
       "photos": [
         {
           "src": "assets/gallery/picnic-and-new-student-orientation-v4ft/mvbba3gdr9z.jpg"
+        },
+        {
+          "src": "assets/gallery/picnic-and-new-student-orientation-v4ft/mvg587udlp3.jpg"
+        },
+        {
+          "src": "assets/gallery/picnic-and-new-student-orientation-v4ft/mvg587wz41o.jpg"
+        },
+        {
+          "src": "assets/gallery/picnic-and-new-student-orientation-v4ft/mvg5a79pept.jpg"
+        },
+        {
+          "src": "assets/gallery/picnic-and-new-student-orientation-v4ft/mvg5a7dgauy.jpg"
+        },
+        {
+          "src": "assets/gallery/picnic-and-new-student-orientation-v4ft/mvg5abha9hf.jpg"
         }
       ]
     },
